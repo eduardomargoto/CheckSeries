@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/llContainerAll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_main"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="0dp"
+            android:minHeight="?attr/actionBarSize"
+            tools:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ProgressBar
+                android:id="@+id/pb_updates"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </android.support.v7.widget.Toolbar>
+        <br.com.etm.checkseries.utils.SlidingTabLayout
+            android:id="@+id/sld_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+
+    </LinearLayout>
+    <!-- LOADING -->
+    <ProgressBar
+        android:id="@+id/pbContainer"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>
+
+
+

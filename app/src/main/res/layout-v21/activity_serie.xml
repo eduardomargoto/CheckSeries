@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.SerieActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="0dp"
+        android:minHeight="?attr/actionBarSize"
+        tools:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <br.com.etm.checkseries.utils.SlidingTabLayout
+        android:id="@+id/sld_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </br.com.etm.checkseries.utils.SlidingTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+

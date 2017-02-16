@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.MainActivity">
+
+    <item
+        android:id="@+id/it_serie_watched"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/dots_vertical"
+        android:orderInCategory="100"
+        android:title="@string/app_it_serie_watched"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/it_serie_update"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/filter_white"
+        android:orderInCategory="100"
+        android:title="@string/app_it_serie_update"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_change_name"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/ic_rename_box"
+        android:orderInCategory="100"
+        android:title="@string/app_it_change_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_manage_list"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/ic_rename_box"
+        android:orderInCategory="100"
+        android:title="@string/app_it_manage_list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_serie_hidden"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/dots_vertical"
+        android:orderInCategory="100"
+        android:title="@string/app_it_serie_hidden"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_serie_remove"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/dots_vertical"
+        android:orderInCategory="100"
+        android:title="@string/app_it_serie_remove"
+        app:showAsAction="never" />
+
+</menu>

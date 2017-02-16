@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.ConfigurationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Geral"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_langague"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Idioma preferido do conteúdo"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_language_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_language"
+                    android:text=""
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_internet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Imagens apenas via Wi-Fi"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_internet_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_internet"
+                    android:ellipsize="end"
+                    android:paddingRight="110dp"
+                    android:text="Para reduzir cobranças de operadora, não baixar pela rede móvel"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_only_wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/tv_internet_msg"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:checked="true" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_updates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Ativar atualizações automáticas"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_updates_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_updates"
+                    android:ellipsize="end"
+                    android:paddingRight="110dp"
+                    android:text="Atualizar periodicamente suas séries."
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_updates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Aparência"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_format_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_format_number_seasonepisode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Formato das Temporadas e Episódios"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_format"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_format_number_seasonepisode"
+                    android:ellipsize="start"
+                    android:text="1x01"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Temas"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_theme_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_theme"
+                    android:ellipsize="start"
+                    android:text="CheckSeries"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Séries"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_layout_serie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exibir séries de modo compacto."
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_layout_serie_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_layout_serie"
+                    android:ellipsize="start"
+                    android:paddingRight="110dp"
+                    android:text="Exibe as séries de uma forma mais compacta."
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_layout_serie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/tv_layout_serie_msg"
+                    android:layout_centerVertical="true"
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_hidden_epi_specials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ocultar episódios especiais"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_hidden_epi_specials_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_hidden_epi_specials"
+                    android:ellipsize="start"
+                    android:paddingRight="110dp"
+                    android:text="Ocultar todos episódios especiais, exceto da lista de temporadas"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_hidden_episode_specials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/tv_hidden_epi_specials_msg"
+                    android:layout_centerVertical="true"
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:id="@+id/rl_timeoffset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_timeoffset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deslocamento de tempo manual"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_timeoffset_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_timeoffset"
+                    android:ellipsize="start"
+                    android:text="Deslocar horário de exibição em 0 horas"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:id="@+id/rl_checkmain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_checkmain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exibir barra de progresso"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_checkmain_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_checkmain"
+                    android:ellipsize="start"
+                    android:paddingRight="110dp"
+                    android:text="Exibir barra de progresso na tela principal"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_checkmain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <!--NOTIFICAÇÕES-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Notificações"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_notification_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notificações"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_notification_enable"
+                    android:layout_marginRight="40dp"
+                    android:ellipsize="start"
+                    android:text="Desabilitado"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="false" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rl_when_notification"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:clickable="true"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:visibility="invisible">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_when_notify"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Quando notificar"-->
+            <!--android:textColor="@color/colorTextIcon"-->
+            <!--android:textSize="16sp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_when_notify_value"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/tv_when_notify"-->
+            <!--android:ellipsize="start"-->
+            <!--android:text="Uma hora de antecedência"-->
+            <!--android:textColor="@color/colorDivider"-->
+            <!--android:textSize="12sp" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.08dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@color/colorSecondText" />-->
+
+            <RelativeLayout
+                android:id="@+id/rl_favorite_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+                <TextView
+                    android:id="@+id/tv_ntf_only_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apenas favoritos"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_ctf_only_favorite_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_ntf_only_favorite"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:ellipsize="start"
+                    android:paddingRight="110dp"
+                    android:text="Receber notificações apenas para séries favoritas"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/sw_ntf_only_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="false" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Backup/Restore (SDCard)"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_bakcup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+
+
+                <Button
+                    android:id="@+id/sw_doBackup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="Realizar backup" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.08dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorSecondText" />
+
+            <RelativeLayout
+                android:id="@+id/rl_restore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+
+
+                <Button
+                    android:id="@+id/sw_doRestore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="Restaurar backup"/>
+
+
+            </RelativeLayout>
+
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rl_vibrate_notification"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:clickable="true"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_ntf_vibrate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Vibrar"-->
+            <!--android:textColor="@color/colorTextIcon"-->
+            <!--android:textSize="16sp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_ntf_vibrate_msg"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/tv_ntf_vibrate"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:ellipsize="start"-->
+            <!--android:text="Vibrar ao exibir notificação"-->
+            <!--android:textColor="@color/colorDivider"-->
+            <!--android:textSize="12sp" />-->
+
+            <!--<Switch-->
+            <!--android:id="@+id/sw_ntf_vibrate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:checked="false" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.08dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@color/colorSecondText" />-->
+
+            <!--  <RelativeLayout
+                  android:id="@+id/rl_audio_notification"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:background="?attr/selectableItemBackground"
+                  android:clickable="true"
+                  android:paddingBottom="10dp"
+                  android:paddingTop="10dp"
+                  android:visibility="invisible">
+
+                  <TextView
+                      android:id="@+id/tv_audio"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Toque"
+                      android:textColor="@color/colorTextIcon"
+                      android:textSize="16sp" />
+
+                  <TextView
+                      android:id="@+id/tv_audio_name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/tv_audio"
+                      android:ellipsize="start"
+                      android:text="Ceusium"
+                      android:textColor="@color/colorDivider"
+                      android:textSize="12sp" />
+
+              </RelativeLayout>-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

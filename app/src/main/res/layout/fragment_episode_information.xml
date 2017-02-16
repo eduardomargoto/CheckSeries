@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="0dp"
+    tools:context=".fragments.EpisodeInformationFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/rl_view_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:contentPaddingBottom="0dp"
+            app:contentPaddingTop="0dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_view_banner_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondText">
+
+                <ImageView
+                    android:id="@+id/iv_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#99000000">
+
+                <TextView
+                    android:id="@+id/tv_name_episode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/tv_date_episode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name_episode"
+                    android:ellipsize="end"
+                    android:padding="5dp"
+                    android:textColor="@color/colorTextIcon"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_total_episode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name_episode"
+                    android:layout_toRightOf="@id/tv_date_episode"
+                    android:padding="5dp"
+                    android:textColor="@color/colorDivider"
+                    android:textSize="10dp" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <TableRow
+            android:id="@+id/rl_view_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_view_banner"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:stretchColumns="0,1,2,3"
+            android:useDefaultMargins="true">
+
+
+            <ImageView
+                android:id="@+id/iv_watched"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="5dp"
+                android:src="@drawable/ic_check" />
+
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="5dp"
+                android:src="@drawable/comment_24dp" />
+
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="5dp"
+                android:src="@drawable/share_24dp" />
+
+            <ImageView
+                android:id="@+id/iv_next_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="5dp"
+                android:src="@drawable/skip_next_24dp" />
+
+        </TableRow>
+
+        <View
+            android:id="@+id/line_view_2"
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_below="@id/rl_view_actions"
+            android:layout_margin="5dp"
+            android:background="@color/colorSecondText" />
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_view_2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorTextIcon"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</ScrollView>

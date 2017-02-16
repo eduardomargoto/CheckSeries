@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/WidgetStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="Lançamentos"
+        android:textSize="16dp" />
+
+    <ListView
+        android:id="@+id/rv_episodes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/widget_item" />
+
+
+    <TextView
+        android:id="@+id/tv_empty_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:text="Nenhum lançamento encontrado!"
+        android:textSize="20sp" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.MainActivity">
+
+    <item
+        android:id="@+id/it_filter_notfinalized"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:orderInCategory="100"
+        android:title="@string/app_options_filter_notfinalized"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_filter_stars"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:orderInCategory="100"
+        android:title="@string/app_order_stars"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/it_filter_hiddens"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:orderInCategory="100"
+        android:title="@string/app_options_filter_hiddens"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <!--<item-->
+        <!--android:id="@+id/it_filter_comingsoon"-->
+        <!--android:layout_width="24dp"-->
+        <!--android:layout_height="24dp"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/app_options_filter_comingsoon"-->
+        <!--android:checkable="true"-->
+        <!--app:showAsAction="never" />-->
+
+    <item
+        android:id="@+id/it_filter_removeall"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:orderInCategory="100"
+        android:title="@string/app_options_filter_removeall"
+        app:showAsAction="never" />
+
+</menu>

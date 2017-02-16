@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="3dp"
+    card_view:cardMaxElevation="3dp"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="false">
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BackgroundCards"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="?android:selectableItemBackground"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
+        <!--style="?android:borderlessButtonStyle"-->
+
+        <ImageView
+            android:id="@+id/iv_serie"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:src="@null" />
+
+        <TextView
+            android:id="@+id/tv_name_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_serie"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:paddingRight="36dp"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+        <TextView
+            android:id="@+id/tv_nextepisode_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/iv_serie"
+            android:layout_below="@id/tv_name_serie"
+            android:textColor="@color/colorSecondText"
+            android:textSize="14sp"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:text="1x01 Pilot"
+            android:maxLines="1"/>
+        <TextView
+            android:id="@+id/tv_nextepisodetime_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/iv_serie"
+            android:layout_below="@id/tv_nextepisode_serie"
+            android:textColor="@color/colorDivider"
+            android:textSize="12sp"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <ImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingTop="10dp"
+            android:paddingRight="14dp"
+            android:src="@drawable/star_outline_24dp" />
+
+        <ImageView
+            android:id="@+id/iv_options_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:paddingBottom="10dp"
+            android:paddingRight="14dp"
+            android:src="@drawable/dots_vertical_black" />
+
+        <TextView
+            android:id="@+id/tv_network_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/iv_options_serie"
+            android:layout_marginRight="40dp"
+            android:paddingBottom="12dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorDivider" />
+
+
+        <TextView
+            android:id="@+id/tv_serieid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/iv_favorite"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/vw_divider"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"/>
+</LinearLayout>

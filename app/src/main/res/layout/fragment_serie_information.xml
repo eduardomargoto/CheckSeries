@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="0dp"
+    tools:context=".fragments.SerieInformationFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/rl_view_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:contentPaddingBottom="0dp"
+            app:contentPaddingTop="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorSecondText"
+                    android:paddingBottom="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingTop="0dp">
+
+                    <ImageView
+                        android:id="@+id/iv_background_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_banner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:src="@drawable/loading_animation_black" />
+
+
+                <ImageView
+                    android:id="@+id/iv_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:src="@null" />
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/iv_banner"
+                    android:elevation="4dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:textColor="@color/colorTextIcon" />
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_year"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/iv_banner"
+                    android:elevation="4dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:textColor="@color/colorTextIcon" />
+
+                <TextView
+                    android:id="@+id/tv_network"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_duration"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/iv_banner"
+                    android:elevation="4dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:textColor="@color/colorTextIcon" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_network"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/iv_banner"
+                    android:elevation="4dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:textColor="@color/colorTextIcon" />
+
+
+                <TextView
+                    android:id="@+id/tv_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_status"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/iv_banner"
+                    android:elevation="4dp"
+                    android:ellipsize="end"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="-4"
+                    android:shadowDy="4"
+                    android:shadowRadius="2"
+                    android:textColor="@color/colorTextIcon" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_rating"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/tv_genre"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_toRightOf="@id/iv_banner"-->
+                <!--android:elevation="4dp"-->
+                <!--android:shadowColor="@color/text_shadow"-->
+                <!--android:shadowDx="-4"-->
+                <!--android:shadowDy="4"-->
+                <!--android:shadowRadius="2"-->
+                <!--android:textColor="@color/colorTextIcon" />-->
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <TableRow
+            android:id="@+id/rl_view_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_view_banner"
+            android:layout_margin="5dp"
+            android:alignmentMode="alignBounds"
+            android:clickable="true"
+            android:stretchColumns="0,1,2,3"
+            android:useDefaultMargins="true">
+
+
+
+                <ImageView
+                    android:id="@+id/iv_allwatched"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:src="@drawable/check_all_24dp" />
+
+                <ImageView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:src="@drawable/comment_24dp" />
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:src="@drawable/share_24dp" />
+
+                <ImageView
+                    android:id="@+id/iv_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:foregroundGravity="center"
+                    android:padding="5dp"
+                    android:src="@drawable/delete_14dp" />
+
+        </TableRow>
+
+        <View
+            android:id="@+id/line_view_1"
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_below="@id/rl_view_actions"
+            android:layout_margin="5dp"
+            android:background="@color/colorSecondText" />
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line_view_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorTextIcon"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</ScrollView>

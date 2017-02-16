@@ -1,0 +1,162 @@
+<resources>
+    <string name="today">Hoje</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="at_days">Em /days dias.</string>
+    <!--<string name="loading_series">Carregando series...</string>-->
+
+    <string name="app_name">CheckSeries</string>
+    <string name="app_name_serie">Séries</string>
+    <string name="app_act_newserie">Adicionar Serie</string>
+    <string name="app_act_historic">Recentes</string>
+    <string name="app_act_season">Temporada</string>
+    <string name="app_act_episodes_season">Episódios da temporada</string>
+    <string name="app_act_configuration">Configurações</string>
+    <string name="app_act_serieslist">Listas</string>
+    <string name="app_act_comments">Comentários</string>
+    <string name="app_act_comment">Comentário</string>
+
+    <string name="app_title_dialog_addlist">Adicionar lista</string>
+    <string name="app_it_options_manage">Gerenciar</string>
+    <!--<string name="app_it_options_orderserie">Ordenar série</string>-->
+    <!--<string name="app_it_options_orderlist">Reordenar listas</string>-->
+    <string name="app_it_options_removelist">Remover da lista</string>
+
+    <string name="app_dl_title_format_numbers">Formatos</string>
+    <string name="app_dl_title_languages">Idiomas</string>
+    <string name="app_dl_title_remove_serie">Remover Serie</string>
+    <string name="app_dl_title_all_watched">Todos os episódios assistidos</string>
+
+    <string name="app_text_ok">OK</string>
+
+    <string name="app_alert_spoiler">Spoiler!!</string>
+    <string name="app_msg_comment_empty">Escreva algo para comentar.</string>
+    <string name="app_msg_comment_removed">Comentário removido!</string>
+    <string name="app_msg_comment_nouser">Efetue o login, para realizar comentários!</string>
+
+    <string name="app_dialog_addbutton">ADICONAR</string>
+    <string name="app_dialog_finalize">FINALIZAR</string>
+    <string name="app_dialog_cancel">CANCELAR</string>
+    <string name="app_dialog_ok">OK</string>
+    <string name="app_dialog_removebutton">REMOVER</string>
+    <!--<string name="app_dialog_denouncebutton">DENUNCIAR</string>-->
+    <!--<string name="app_dialog_comment_denounce_confirmation">Deseja denunciar o comentário?</string>-->
+    <string name="app_dialog_comment_remove_confirmation">Deseja remover o comentário?</string>
+    <string name="app_confiact_timeoffset">Deslocar horário de exibição em .hour. horas</string>
+
+    <string name="app_enable">Habilitado</string>
+    <string name="app_unable">Desabilitado</string>
+
+    <string name="app_text_season">Temporada</string>
+    <string name="app_text_specials">Especiais</string>
+    <string name="app_text_titles">Títulos</string>
+
+
+    <string name="app_text_wantremove">Deseja remover</string>
+    <string name="app_text_mark_allwatched">Marcar todos os episódios como asssistidos</string>
+    <string name="app_text_removed">removido.</string>
+    <string name="app_text_removing">Removendo</string>
+
+    <string name="app_text_updating_series">Atualizando series.</string>
+    <string name="app_text_updating_series_finish">Series atualizadas.</string>
+
+    <string name="app_text_showagain">visível novamente.</string>
+    <string name="app_text_hidden">ocultado.</string>
+    <string name="app_text_not_displayed">não exibido(s).</string>
+    <string name="app_text_date_unknown">Data desconhecida.</string>
+    <string name="app_msg_episode_withoutdate">Episódio não foi lançado ainda.</string>
+    <string name="app_msg_episode_haventmore">Não existe ainda novos episódios.</string>
+
+    <string name="app_hidden_positivebtn">OCULTAR</string>
+    <string name="app_show_positivebtn">EXIBIR</string>
+    <string name="app_text_show_serie">Exibir serie</string>
+    <string name="app_text_hidden_serie">Ocultar serie</string>
+
+    <string name="app_text_wantshow_serie">Deseja exibir</string>
+    <string name="app_text_wanthidden_serie">Deseja ocultar</string>
+
+
+    <string name="app_findnewseries">Digite o nome da série.</string>
+    <string name="app_nofindnewseries">Nenhum resultado obtido. \nTente palavras completas.</string>
+    <string name="app_loading">Carregando...</string>
+    <string name="app_searching">Procurando...</string>
+    <!--<string name="app_updating">Atualizando...</string>-->
+    <string name="app_internet_off">Conecte-se a internet para obter resultados.</string>
+    <!--<string name="app_no_results">Conecte-se a internet para obter resultados.</string>-->
+    <string name="app_myseries_empty">Nenhuma série adicionada...</string>
+    <string name="app_nextserie_empty">Nenhum lançamento encontrado.</string>
+    <!--<string name="app_serieslist_empty">Adicione séries a suas listas.</string>-->
+    <string name="app_serieslist_list_default">MINHAS SÉRIES</string>
+    <string name="app_serieslist_list_search">BUSCA</string>
+
+    <string name="app_serie_status_ended">Finalizada</string>
+    <string name="app_serie_status_continuing">Em exibição</string>
+
+
+    <string name="app_title_myseries">MINHAS SÉRIES</string>
+    <string name="app_title_nextepisode">LANÇAMENTOS</string>
+    <!--<string name="app_title_recents">RECENTES</string>-->
+
+    <string name="app_title_serie">SÉRIE</string>
+    <string name="app_title_episode">EPISÓDIO</string>
+    <string name="app_title_seasons">TEMPORADAS</string>
+
+    <string name="app_ic_search">Pesquisar</string>
+    <string name="app_ic_filter">Fitrar</string>
+    <string name="app_ic_addserielist">Adicionar série em lista</string>
+    <string name="app_ic_options">Opções</string>
+
+    <string name="app_options_watchedallepisodes">Todos assistidos</string>
+    <string name="app_options_watchedallhereepisodes">Todos acima assistidos</string>
+    <string name="app_options_watchednooneepisodes">Nenhum assistido</string>
+
+    <string name="app_options_update">Atualizar</string>
+    <string name="app_options_order">Ordenar</string>
+
+    <string name="app_options_filter_notfinalized">Não Finalizados</string>
+    <!--<string name="app_options_filter_comingsoon">Em breve</string>-->
+    <string name="app_options_filter_hiddens">Ocultados</string>
+    <string name="app_options_filter_removeall">Remover filtros</string>
+
+    <string name="app_action_revfavorite_serie">removido dos favoritos</string>
+    <string name="app_action_addfavorite_serie"> adicionado aos favoritos</string>
+
+    <string name="app_it_serie_watched">Episódio Assistido</string>
+    <string name="app_it_serie_update">Atualizar</string>
+    <string name="app_it_serie_hidden">Ocultar</string>
+    <string name="app_it_change_name">Título Exibido</string>
+    <string name="app_it_manage_list">Gerenciar lista</string>
+    <string name="app_it_serie_show">Exibir</string>
+    <string name="app_it_serie_remove">Remover</string>
+
+    <string name="app_it_comment_remove">Remover</string>
+    <!--<string name="app_it_comment_denounce">Denunciar</string>-->
+
+    <string name="app_order_name">Título</string>
+    <string name="app_order_nextepisode">Próximo Episódio</string>
+    <string name="app_order_stars">Favoritos</string>
+
+    <string name="app_series">Series</string>
+    <string name="app_list">Listas</string>
+    <string name="app_comingsoon">Lançamentos</string>
+    <string name="app_search">Procurar série</string>
+    <string name="app_historic">Recentes</string>
+    <string name="app_statistic">Estatísticas</string>
+    <string name="app_settings">Configurações</string>
+
+    <string name="app_word_status">Status</string>
+    <string name="app_word_year">Ano</string>
+    <string name="app_word_duration">Duração</string>
+    <string name="app_word_network">Rede</string>
+
+
+    <string name="app_hint_dialog_addlista">Digite o nome da lista</string>
+
+
+    <!--PARSE CLOUD-->
+    <!--<string name="parse_app_id">MY_APP_PARSE_ID</string>-->
+    <!--<string name="parse_client_key">MY_APP_PARSE_CLIENT_KEY</string>-->
+
+
+
+</resources>
+

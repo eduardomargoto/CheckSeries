@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.SerieActivity">
+
+    <item
+        android:id="@+id/it_options_remove"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:icon="@drawable/filter_white"
+        android:orderInCategory="100"
+        android:title="@string/app_it_comment_remove"
+        app:showAsAction="never" />
+
+    <!--<item-->
+        <!--android:id="@+id/it_options_denounce"-->
+        <!--android:layout_width="24dp"-->
+        <!--android:layout_height="24dp"-->
+        <!--android:icon="@drawable/filter_white"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/app_it_comment_denounce"-->
+        <!--app:showAsAction="never" />-->
+</menu>
