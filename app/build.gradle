@@ -1,16 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'keycheckseries'
-            keyPassword 'adesempre07'
-            storeFile file('F:/PROJETOS/ANDROID/Keys/keyCheckSeries.jks')
-            storePassword 'adesempre07'
-        }
-    }
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId 'br.com.etm.checkseries'
         minSdkVersion 16
@@ -23,16 +15,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
     }
     dexOptions {
         preDexLibraries = false
-        jumboMode = false
-        javaMaxHeapSize "2048M"
+        javaMaxHeapSize "2g"
     }
-    productFlavors {
-    }
+
     packagingOptions {
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/LICENSE'
