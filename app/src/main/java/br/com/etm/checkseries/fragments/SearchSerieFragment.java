@@ -56,7 +56,7 @@ public class SearchSerieFragment extends Fragment {
 
 
         tv_msg = (TextView) v.findViewById(R.id.tv_msg);
-        if (MainActivity.mySeries.isEmpty())
+        if (this.series.isEmpty())
             tv_msg.setText(R.string.app_myseries_empty);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.rv_list_serie);
@@ -67,10 +67,10 @@ public class SearchSerieFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        if (series == null)
-            series = new ArrayList<>(MainActivity.mySeries);
-        SerieAdapter serieAdapter = new SerieAdapter(getActivity(), series);
-        recyclerView.setAdapter(serieAdapter);
+        if (series != null) {
+            SerieAdapter serieAdapter = new SerieAdapter(getActivity(), series);
+            recyclerView.setAdapter(serieAdapter);
+        }
         return v;
     }
 

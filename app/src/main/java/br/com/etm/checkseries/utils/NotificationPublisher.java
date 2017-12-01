@@ -45,6 +45,7 @@ import br.com.etm.checkseries.views.SplashScreen;
  */
 public class NotificationPublisher extends BroadcastReceiver {
 
+    private static final String PREFS_NAME = "User";
     public static String NOTIFICATION_UPDATE = "UPDATE";
     public static String NOTIFICATION_COMMINGSOON = "COMINGSOON";
     private static int NOTIFICATION_COUNT = 1;
@@ -284,7 +285,7 @@ public class NotificationPublisher extends BroadcastReceiver {
 
     public static void scheduleCommingSoonToday(Context context) {
         Log.i("LOG-AMBISERIES", "scheduleCommingSoonToday");
-        SharedPreferences sharedPreferences = context.getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         if (!sharedPreferences.getBoolean("doSheduleCommingSoonToday", false)) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("doSheduleCommingSoonToday", true);

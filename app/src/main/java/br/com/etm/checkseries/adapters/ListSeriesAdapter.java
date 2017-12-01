@@ -260,11 +260,11 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
                         Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                     }
 
-                    //ALTERANDO MAIN LISTSERIES
+                   /* //ALTERANDO MAIN LISTSERIES
                     for (Serie s : MainActivity.mySeries) {
                         if (s.getId().equals(serie.getId()))
                             s.setFavorite(serie.isFavorite());
-                    }
+                    }*/
 
                     new DAO_Serie(v.getContext()).edit(serie);
                     notifyItemChanged(getAdapterPosition());

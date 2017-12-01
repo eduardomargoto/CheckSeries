@@ -21,13 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -76,7 +69,7 @@ public class SeriesListActivity extends AppCompatActivity {
 
 
         // NAVIGATION
-//        this.getResult().setToolbar(this, tb_top);
+//        this.getResult().setToolbar(this, mToolbar);
 //        this.getResult().setOnDrawerItemClickListener(navigation_click_item);
 
 
@@ -90,7 +83,7 @@ public class SeriesListActivity extends AppCompatActivity {
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sld_tabs);
         mViewPager.setAdapter(mTabsAdapter);
         mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.accent));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mSlidingTabLayout.setViewPager(mViewPager);
         mTabsAdapter.setViewPager(mViewPager);
 //        clearTabs();
@@ -106,84 +99,6 @@ public class SeriesListActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(final String newText) {
-                Log.i("LOG-AMBISERIES", "SeriesListActivity - onQueryTextSubmit(" + newText + ")");
-                new Thread() {
-                    @Override
-                    public void run() {
-                        ArrayList<Serie> aux = null;
-                        if (newText.length() > 0) {
-                            ListSeriesFragment.SEARCH_VIEW = true;
-                            aux = new ArrayList<Serie>(MainActivity.mySeries);
-                            for (int i = aux.size() - 1; i >= 0; i--) {
-                                if (aux.get(i).getName().toUpperCase().indexOf(newText.toUpperCase()) == -1) {
-                                    aux.remove(i);
-                                }
-                            }
-                            mTabsAdapter.setMySeries(aux);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    updateFragments(mTabsAdapter, mViewPager);
-                                }
-                            });
-                        } else {
-                            ListSeriesFragment.SEARCH_VIEW = false;
-                            mTabsAdapter.setMySeries(null);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    updateFragments(mTabsAdapter, mViewPager);
-                                }
-                            });
-                        }
-                    }
-                }.start();
-
-
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(final String newText) {
-                Log.i("LOG-AMBISERIES", "SeriesListActivity - onQueryTextChange(" + newText + ")");
-                new Thread() {
-                    @Override
-                    public void run() {
-                        ArrayList<Serie> aux = null;
-                        if (newText.length() > 0) {
-                            ListSeriesFragment.SEARCH_VIEW = true;
-                            aux = new ArrayList<Serie>(MainActivity.mySeries);
-                            for (int i = aux.size() - 1; i >= 0; i--) {
-                                if (aux.get(i).getName().toUpperCase().indexOf(newText.toUpperCase()) == -1) {
-                                    aux.remove(i);
-                                }
-                            }
-                            mTabsAdapter.setMySeries(aux);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    updateFragmentsSearch(mTabsAdapter, mViewPager);
-                                }
-                            });
-                        } else {
-                            ListSeriesFragment.SEARCH_VIEW = false;
-                            mTabsAdapter.setMySeries(null);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    updateFragmentsSearch(mTabsAdapter, mViewPager);
-                                }
-                            });
-                        }
-                    }
-                }.start();
-                return true;
-            }
-        });
         return true;
     }
 
@@ -333,7 +248,7 @@ public class SeriesListActivity extends AppCompatActivity {
 //        list.add(new ListOfUser(getResources().getString(R.string.app_serieslist_list_search)));
 //        mTabsAdapter = new TabsListAdapter(getSupportFragmentManager(), this, list, series);
 //        mViewPager.setAdapter(mTabsAdapter);
-//        mSlidingTabLayout.setViewPager(mViewPager);
+//        mTabLayout.setViewPager(mViewPager);
 //    }
 
     public void updateTabs() {

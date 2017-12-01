@@ -28,7 +28,7 @@ public class BDCore extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i("LOG-BDCORE", "onCreate");
-        db.execSQL("CREATE TABLE PROFILE (id text primary_key, " +
+        db.execSQL("CREATE TABLE PROFILE (id text primary key, " +
                 "name text not null," +
                 "username text not null," +
                 "image_url text not null," +

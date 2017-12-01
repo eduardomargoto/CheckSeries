@@ -75,7 +75,7 @@ public class ListEpisodesSeasonActivity extends AppCompatActivity {
         mViewPager.setAdapter(mTabsAdapter);
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.accent));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mSlidingTabLayout.setViewPager(mViewPager);
         mViewPager.setCurrentItem(episodeMark.getEpisodeNumber() - 1);
     }

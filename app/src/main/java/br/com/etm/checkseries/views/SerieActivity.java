@@ -81,11 +81,11 @@ public class SerieActivity extends AppCompatActivity {
         mViewPager.setAdapter(mTabsAdapter);
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.accent));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mSlidingTabLayout.setViewPager(mViewPager);
         mViewPager.setCurrentItem(1);
 
-        Appodeal.initialize(this, MainActivity.APPODEAL_KEY, Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.MREC | Appodeal.NATIVE);
+//        Appodeal.initialize(this, MainActivity.APPODEAL_KEY, Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.MREC | Appodeal.NATIVE);
 
 
 

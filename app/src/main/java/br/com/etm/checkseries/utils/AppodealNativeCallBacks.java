@@ -26,7 +26,7 @@ public class AppodealNativeCallBacks implements NativeCallbacks {
     public void onNativeLoaded(List<NativeAd> nativeAds) {
         Log.i("NATIVEADS", "onNativeLoaded - " + nativeAds.size());
         boolean existe = false;
-        for (NativeAd nativeAd : nativeAds) {
+        /*for (NativeAd nativeAd : nativeAds) {
             for (NativeAd ad : MainActivity.mAds) {
                 if (nativeAd.getTitle().equals(ad.getTitle())) {
                     existe = true;
@@ -41,7 +41,7 @@ public class AppodealNativeCallBacks implements NativeCallbacks {
         }
         MainActivity mainActivity = (MainActivity) mActivity;
         MainActivity.updateFragments(mainActivity.getTabsAdapter(), mainActivity.getViewPager());
-        Log.i("NATIVEADS", "mAds - " + MainActivity.mAds.size());
+        Log.i("NATIVEADS", "mAds - " + MainActivity.mAds.size());*/
     }
 
     @Override

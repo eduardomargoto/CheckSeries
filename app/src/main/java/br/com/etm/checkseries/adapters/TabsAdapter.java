@@ -26,51 +26,39 @@ import br.com.etm.checkseries.views.MainActivity;
  * Created by EDUARDO_MARGOTO on 27/10/2015.
  */
 public class TabsAdapter extends FragmentStatePagerAdapter {
-    private Drawable myDrawable = null;
-    private SpannableStringBuilder sb = null;
-    private ImageSpan span = null;
 
-    private Context context;
+    private static final String TAG = TabsAdapter.class.getSimpleName();
+    private static final String PARAM_POSITION = "position";
+
     private String[] titles;
-    private List<Serie> series;
+    private ArrayList<Serie> series;
 
     public TabsAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.context = context;
         titles = new String[]{context.getResources().getString(R.string.app_title_myseries),
                 context.getResources().getString(R.string.app_title_nextepisode)};
-        this.series = null;
-
+        this.series = new ArrayList<>();
     }
 
     @Deprecated
-    public TabsAdapter(FragmentManager fm, Context context, List<Serie> series) {
+    public TabsAdapter(FragmentManager fm, Context context, ArrayList<Serie> series) {
         super(fm);
-        this.context = context;
-
         titles = new String[]{context.getResources().getString(R.string.app_title_myseries),
                 context.getResources().getString(R.string.app_title_nextepisode)};
         this.series = series;
-
     }
 
     @Override
     public Fragment getItem(int position) {
-        Log.i("LOG-AMBISERIES", "TabsAdapter - getItem(" + position + ")");
+        Log.i(TAG, "getItem(" + position + ")");
         Fragment frag = null;
         if (position == 0) { //MYSERIES
-            if (MainActivity.SEARCHVIEW) {
-                frag = new SerieFragment(series);
-            } else frag = new SerieFragment();
-
+            frag = SerieFragment.newInstance(series);
         } else if (position == 1) { // NEXTS
             frag = new NextEpisodeFragment();
         } else if (position == 2) { // NEXTS
             frag = new NextEpisodeFragment();
         }
-        Bundle b = new Bundle();
-        b.putInt("position", position);
-        frag.setArguments(b);
         return frag;
     }
 
@@ -79,19 +67,17 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
         return titles.length;
     }
 
-
     @Override
     public CharSequence getPageTitle(int position) {
         return titles[position];
     }
-
 
     public List<Serie> getSeries() {
         return series;
     }
 
     public void setSeries(List<Serie> series) {
-        Log.i("LOG-AMBISERIES", "TabsAdapter - setSeries");
+        Log.i(TAG, "setSeries");
         this.series = new ArrayList<>(series);
     }
 }

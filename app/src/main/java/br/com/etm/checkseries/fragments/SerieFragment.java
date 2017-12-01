@@ -1,14 +1,11 @@
 package br.com.etm.checkseries.fragments;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,163 +13,118 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.adapters.ListOfUserBaseAdapter;
 import br.com.etm.checkseries.adapters.SerieAdapter;
-import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.daos.DAO_List;
-import br.com.etm.checkseries.daos.DAO_ListSerie;
-import br.com.etm.checkseries.daos.DAO_Serie;
 import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.ListOfUser;
 import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.utils.SerieComparator_Name;
-import br.com.etm.checkseries.utils.SerieComparator_NextEpisode;
-import br.com.etm.checkseries.utils.UtilsEntitys;
-import br.com.etm.checkseries.views.MainActivity;
 import br.com.etm.checkseries.views.NewSerieActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.
  */
-public class SerieFragment extends Fragment  {
+public class SerieFragment extends Fragment {
+
+    private static final String TAG = SerieFragment.class.getSimpleName();
+    private static final String PARAM_SERIES = "series_param";
+
     public static boolean SHOW_SERIES_HIDDENS = false;
 
-    public RecyclerView recyclerView;
-    private TextView tv_msg;
-    private LinearLayoutManager mLayoutManager;
-    private FloatingActionButton bt_novo;
+    @BindView(R.id.rv_list_serie)
+    RecyclerView recyclerView;
 
-    public int position = -1;
-    public Serie serie = null;
-    List<Serie> seriesList = null;
-    Handler handle = new Handler();
+    @BindView(R.id.tv_msg)
+    TextView tvMessage;
 
+    @BindView(R.id.btn_novo)
+    FloatingActionButton btnNew;
 
+    private Unbinder unbinder;
+    private ArrayList<Serie> seriesList = null;
 
-    private static final int HIDE_THRESHOLD = 20;
-    private int scrolledDistance = 0;
-    private boolean controlsVisible = true;
-
-    @SuppressLint("ValidFragment")
-    public SerieFragment() {
-    }
-
-    @SuppressLint("ValidFragment")
-    public SerieFragment(List<Serie> series) {
-        seriesList = new ArrayList<>(series);
+    public static SerieFragment newInstance(ArrayList<Serie> seriesList) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(PARAM_SERIES, seriesList);
+        SerieFragment fragment = new SerieFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i("LOG-AMBISERIES", "SerieFragment - onCreateView");
-        View v = inflater.inflate(R.layout.fragment_serie, container, false);
+        Log.i(TAG, "onCreateView");
+        View view = inflater.inflate(R.layout.fragment_serie, container, false);
+        unbinder = ButterKnife.bind(this, view);
 
-//        Appodeal.hide(MainActivity.mActivityMain, Appodeal.BANNER);
+        if (getArguments() != null && getArguments().containsKey(PARAM_SERIES)) {
+            seriesList = (ArrayList<Serie>) getArguments().getSerializable(PARAM_SERIES);
+            if (seriesList != null && !seriesList.isEmpty())
+                tvMessage.setVisibility(View.VISIBLE);
+        }
 
-        tv_msg = (TextView) v.findViewById(R.id.tv_msg);
-        if (MainActivity.mySeries.isEmpty())
-            tv_msg.setText(R.string.app_myseries_empty);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.rv_list_serie);
+//        int positionAds = 0;
+//        if (!MainActivity.mAds.isEmpty()) {
+//            if (seriesList.size() >= 4) {
+//                for (int i = 3; i < seriesList.size(); i++) {
+//                    if ((i % 3) == 0) {
+//                        Serie s = new Serie();
+//                        s.setName(MainActivity.mAds.get(positionAds).getTitle());
+//                        seriesList.add(i, s);
+//                        positionAds++;
+//                        if (positionAds == MainActivity.mAds.size())
+//                            positionAds = 0;
+//                    }
+//                }
+//            } else {
+//                Serie s = new Serie();
+//                s.setName(MainActivity.mAds.get(positionAds).getTitle());
+//                seriesList.add(s);
+//            }
+//        }
 
-        bt_novo = (FloatingActionButton) v.findViewById(R.id.btn_novo);
 
-        // FLOATING BUTTON NOVO
-        bt_novo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(v.getContext(), NewSerieActivity.class);
-                startActivityForResult(it, MainActivity.NEWSERIEACTIVITY_CODE);
-            }
-        });
+        configureRecyclerView();
+        return view;
+    }
+
+    @OnClick(R.id.btn_novo)
+    public void onClickAddSerie() {
+        Intent intent = new Intent(getActivity(), NewSerieActivity.class);
+        startActivity(intent);
+        ///startActivityForResult(it, MainActivity.NEWSERIEACTIVITY_CODE);
+    }
+
+    private void configureRecyclerView() {
         recyclerView.setHasFixedSize(true);
-
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                //show views if first item is first visible position and views are hidden
-
-                if (dy > 0) { // descendo
-                    bt_novo.hide(true);
-                } else { // subindo
-                    bt_novo.show(true);
-                }
-            }
-        });
-
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        if(EnvironmentConfig.getInstance().isLayoutCompat() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            GridLayoutManager lm = new GridLayoutManager(getContext(), 2);
-            recyclerView.setLayoutManager(lm);
-        }
-
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager lm = null;
+        if (EnvironmentConfig.getInstance().isLayoutCompat() &&
+                getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lm = new GridLayoutManager(getContext(), 2);
+        } else {
+            lm = new LinearLayoutManager(getContext());
 
-        if (seriesList == null)
-            seriesList = new ArrayList<>(getListSeriesShow());
-
-        int positionAds = 0;
-        if (!MainActivity.mAds.isEmpty()) {
-            if (seriesList.size() >= 4) {
-                for (int i = 3; i < seriesList.size(); i++) {
-                    if ((i % 3) == 0) {
-                        Serie s = new Serie();
-                        s.setName(MainActivity.mAds.get(positionAds).getTitle());
-                        seriesList.add(i, s);
-                        positionAds++;
-                        if (positionAds == MainActivity.mAds.size())
-                            positionAds = 0;
-                    }
-                }
-            } else {
-                Serie s = new Serie();
-                s.setName(MainActivity.mAds.get(positionAds).getTitle());
-                seriesList.add(s);
-            }
         }
-
-
+        recyclerView.setLayoutManager(lm);
         SerieAdapter serieAdapter = new SerieAdapter(getActivity(), seriesList);
         recyclerView.setAdapter(serieAdapter);
-
-        return v;
     }
 
 
     public ArrayList<Serie> getListSeriesShow() {
         EnvironmentConfig ec = EnvironmentConfig.getInstance();
-        ArrayList<Serie> serieList = new ArrayList<>(MainActivity.mySeries);
+        ArrayList<Serie> serieList = new ArrayList<>(seriesList);
         for (int i = serieList.size() - 1; i >= 0; i--) {
             boolean removed = false;
             if (ec.isFilter_hidden()) {
@@ -217,29 +169,32 @@ public class SerieFragment extends Fragment  {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.i("LOG", "onViewCreated()");
+        Log.i(TAG, "onViewCreated()");
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_list_serie);
         registerForContextMenu(recyclerView);
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        Log.i("LOG", "onCreateContextMenu()");
+        Log.i(TAG, "onCreateContextMenu()");
         super.onCreateContextMenu(menu, v, menuInfo);
         // inflate menu
-
         int position = SerieAdapter.POSITION_SERIE_ACTIVE;
-
         Serie s = this.seriesList.get(position);
         HelpFragment.createContextMenu(getActivity(), s, menu);
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    /* @Override
     public boolean onContextItemSelected(MenuItem item) {
 
-        position = SerieAdapter.POSITION_SERIE_ACTIVE;
-        serie = seriesList.get(position);
+        int position = SerieAdapter.POSITION_SERIE_ACTIVE;
+        Serie serie = seriesList.get(position);
 
         switch (item.getItemId()) {
             case R.id.it_serie_update:
@@ -452,7 +407,7 @@ public class SerieFragment extends Fragment  {
                 serie = null;
         }
         return true;
-    }
+    }*/
 
 }
 

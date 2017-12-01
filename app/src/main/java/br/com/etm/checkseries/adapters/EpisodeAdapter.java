@@ -254,7 +254,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             NativeAd mAd = null;
 
-            if (!MainActivity.mAds.isEmpty()) {
+            /*if (!MainActivity.mAds.isEmpty()) {
                 try {
                     for (NativeAd ad : MainActivity.mAds) {
                         if (ad.getTitle().equals(episodeList.get(position).getEpisodeName())) {
@@ -296,7 +296,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 } catch (Exception e) {
                     Log.i("NATIVEADS", "EXCEPTION");
                 }
-            }
+            }*/
         }
     }
 

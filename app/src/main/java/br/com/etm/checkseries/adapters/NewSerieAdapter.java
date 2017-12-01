@@ -190,7 +190,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
                         progressDialog.setMessage("Aguarde enquanto atualizamos a serie.");
                         progressDialog.show();
 
-                        new Thread() {
+                    /*    new Thread() {
                             public void run() {
                                 try {
                                     serie[0] = APITheTVDB.getSerieAndEpisodes(tv_serieid.getText().toString());
@@ -254,7 +254,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
 
 
                             }
-                        }.start();
+                        }.start();*/
                     }
                 }
             });

@@ -45,9 +45,9 @@ public class SeasonActivity extends AppCompatActivity {
         tb_top = (Toolbar) findViewById(R.id.tb_main);
         tb_top.setTitle(serie.getName());
 //        if (ListSeasonsAdapter.POSITION_ACTIVE_SEASON != 0) {
-//            tb_top.setTitle(serie.getName() + " - " + ListSeasonsAdapter.POSITION_ACTIVE_SEASON + "ª " + getResources().getString(R.string.app_text_season));
+//            mToolbar.setTitle(serie.getName() + " - " + ListSeasonsAdapter.POSITION_ACTIVE_SEASON + "ª " + getResources().getString(R.string.app_text_season));
 //        } else {
-//            tb_top.setTitle(serie.getName() + " - " + getResources().getString(R.string.app_text_specials));
+//            mToolbar.setTitle(serie.getName() + " - " + getResources().getString(R.string.app_text_specials));
 //        }
         setSupportActionBar(tb_top);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,7 +62,7 @@ public class SeasonActivity extends AppCompatActivity {
 
         episodeList = new ArrayList<Episode>(serie.getEpisodeList());
         int positionAds = 0;
-        if (!MainActivity.mAds.isEmpty()) {
+        /*if (!MainActivity.mAds.isEmpty()) {
             if (episodeList.size() >= 4) {
                 for (int i = 3; i < episodeList.size(); i++) {
                     if ((i % 3) == 0) {
@@ -80,7 +80,7 @@ public class SeasonActivity extends AppCompatActivity {
                 e.setEpisodeName(MainActivity.mAds.get(positionAds).getTitle());
                 episodeList.add(e);
             }
-        }
+        }*/
 
 //        for (Episode ep : serie.getEpisodeList()) {
 //            if (ep.getSeasonNumber() == ListSeasonsAdapter.POSITION_ACTIVE_SEASON) {

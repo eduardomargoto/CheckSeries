@@ -49,7 +49,7 @@ public class HistoricActivity extends AppCompatActivity {
 //        for(Episode ep: episodes){
 //            Log.i("EPISODE",ep.getSeasonNumber() + " - " + ep.getEpisodeNumber() + " / " + ep.getDateWatchedFormatted());
 //        }
-        int positionAds = 0;
+        /*int positionAds = 0;
         if (!MainActivity.mAds.isEmpty()) {
             if (episodes.size() >= 4) {
                 for (int i = 3; i < episodes.size(); i++) {
@@ -68,7 +68,7 @@ public class HistoricActivity extends AppCompatActivity {
                 e.setEpisodeName(MainActivity.mAds.get(positionAds).getTitle());
                 episodes.add(e);
             }
-        }
+        }*/
         setFragmentInActivity();
     }
 

@@ -27,9 +27,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -94,111 +91,105 @@ public class ConfigurationActivity extends AppCompatActivity {
         sw_doBackup = (Button) findViewById(R.id.sw_doBackup);
         sw_doRestore = (Button) findViewById(R.id.sw_doRestore);
 
-        sw_doBackup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    SharedPreferences sharedPref = v.getContext().getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
-                    writeAccepted = sharedPref.getBoolean("writeAccepted", false);
-                    if (!writeAccepted)
-                        requestPermissions(perms, permsRequestCode);
+   /*     sw_doBackup.setOnClickListener(v -> {
+            String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                SharedPreferences sharedPref = v.getContext().getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+                writeAccepted = sharedPref.getBoolean("writeAccepted", false);
+                if (!writeAccepted)
+                    requestPermissions(perms, permsRequestCode);
 
-                    if (writeAccepted) {
-                        UtilsEntitys.exportDBLocal(MainActivity.DEFAULTPATHBACKUP, MainActivity.PACKAGE_NAME, BDCore.NOME_BD, v.getContext());
-                        sw_doBackup.setEnabled(false);
-                    }
-
-                } else {
+                if (writeAccepted) {
                     UtilsEntitys.exportDBLocal(MainActivity.DEFAULTPATHBACKUP, MainActivity.PACKAGE_NAME, BDCore.NOME_BD, v.getContext());
                     sw_doBackup.setEnabled(false);
                 }
 
+            } else {
+                UtilsEntitys.exportDBLocal(MainActivity.DEFAULTPATHBACKUP, MainActivity.PACKAGE_NAME, BDCore.NOME_BD, v.getContext());
+                sw_doBackup.setEnabled(false);
             }
+
         });
 
-        sw_doRestore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Context context = v.getContext();
-                UtilsEntitys.createAlertDialog(v.getContext(), "Restaurar backup",
-                        "Deseja restaurar o backup ? Você irá substituir o dados já existentes.",
-                        "SIM", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                UtilsEntitys.importDBLocal(MainActivity.DEFAULTPATHBACKUP, MainActivity.PACKAGE_NAME, BDCore.NOME_BD, context);
+        sw_doRestore.setOnClickListener(v -> {
+            final Context context = v.getContext();
+            UtilsEntitys.createAlertDialog(v.getContext(), "Restaurar backup",
+                    "Deseja restaurar o backup ? Você irá substituir o dados já existentes.",
+                    "SIM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UtilsEntitys.importDBLocal(MainActivity.DEFAULTPATHBACKUP, MainActivity.PACKAGE_NAME, BDCore.NOME_BD, context);
 
-                                new AsyncTask() {
-                                    @Override
-                                    protected Object doInBackground(Object[] params) {
+                            new AsyncTask() {
+                                @Override
+                                protected Object doInBackground(Object[] params) {
+                                    new DAO_EnvironmentConfig(getApplicationContext()).bind();
+                                    if (EnvironmentConfig.getInstance().getId() == null) {
+                                        new Thread() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    List<Language> languages = APITheTVDB.getLanguages();
+
+                                                    for (Language l : languages) {
+                                                        new DAO_Language(getApplicationContext()).create(l);
+                                                        if (l.getAbbreviation().equals(Locale.getDefault().getLanguage())) {
+                                                            EnvironmentConfig.getInstance().setLanguage(l);
+                                                        }
+                                                    }
+                                                    new DAO_EnvironmentConfig(getApplicationContext()).create();
+
+
+                                                } catch (XmlPullParserException e) {
+                                                    Log.i("LOG-ERROR", e.toString());
+                                                } catch (IOException e) {
+                                                    Log.i("LOG-ERROR", e.toString());
+                                                } catch (ParseException e) {
+                                                    Log.i("LOG-ERROR", e.toString());
+                                                }
+                                            }
+                                        }.start();
+                                    } else {
                                         new DAO_EnvironmentConfig(getApplicationContext()).bind();
-                                        if (EnvironmentConfig.getInstance().getId() == null) {
+                                        if (EnvironmentConfig.getInstance().getLanguage() != null) {
+                                            EnvironmentConfig.getInstance().setLanguage(new DAO_Language(getApplicationContext()).find(EnvironmentConfig.getInstance().getLanguage().getId().toString()));
+                                        }
+                                        if (EnvironmentConfig.getInstance().getNextUpdate() == -1)
                                             new Thread() {
                                                 @Override
                                                 public void run() {
-                                                    try {
-                                                        List<Language> languages = APITheTVDB.getLanguages();
-
-                                                        for (Language l : languages) {
-                                                            new DAO_Language(getApplicationContext()).create(l);
-                                                            if (l.getAbbreviation().equals(Locale.getDefault().getLanguage())) {
-                                                                EnvironmentConfig.getInstance().setLanguage(l);
-                                                            }
-                                                        }
-                                                        new DAO_EnvironmentConfig(getApplicationContext()).create();
-
-
-                                                    } catch (XmlPullParserException e) {
-                                                        Log.i("LOG-ERROR", e.toString());
-                                                    } catch (IOException e) {
-                                                        Log.i("LOG-ERROR", e.toString());
-                                                    } catch (ParseException e) {
-                                                        Log.i("LOG-ERROR", e.toString());
+                                                    if (EnvironmentConfig.getInstance().isUpdateAutomatic()) {
+                                                        NotificationPublisher.scheduleUpdate(getApplicationContext());
                                                     }
+                                                    NotificationPublisher.scheduleCommingSoonToday(getApplicationContext());
                                                 }
                                             }.start();
-                                        } else {
-                                            new DAO_EnvironmentConfig(getApplicationContext()).bind();
-                                            if (EnvironmentConfig.getInstance().getLanguage() != null) {
-                                                EnvironmentConfig.getInstance().setLanguage(new DAO_Language(getApplicationContext()).find(EnvironmentConfig.getInstance().getLanguage().getId().toString()));
-                                            }
-                                            if (EnvironmentConfig.getInstance().getNextUpdate() == -1)
-                                                new Thread() {
-                                                    @Override
-                                                    public void run() {
-                                                        if (EnvironmentConfig.getInstance().isUpdateAutomatic()) {
-                                                            NotificationPublisher.scheduleUpdate(getApplicationContext());
-                                                        }
-                                                        NotificationPublisher.scheduleCommingSoonToday(getApplicationContext());
-                                                    }
-                                                }.start();
-                                        }
-
-                                        MainActivity.mySeries = new DAO_Serie(context).findAll();
-                                        for (int i = 0; i < MainActivity.mySeries.size(); i++) {
-                                            MainActivity.mySeries.get(i).setEpisodeList(new DAO_Episode(context).findAll(MainActivity.mySeries.get(i)));
-                                        }
-                                        if (EnvironmentConfig.getInstance().isOrder_name()) {
-                                            Collections.sort(MainActivity.mySeries, new SerieComparator_Name());
-                                        } else if (EnvironmentConfig.getInstance().isOrder_nextEpisode()) {
-                                            Collections.sort(MainActivity.mySeries, new SerieComparator_NextEpisode());
-                                        } else
-                                            Collections.sort(MainActivity.mySeries, new SerieComparator_Normal());
-                                        return null;
-
                                     }
 
-                                    @Override
-                                    protected void onPostExecute(Object o) {
-                                        Toast.makeText(context.getApplicationContext(), "Importação realizada!",
-                                                Toast.LENGTH_SHORT).show();
+                                    MainActivity.mySeries = new DAO_Serie(context).findAll();
+                                    for (int i = 0; i < MainActivity.mySeries.size(); i++) {
+                                        MainActivity.mySeries.get(i).setEpisodeList(new DAO_Episode(context).findAll(MainActivity.mySeries.get(i)));
                                     }
-                                }.execute();
-                            }
-                        }, "NÃO").show();
+                                    if (EnvironmentConfig.getInstance().isOrder_name()) {
+                                        Collections.sort(MainActivity.mySeries, new SerieComparator_Name());
+                                    } else if (EnvironmentConfig.getInstance().isOrder_nextEpisode()) {
+                                        Collections.sort(MainActivity.mySeries, new SerieComparator_NextEpisode());
+                                    } else
+                                        Collections.sort(MainActivity.mySeries, new SerieComparator_Normal());
+                                    return null;
 
-            }
-        });
+                                }
+
+                                @Override
+                                protected void onPostExecute(Object o) {
+                                    Toast.makeText(context.getApplicationContext(), "Importação realizada!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }.execute();
+                        }
+                    }, "NÃO").show();
+
+        });*/
 
 
         tv_language_checked = (TextView) findViewById(R.id.tv_language_checked);
@@ -479,7 +470,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         Log.i("LOG-AMBISERIES", "ConfigurationActivity - onRequestPermissionsResult");
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (permsRequestCode) {
+      /*  switch (permsRequestCode) {
             case 200:
                 SharedPreferences sharedPref = this.getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
@@ -489,7 +480,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                 editor.putBoolean("readAccepted", readAccepted);
                 editor.commit();
                 break;
-        }
+        }*/
 
     }
 

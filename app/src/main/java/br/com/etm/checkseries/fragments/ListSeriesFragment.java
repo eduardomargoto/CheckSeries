@@ -28,9 +28,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,7 +76,7 @@ public class ListSeriesFragment extends Fragment {
     private List<ListOfUser> listOfUsers;
     private TabsListAdapter mTabListAdapter;
     private int positionTab = -1;
-    private FloatingActionButton bt_novo;
+
 
     public ListSeriesFragment() {
     }
@@ -112,10 +109,6 @@ public class ListSeriesFragment extends Fragment {
             tv_msg.setText(R.string.app_myseries_empty);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.rv_list_serie);
-
-
-        bt_novo = (FloatingActionButton) v.findViewById(R.id.btn_novo);
-        bt_novo.setVisibility(View.INVISIBLE);
 
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());

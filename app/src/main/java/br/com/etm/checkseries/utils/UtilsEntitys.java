@@ -6,27 +6,13 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.google.android.gms.auth.api.Auth;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
-import com.mikepenz.materialdrawer.util.DrawerImageLoader;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,15 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.BDCore;
-import br.com.etm.checkseries.daos.DAO_Profile;
-import br.com.etm.checkseries.daos.FirebaseCore;
-import br.com.etm.checkseries.domains.Profile;
-import br.com.etm.checkseries.views.MainActivity;
-import br.com.etm.checkseries.views.SplashScreen;
 
 
 /**
@@ -163,7 +141,7 @@ public class UtilsEntitys {
         return popup;
     }
 
-    public static AccountHeader createAccountHeader(final Activity activity) {
+/*    public static AccountHeader createAccountHeader(final Activity activity) {
         final AccountHeaderBuilder accountHeaderBuilder = new AccountHeaderBuilder();
         accountHeaderBuilder.withActivity(activity)
                 .withHeaderBackground(R.drawable.back_navigation);
@@ -239,7 +217,7 @@ public class UtilsEntitys {
 
 
         return accountHeaderBuilder.build();
-    }
+    }*/
 
     public static AlertDialog.Builder createAlertDialog(Context context, String title, String message, String textPositiveButton, DialogInterface.OnClickListener positiveButton,
                                                         String textNegativeButton, DialogInterface.OnClickListener negativeButton) {

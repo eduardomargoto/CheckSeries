@@ -45,11 +45,16 @@ import br.com.etm.checkseries.utils.UtilsEntitys;
 import br.com.etm.checkseries.utils.UtilsImages;
 import br.com.etm.checkseries.views.MainActivity;
 import br.com.etm.checkseries.views.SerieActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.
  */
 public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final String TAG = SerieAdapter.class.getSimpleName();
+
     public static int POSITION_SERIE_ACTIVE = -1;
     public static final int NATIVE_ADS = 0;
     public static final int ITEM_SERIE = 1;
@@ -64,12 +69,12 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.serieList = new ArrayList<>(serieList);
 
         this.contextActivity = (Context) activity;
-        this.layoutInflater = (LayoutInflater) contextActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.i("LOG", "onCreateViewHolder() viewType: " + viewType);
+        Log.i(TAG, "onCreateViewHolder() viewType: " + viewType);
         View view = null;
         RecyclerView.ViewHolder mvh = null;
         if (viewType == ITEM_SERIE) {
@@ -90,7 +95,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.i("LOG", "onBindViewHolder(" + position + ")");
+        Log.i(TAG, "onBindViewHolder(" + position + ")");
         if (holder instanceof MyViewHolder) {
             Serie s = serieList.get(position);
 
@@ -231,7 +236,8 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             }
 
-        } else {
+        }
+   /*     else {
 
             MyViewHolderNativeAds mvhna = (MyViewHolderNativeAds) holder;
 
@@ -282,7 +288,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             }
 
-        }
+        }*/
     }
 
     @Override
@@ -322,95 +328,87 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-//        public Transformation trans1 = new ContrastFilterTransformation(contextActivity, 1.5f);
-//        public Transformation trans2 = new BrightnessFilterTransformation(contextActivity, 0.2f);
+        @BindView(R.id.ic_check_episode)
+        ImageButton ic_check_epsiode;
 
-        public ImageView iv_serie, iv_favorite, iv_options_serie;
-        public TextView tv_serie_name, tv_network_serie, tv_size_episodes;
-        public TextView tv_serieid, tv_nextepisode_serie, tv_nextepisodetime_serie;
-        public RelativeLayout rl_view;
+        @BindView(R.id.iv_serie)
+        ImageView iv_serie;
 
-        public ProgressBar pb_episodes;
-        public ImageButton ic_check_epsiode;
+        @BindView(R.id.iv_favorite)
+        ImageView iv_favorite;
 
+        @BindView(R.id.iv_options_serie)
+        ImageView iv_options_serie;
+
+        @BindView(R.id.tv_name_serie)
+        TextView tv_serie_name;
+
+        @BindView(R.id.tv_network_serie)
+        TextView tv_network_serie;
+
+        @BindView(R.id.tv_size_episodes)
+        TextView tv_size_episodes;
+
+        @BindView(R.id.tv_serieid)
+        TextView tv_serieid;
+
+        @BindView(R.id.tv_nextepisode_serie)
+        TextView tv_nextepisode_serie;
+
+        @BindView(R.id.tv_nextepisodetime_serie)
+        TextView tv_nextepisodetime_serie;
+
+        @BindView(R.id.rl_view)
+        RelativeLayout rl_view;
+
+        @BindView(R.id.pb_episodes)
+        ProgressBar pb_episodes;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            ic_check_epsiode = (ImageButton) itemView.findViewById(R.id.ic_check_episode);
-            pb_episodes = (ProgressBar) itemView.findViewById(R.id.pb_episodes);
-            tv_size_episodes = (TextView) itemView.findViewById(R.id.tv_size_episodes);
-
-            iv_serie = (ImageView) itemView.findViewById(R.id.iv_serie);
-            rl_view = (RelativeLayout) itemView.findViewById(R.id.rl_view);
-            tv_serie_name = (TextView) itemView.findViewById(R.id.tv_name_serie);
-            tv_serieid = (TextView) itemView.findViewById(R.id.tv_serieid);
-            iv_favorite = (ImageView) itemView.findViewById(R.id.iv_favorite);
+            ButterKnife.bind(itemView);
             iv_favorite.setTag(1);
-            iv_options_serie = (ImageView) itemView.findViewById(R.id.iv_options_serie);
             iv_options_serie.setTag(2);
-            tv_nextepisode_serie = (TextView) itemView.findViewById(R.id.tv_nextepisode_serie);
-            tv_nextepisodetime_serie = (TextView) itemView.findViewById(R.id.tv_nextepisodetime_serie);
-            tv_network_serie = (TextView) itemView.findViewById(R.id.tv_network_serie);
 
-
-            ic_check_epsiode.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Serie serie = serieList.get(getAdapterPosition());
-                    Episode episode = serie.getNextEpisode();
-                    episode.setWatched(true);
-                    new DAO_Episode(v.getContext()).updateWatchedSkipped(episode);
-//                    episode = new DAO_Episode(v.getContext()).findNextEpisode(serie.getId().toString());
-
-//                    MainActivity.mySeries.get(getAdapterPosition()).
-//                    serieList.get(getAdapterPosition()).setNextEpisode(episode);
-                    //HelpFragment.updateEpisodeMainActivity(episode, getAdapterPosition());
-
-                    notifyItemChanged(getAdapterPosition());
-
-//                    MainActivity.updateFragments();
-                }
+            ic_check_epsiode.setOnClickListener(v -> {
+                Serie serie = serieList.get(getAdapterPosition());
+                Episode episode = serie.getNextEpisode();
+                episode.setWatched(true);
+                new DAO_Episode(v.getContext()).updateWatchedSkipped(episode);
+                notifyItemChanged(getAdapterPosition());
             });
 
-            iv_options_serie.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SerieAdapter.POSITION_SERIE_ACTIVE = getAdapterPosition();
-                    v.showContextMenu();
-                }
+            iv_options_serie.setOnClickListener(v -> {
+                SerieAdapter.POSITION_SERIE_ACTIVE = getAdapterPosition();
+                v.showContextMenu();
             });
 
-            iv_favorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Serie serie = serieList.get(getAdapterPosition());
-                    String str_action = "";
-                    if (serie.isFavorite()) {
-                        serie.setFavorite(false);
-                        Picasso.with(contextActivity).load(R.drawable.star_outline_24dp)
-                                .into(iv_favorite);
-                        str_action = v.getResources().getString(R.string.app_action_revfavorite_serie);
-                        Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
-                    } else {
-                        serie.setFavorite(true);
-                        Picasso.with(contextActivity).load(R.drawable.star_24dp)
-                                .into(iv_favorite);
-                        str_action = v.getResources().getString(R.string.app_action_addfavorite_serie);
-                        Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
-                    }
-
-                    new DAO_Serie(v.getContext()).edit(serie);
-                    notifyItemChanged(getAdapterPosition());
-                    Log.i("LOG-FAVORITE-SERIE", "FAVORIE -> " + serie.isFavorite());
-                    if (EnvironmentConfig.getInstance().isFilter_favorite() && !serie.isFavorite()) {
-                        notifyItemRemoved(getAdapterPosition());
-                        serieList.remove(serie);
-                    }
-                    serie = null;
-                    str_action = null;
+            iv_favorite.setOnClickListener(v -> {
+                Serie serie = serieList.get(getAdapterPosition());
+                String str_action = "";
+                if (serie.isFavorite()) {
+                    serie.setFavorite(false);
+                    Picasso.with(contextActivity).load(R.drawable.star_outline_24dp)
+                            .into(iv_favorite);
+                    str_action = v.getResources().getString(R.string.app_action_revfavorite_serie);
+                    Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
+                } else {
+                    serie.setFavorite(true);
+                    Picasso.with(contextActivity).load(R.drawable.star_24dp)
+                            .into(iv_favorite);
+                    str_action = v.getResources().getString(R.string.app_action_addfavorite_serie);
+                    Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                 }
 
+                new DAO_Serie(v.getContext()).edit(serie);
+                notifyItemChanged(getAdapterPosition());
+                Log.i(TAG, "FAVORIE -> " + serie.isFavorite());
+                if (EnvironmentConfig.getInstance().isFilter_favorite() && !serie.isFavorite()) {
+                    notifyItemRemoved(getAdapterPosition());
+                    serieList.remove(serie);
+                }
+                serie = null;
+                str_action = null;
             });
 
             if (!EnvironmentConfig.getInstance().isLayoutCompat())
@@ -443,22 +441,30 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class MyViewHolderNativeAds extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvDescription, tvAgeRestrictions;
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+
+        @BindView(R.id.tv_description)
+        TextView tvDescription;
+
+        @BindView(R.id.tv_age_restriction)
+        TextView tvAgeRestrictions;
+
+        @BindView(R.id.rb_rating)
         RatingBar ratingBar;
+
+        @BindView(R.id.b_cta)
         Button ctaButton;
+
+        @BindView(R.id.icon)
         ImageView imageView;
+
+        @BindView(R.id.provider_view)
         FrameLayout providerViewContainer;
 
         public MyViewHolderNativeAds(View itemView) {
             super(itemView);
-
-            providerViewContainer = (FrameLayout) itemView.findViewById(R.id.provider_view);
-            imageView = (ImageView) itemView.findViewById(R.id.icon);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvDescription = (TextView) itemView.findViewById(R.id.tv_description);
-            ratingBar = (RatingBar) itemView.findViewById(R.id.rb_rating);
-            ctaButton = (Button) itemView.findViewById(R.id.b_cta);
-            tvAgeRestrictions = (TextView) itemView.findViewById(R.id.tv_age_restriction);
+            ButterKnife.bind(itemView);
         }
 
     }

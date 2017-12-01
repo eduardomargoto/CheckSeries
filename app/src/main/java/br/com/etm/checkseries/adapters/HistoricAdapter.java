@@ -99,7 +99,8 @@ public class HistoricAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
 
-        } else {
+        }
+       /* else {
 
             HistoricAdapter.MyViewHolderNativeAds mvhna = (HistoricAdapter.MyViewHolderNativeAds) viewholder;
             NativeAd mAd = null;
@@ -147,7 +148,7 @@ public class HistoricAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     Log.i("NATIVEADS", "EXCEPTION");
                 }
             }
-        }
+        }*/
     }
 
     @Override

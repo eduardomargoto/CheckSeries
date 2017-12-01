@@ -58,7 +58,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
         if (comment.getSpoiler().equals("true")) {
             holder.txv_comment.setText(context.getResources().getString(R.string.app_alert_spoiler));
-            holder.txv_comment.setTextColor(context.getResources().getColor(R.color.md_red_500));
+            holder.txv_comment.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
         } else {
             holder.txv_comment.setText(comment.getComment());
             holder.txv_comment.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_dark));

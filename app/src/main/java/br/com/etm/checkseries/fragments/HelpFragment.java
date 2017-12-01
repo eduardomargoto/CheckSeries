@@ -58,11 +58,11 @@ public class HelpFragment {
     }
 
     public static void updateEpisodeMainActivity(final Episode episode, final int positionAdapter) {
-        new Thread() {
+ /*       new Thread() {
             @Override
             public void run() {
 
-                MainActivity.mySeries.get(positionAdapter).setNextEpisode(episode);
+                mySeries.get(positionAdapter).setNextEpisode(episode);
 
                 if (EnvironmentConfig.getInstance().isOrder_name()) {
                     Collections.sort(MainActivity.mySeries, new SerieComparator_Name());
@@ -72,11 +72,11 @@ public class HelpFragment {
 
 
             }
-        }.start();
+        }.start();*/
     }
 
     public static void updateEpisodeMainActivity(final Episode episode, final Serie serie) {
-        new Thread() {
+       /* new Thread() {
             @Override
             public void run() {
                 for (int i = 0; i < MainActivity.mySeries.size(); i++) {
@@ -99,11 +99,11 @@ public class HelpFragment {
 
                 Log.d("UPDATE", "ATUALIZO A MAIN");
             }
-        }.start();
+        }.start();*/
     }
 
     public static void updateSerieMainActivity(final Serie serie) {
-        new Thread() {
+/*        new Thread() {
             @Override
             public void run() {
                 for (int i = 0; i < MainActivity.mySeries.size(); i++) {
@@ -121,7 +121,7 @@ public class HelpFragment {
                     Collections.sort(MainActivity.mySeries, new SerieComparator_Normal());
                 }
             }
-        }.start();
+        }.start();*/
     }
 
     public static void createContextMenu(Activity activity, Serie serie, ContextMenu menu, int resId_menu) {
