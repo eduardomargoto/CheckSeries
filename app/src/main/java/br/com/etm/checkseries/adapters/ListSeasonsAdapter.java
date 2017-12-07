@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.views.SeasonActivity;
 
 /**

@@ -1,15 +1,8 @@
 package br.com.etm.checkseries.fragments;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -20,28 +13,18 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
 import br.com.etm.checkseries.daos.DAO_Episode;
 import br.com.etm.checkseries.daos.DAO_ListSerie;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.ListOfUser_Serie;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser_Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.HttpConnection;
-import br.com.etm.checkseries.utils.NotificationPublisher;
-import br.com.etm.checkseries.utils.SerieComparator_Name;
-import br.com.etm.checkseries.utils.SerieComparator_NextEpisode;
-import br.com.etm.checkseries.utils.SerieComparator_Normal;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.MainActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 30/10/2015.

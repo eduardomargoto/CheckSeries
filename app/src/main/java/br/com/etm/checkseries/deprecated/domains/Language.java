@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.domains;
+package br.com.etm.checkseries.deprecated.domains;
 
 /**
  * Created by EDUARDO_MARGOTO on 07/11/2015.

@@ -2,7 +2,6 @@ package br.com.etm.checkseries.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,18 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.appodeal.ads.NativeAd;
+
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.MainActivity;
+
 import static br.com.etm.checkseries.adapters.EpisodeAdapter.ITEM_EPISODE;
 import static br.com.etm.checkseries.adapters.EpisodeAdapter.NATIVE_ADS;
 

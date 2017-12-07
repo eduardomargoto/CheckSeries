@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.NewSerieFragment;
 import br.com.etm.checkseries.utils.HttpConnection;
 import butterknife.BindView;

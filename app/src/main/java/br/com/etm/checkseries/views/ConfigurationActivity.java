@@ -2,18 +2,9 @@ package br.com.etm.checkseries.views;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.backup.BackupManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,40 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.RemoteViews;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.BDCore;
 import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
-import br.com.etm.checkseries.daos.DAO_Episode;
 import br.com.etm.checkseries.daos.DAO_Language;
-import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Language;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.fragments.HelpFragment;
-import br.com.etm.checkseries.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.NotificationPublisher;
-import br.com.etm.checkseries.utils.SerieComparator_Name;
-import br.com.etm.checkseries.utils.SerieComparator_NextEpisode;
-import br.com.etm.checkseries.utils.SerieComparator_Normal;
-import br.com.etm.checkseries.utils.UtilsEntitys;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Language;
 
 /**
  * Created by EDUARDO_MARGOTO on 05/11/2015.

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,28 +21,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.appodeal.ads.NativeAd;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.daos.DAO_Episode;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.fragments.HelpFragment;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
-import br.com.etm.checkseries.utils.UtilsEntitys;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.MainActivity;
 import br.com.etm.checkseries.views.SerieActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;

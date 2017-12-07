@@ -1,18 +1,16 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
 

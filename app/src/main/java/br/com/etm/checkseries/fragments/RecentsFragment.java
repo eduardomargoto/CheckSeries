@@ -16,7 +16,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.RecentsAdapter;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 
 /**
  * Created by EDUARDO_MARGOTO on 28/10/2015.

@@ -1,17 +1,16 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.domains.ListOfUser_Serie;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser_Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 
 /**
  * Created by EDUARDO_MARGOTO on 05/11/2015.

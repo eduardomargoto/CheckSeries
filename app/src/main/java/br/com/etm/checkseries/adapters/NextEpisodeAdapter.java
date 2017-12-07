@@ -22,14 +22,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
 

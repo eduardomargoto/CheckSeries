@@ -11,15 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.appodeal.ads.Appodeal;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.views.NewSerieActivity;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 
 /**
  * Created by EDUARDO_MARGOTO on 23/10/2015.

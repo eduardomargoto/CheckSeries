@@ -15,8 +15,8 @@ import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.TabsEpisodesSeasonAdapter;
 import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.EpisodeInformationFragment;
 import br.com.etm.checkseries.utils.SlidingTabLayout;
 

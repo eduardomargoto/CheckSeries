@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.domains;
+package br.com.etm.checkseries.deprecated.domains;
 
 import android.graphics.Bitmap;
 

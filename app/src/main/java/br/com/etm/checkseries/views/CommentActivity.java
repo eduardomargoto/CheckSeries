@@ -29,10 +29,10 @@ import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.CommentAdapter;
 import br.com.etm.checkseries.daos.FirebaseCore;
-import br.com.etm.checkseries.domains.Comment;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Profile;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Comment;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Profile;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.UtilsEntitys;
 
 /**

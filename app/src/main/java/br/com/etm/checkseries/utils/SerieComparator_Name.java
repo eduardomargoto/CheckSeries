@@ -2,7 +2,7 @@ package br.com.etm.checkseries.utils;
 
 import java.util.Comparator;
 
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 
 /**
  * Created by EDUARDO_MARGOTO on 31/10/2015.

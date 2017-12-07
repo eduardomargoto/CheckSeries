@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Comment;
+import br.com.etm.checkseries.deprecated.domains.Comment;
 
 /**
  * Created by EDUARDO_MARGOTO on 13/04/2016.

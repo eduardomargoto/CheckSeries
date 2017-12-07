@@ -1,26 +1,18 @@
 package br.com.etm.checkseries.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.util.Log;
-
-import com.appodeal.ads.Appodeal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.NextEpisodeFragment;
 import br.com.etm.checkseries.fragments.SerieFragment;
-import br.com.etm.checkseries.views.MainActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 27/10/2015.

@@ -2,36 +2,20 @@ package br.com.etm.checkseries.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_List;
-import br.com.etm.checkseries.daos.DAO_ListSerie;
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.views.MainActivity;
-import br.com.etm.checkseries.views.SeriesListActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 27/10/2015.

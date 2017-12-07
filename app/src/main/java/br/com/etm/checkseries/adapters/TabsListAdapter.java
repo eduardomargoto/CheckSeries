@@ -7,15 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import br.com.etm.checkseries.daos.DAO_Episode;
 import br.com.etm.checkseries.daos.DAO_ListSerie;
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.ListSeriesFragment;
 
 /**

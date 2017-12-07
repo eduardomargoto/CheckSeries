@@ -17,8 +17,8 @@ import java.util.Calendar;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.ListSeasonsAdapter;
 import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.views.SerieActivity;
 
 /**

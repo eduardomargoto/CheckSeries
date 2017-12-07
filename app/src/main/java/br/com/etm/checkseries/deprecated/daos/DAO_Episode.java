@@ -1,10 +1,9 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -13,9 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 /**

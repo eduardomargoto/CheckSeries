@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,13 +24,11 @@ import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.fragments.ListSeriesFragment;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.MainActivity;
 import br.com.etm.checkseries.views.SerieActivity;
 
 /**

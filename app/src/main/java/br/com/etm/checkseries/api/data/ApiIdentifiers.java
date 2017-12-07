@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.domains;
+package br.com.etm.checkseries.api.data;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by eduardo on 01/12/17.
  */
 
-public class Identifiers implements Serializable {
+public class ApiIdentifiers implements Serializable {
 
     @SerializedName("trakt")
     private Integer trakt;

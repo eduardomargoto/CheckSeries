@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,7 +8,7 @@ import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-import br.com.etm.checkseries.domains.Profile;
+import br.com.etm.checkseries.deprecated.domains.Profile;
 
 /**
  * Created by EDUARDO_MARGOTO on 13/04/2016.

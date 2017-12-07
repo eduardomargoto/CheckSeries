@@ -1,13 +1,7 @@
 package br.com.etm.checkseries.adapters;
 
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -26,21 +19,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.daos.DAO_List;
-import br.com.etm.checkseries.daos.DAO_ListSerie;
-import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.domains.ListOfUser_Serie;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.fragments.HelpFragment;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
-import br.com.etm.checkseries.utils.UtilsEntitys;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.MainActivity;
 
 
 /**

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.HistoricAdapter;
-import br.com.etm.checkseries.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.utils.DividerItemDecoration;
 
 /**

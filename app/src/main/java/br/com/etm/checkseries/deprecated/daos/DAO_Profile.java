@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import br.com.etm.checkseries.domains.Profile;
+import br.com.etm.checkseries.deprecated.domains.Profile;
 
 /**
  * Created by EDUARDO_MARGOTO on 31/10/2015.

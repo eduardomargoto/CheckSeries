@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsCacheMemory;

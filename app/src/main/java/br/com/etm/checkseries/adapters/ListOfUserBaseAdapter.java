@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,11 +14,10 @@ import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.daos.DAO_ListSerie;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.ListOfUser;
-import br.com.etm.checkseries.domains.ListOfUser_Serie;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser;
+import br.com.etm.checkseries.deprecated.domains.ListOfUser_Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.ListSeriesFragment;
-import br.com.etm.checkseries.views.MainActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 05/11/2015.

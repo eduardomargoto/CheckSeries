@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -22,7 +20,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -32,12 +29,10 @@ import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
 import br.com.etm.checkseries.daos.DAO_Episode;
 import br.com.etm.checkseries.daos.DAO_Language;
 import br.com.etm.checkseries.daos.DAO_Serie;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Language;
-import br.com.etm.checkseries.domains.Serie;
-import br.com.etm.checkseries.fragments.HelpFragment;
-import br.com.etm.checkseries.views.MainActivity;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Language;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.views.SplashScreen;
 
 /**

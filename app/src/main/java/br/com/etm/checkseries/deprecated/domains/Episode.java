@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.domains;
+package br.com.etm.checkseries.deprecated.domains;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.views.MainActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.

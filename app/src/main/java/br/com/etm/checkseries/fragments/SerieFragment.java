@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
-import br.com.etm.checkseries.domains.EnvironmentConfig;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.views.NewSerieActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;

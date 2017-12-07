@@ -10,8 +10,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.etm.checkseries.domains.Episode;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Episode;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.EpisodeInformationFragment;
 
 /**

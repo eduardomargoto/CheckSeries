@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.daos;
+package br.com.etm.checkseries.deprecated.daos;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

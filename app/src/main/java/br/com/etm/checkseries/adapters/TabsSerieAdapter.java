@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.EpisodeInformationFragment;
 import br.com.etm.checkseries.fragments.SeasonsFragment;
 import br.com.etm.checkseries.fragments.SerieInformationFragment;

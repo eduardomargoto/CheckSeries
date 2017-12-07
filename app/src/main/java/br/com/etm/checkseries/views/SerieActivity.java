@@ -12,14 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.TabsSerieAdapter;
-import br.com.etm.checkseries.domains.Serie;
+import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.SlidingTabLayout;
 import br.com.etm.checkseries.utils.UtilsImages;
 
