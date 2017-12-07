@@ -28,9 +28,9 @@ import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.CommentActivity;
-import br.com.etm.checkseries.views.ListEpisodesSeasonActivity;
-import br.com.etm.checkseries.views.SerieActivity;
+import br.com.etm.checkseries.activity.CommentActivity;
+import br.com.etm.checkseries.activity.ListEpisodesSeasonActivity;
+import br.com.etm.checkseries.activity.SerieActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 08/11/2015.

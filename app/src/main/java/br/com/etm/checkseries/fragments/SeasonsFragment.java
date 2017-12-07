@@ -19,7 +19,7 @@ import br.com.etm.checkseries.adapters.ListSeasonsAdapter;
 import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.views.SerieActivity;
+import br.com.etm.checkseries.activity.SerieActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 08/11/2015.

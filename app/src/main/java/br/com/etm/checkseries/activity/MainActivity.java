@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.views;
+package br.com.etm.checkseries.activity;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -21,7 +21,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import com.firebase.client.Firebase;
 import java.util.ArrayList;
 import java.util.Collections;
 import br.com.etm.checkseries.R;
@@ -40,8 +39,6 @@ import io.reactivex.Observable;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 1972;
 
     @BindView(R.id.pbContainer)
     ProgressBar pbContainer;
@@ -65,53 +62,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(getApplication());
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
         UtilsEntitys.setOrientationConfigDevice(this);
 
-        //TOOLBAR
-        ViewCompat.setElevation(mToolbar, 0);
+        ViewCompat.setElevation(mToolbar, 4);
+        ViewCompat.setElevation(mTabLayout, 4);
         setSupportActionBar(mToolbar);
 
         pbContainer.setVisibility(View.VISIBLE);
         pb_updates.setVisibility(View.GONE);
 
         configureTabs();
-
-//        if (getIntent().getExtras() != null) {
-//            Object obj = getIntent().getExtras().get(NotificationPublisher.KEY_NOTIFICATION);
-//            if (obj != null) {
-//                if (obj.toString().equals(NotificationPublisher.NOTIFICATION_COMMINGSOON)) {
-//                    mViewPager.setCurrentItem(1);
-//                    UPDATE_ONRESTART = false;
-//                }
-//
-//            }
-//        }
-
-//        new DAO_Profile(this).bind();
-//
-//        if (!Profile.getInstance().getId().equals("")) { // MANTER CONEXAO
-//            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(MainActivity.googleApiClient);
-//            this.startActivityForResult(signInIntent, MainActivity.SIGN_IN_CODE);
-//        }
-
     }
-
-/*    public static boolean checkPlayServices(Context context) {
-        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
-        int result = googleAPI.isGooglePlayServicesAvailable(context);
-        if (result != ConnectionResult.SUCCESS) {
-            if (googleAPI.isUserResolvableError(result)) {
-                googleAPI.getErrorDialog((Activity) context, result,
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            }
-            return false;
-        }
-        return true;
-    }*/
 
     private void configureTabs() {
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), MainActivity.this);

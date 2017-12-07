@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.views;
+package br.com.etm.checkseries.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -29,7 +29,7 @@ import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.SerieActivity;
+import br.com.etm.checkseries.activity.SerieActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.

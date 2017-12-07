@@ -38,7 +38,7 @@ import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.SerieActivity;
+import br.com.etm.checkseries.activity.SerieActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -60,7 +60,11 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public SerieAdapter(Activity activity, List<Serie> serieList) {
         mActivity = activity;
-        this.serieList = new ArrayList<>(serieList);
+        if (serieList != null) {
+            this.serieList = new ArrayList<>(serieList);
+        } else {
+            this.serieList = new ArrayList<>();
+        }
 
         this.contextActivity = (Context) activity;
         this.layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

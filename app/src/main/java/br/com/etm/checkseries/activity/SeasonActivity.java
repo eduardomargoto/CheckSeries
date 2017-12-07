@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.views;
+package br.com.etm.checkseries.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;

@@ -32,7 +32,7 @@ import br.com.etm.checkseries.deprecated.daos.DAO_ListSerie;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.ListOfUser;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.views.SeriesListActivity;
+import br.com.etm.checkseries.activity.SeriesListActivity;
 
 //import android.support.design.widget.FloatingActionButton;
 

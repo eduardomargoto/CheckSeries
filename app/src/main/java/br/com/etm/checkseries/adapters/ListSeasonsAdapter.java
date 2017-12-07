@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.views.SeasonActivity;
+import br.com.etm.checkseries.activity.SeasonActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 08/11/2015.

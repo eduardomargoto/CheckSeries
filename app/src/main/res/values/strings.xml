@@ -75,7 +75,7 @@
     <string name="app_text_wanthidden_serie">Deseja ocultar</string>
 
 
-    <string name="app_findnewseries">Digite o nome da série.</string>
+    <string name="app_search_series">Pesquise por uma série.</string>
     <string name="app_nofindnewseries">Nenhum resultado obtido. \nTente palavras completas.</string>
     <string name="app_loading">Carregando...</string>
     <string name="app_searching">Procurando...</string>

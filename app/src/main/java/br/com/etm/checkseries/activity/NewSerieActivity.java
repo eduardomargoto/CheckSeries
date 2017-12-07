@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.views;
+package br.com.etm.checkseries.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,24 +11,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
+import br.com.etm.checkseries.api.data.ApiMediaObject;
 import br.com.etm.checkseries.deprecated.domains.Serie;
+import br.com.etm.checkseries.di.DaggerNewSerieComponent;
+import br.com.etm.checkseries.di.NewSerieModule;
 import br.com.etm.checkseries.fragments.NewSerieFragment;
+import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.utils.HttpConnection;
+import br.com.etm.checkseries.views.NewSerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 import butterknife.Unbinder;
 
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.
  */
-public class NewSerieActivity extends AppCompatActivity {
+public class NewSerieActivity extends AppCompatActivity implements NewSerieView{
 
     private static final String TAG = NewSerieActivity.class.getSimpleName();
     private static final String SERIESLIST = "seriesList";
@@ -50,6 +59,9 @@ public class NewSerieActivity extends AppCompatActivity {
     private ProgressDialog progressDialog = null;
     private ArrayList<Serie> series;
     private Unbinder unbinder;
+
+    @Inject
+    NewSeriePresenter presenter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -73,11 +85,17 @@ public class NewSerieActivity extends AppCompatActivity {
             tv_msg.setText(R.string.app_internet_off);
         }
 
-        et_serie_name.setOnEditorActionListener((v, actionId, event) -> {
+        DaggerNewSerieComponent.builder()
+                .appComponent(App.getAppComponent())
+                .newSerieModule(new NewSerieModule(this))
+                .build()
+                .inject(this);
+
+        /*et_serie_name.setOnEditorActionListener((v, actionId, event) -> {
             progressDialog.setMessage(getResources().getString(R.string.app_searching));
             progressDialog.show();
             if (HttpConnection.isOnline(NewSerieActivity.this)) {
-             /*   new Thread() {
+             *//*   new Thread() {
                     public void run() {
                         try {
                             List<Language> languages = new ArrayList<Language>();
@@ -111,7 +129,7 @@ public class NewSerieActivity extends AppCompatActivity {
                         progressDialog.dismiss();
 
                     }
-                }.start();*/
+                }.start();*//*
             } else {
                 progressDialog.dismiss();
                 if (last_search_value.equalsIgnoreCase(et_serie_name.getText().toString())) {
@@ -132,7 +150,7 @@ public class NewSerieActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
             return true;
-        });
+        });*/
 
 /*        et_serie_name.setOnTouchListener((v, event) -> {
             if (et_serie_name.getCompoundDrawables()[2] == null)
@@ -143,6 +161,14 @@ public class NewSerieActivity extends AppCompatActivity {
             }
             return false;
         });*/
+    }
+
+    @OnEditorAction(R.id.et_name_serie)
+    protected boolean onSearch(){
+        progressDialog.setMessage(getResources().getString(R.string.app_searching));
+        progressDialog.show();
+        presenter.searchSerie(et_serie_name.getText().toString());
+        return true;
     }
 
     public ArrayList<Serie> updateAddedSeries(ArrayList<Serie> serieList, ArrayList<Serie> mySeries) {
@@ -174,6 +200,7 @@ public class NewSerieActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        presenter.onDestroy();
     }
 
     @Override
@@ -201,6 +228,21 @@ public class NewSerieActivity extends AppCompatActivity {
             serieFragment = new NewSerieFragment(series);
         else
             serieFragment.updateView(series);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.rl_fragment_container, serieFragment, "mainFrag");
+        ft.commit();
+    }
+
+    @Override
+    public void configureView(List<ApiMediaObject> apiMediaObjectList) {
+        serieFragment = (NewSerieFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        tv_msg.setText("");
+//        if (apiMediaObjectList == null) apiMediaObjectList = new ArrayList<>();
+//        if (serieFragment == null)
+//            serieFragment = new NewSerieFragment(apiMediaObjectList);
+//        else
+//            serieFragment.updateView(apiMediaObjectList);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.rl_fragment_container, serieFragment, "mainFrag");

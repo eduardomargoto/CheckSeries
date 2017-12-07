@@ -12,8 +12,6 @@ import com.appodeal.ads.NativeCallbacks;
 
 import java.util.List;
 
-import br.com.etm.checkseries.views.MainActivity;
-
 public class AppodealNativeCallBacks implements NativeCallbacks {
     private final Activity mActivity;
 

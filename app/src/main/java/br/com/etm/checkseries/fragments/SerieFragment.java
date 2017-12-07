@@ -23,7 +23,7 @@ import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.views.NewSerieActivity;
+import br.com.etm.checkseries.activity.NewSerieActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,11 +51,8 @@ public class SerieFragment extends Fragment {
     private Unbinder unbinder;
     private ArrayList<Serie> seriesList = null;
 
-    public static SerieFragment newInstance(ArrayList<Serie> seriesList) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(PARAM_SERIES, seriesList);
+    public static SerieFragment newInstance() {
         SerieFragment fragment = new SerieFragment();
-        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -66,12 +63,9 @@ public class SerieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_serie, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        if (getArguments() != null && getArguments().containsKey(PARAM_SERIES)) {
-            seriesList = (ArrayList<Serie>) getArguments().getSerializable(PARAM_SERIES);
-            if (seriesList != null && !seriesList.isEmpty())
-                tvMessage.setVisibility(View.VISIBLE);
+        if (seriesList != null && !seriesList.isEmpty()) {
+            tvMessage.setVisibility(View.VISIBLE);
         }
-
 
 //        int positionAds = 0;
 //        if (!MainActivity.mAds.isEmpty()) {

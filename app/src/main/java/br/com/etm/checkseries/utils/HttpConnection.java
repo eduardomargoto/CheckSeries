@@ -17,8 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-import br.com.etm.checkseries.views.MainActivity;
-
 /**
  * Created by EDUARDO_MARGOTO on 22/10/2015.
  */

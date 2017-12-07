@@ -14,36 +14,46 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
 import br.com.etm.checkseries.deprecated.domains.Serie;
+import br.com.etm.checkseries.presenters.NewSeriePresenter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by EDUARDO_MARGOTO on 23/10/2015.
  */
 public class NewSerieFragment extends Fragment {
-    private RecyclerView recyclerView;
+
+    @BindView(R.id.rv_list_newserie)
+    RecyclerView recyclerView;
+
     private List<Serie> serieList;
     private LinearLayoutManager mLayoutManager = null;
 
+    @Inject
+    NewSeriePresenter presenter;
+
+    private Unbinder unbinder;
+
     @SuppressLint("ValidFragment")
-    public NewSerieFragment(List<Serie> series) {
-        super();
-        this.serieList = series;
+    public NewSerieFragment(List<Serie> serieList) {
+        this.serieList = serieList;
     }
 
-    @SuppressLint("ValidFragment")
-    public NewSerieFragment() {}
-
+    public NewSerieFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_newserie, container, false);
-        Log.i("LOG-AMBISERIES", "NewFragmentSerie - onCreateView()");
+        unbinder = ButterKnife.bind(this, v);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.rv_list_newserie);
         recyclerView.setHasFixedSize(true);
-
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -64,11 +74,15 @@ public class NewSerieFragment extends Fragment {
         NewSerieAdapter serieAdapter = new NewSerieAdapter(getActivity(), list);
 
         recyclerView.setAdapter(serieAdapter);
-
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
-//    @Override
+    //    @Override
 //    public void onResume() {
 //        super.onResume();
 //        if(Appodeal.isLoaded(Appodeal.BANNER)){

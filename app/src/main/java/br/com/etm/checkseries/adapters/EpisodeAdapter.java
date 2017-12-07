@@ -34,7 +34,7 @@ import br.com.etm.checkseries.fragments.HelpFragment;
 import br.com.etm.checkseries.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
-import br.com.etm.checkseries.views.ListEpisodesSeasonActivity;
+import br.com.etm.checkseries.activity.ListEpisodesSeasonActivity;
 
 /**
  * Created by EDUARDO_MARGOTO on 02/01/2016.

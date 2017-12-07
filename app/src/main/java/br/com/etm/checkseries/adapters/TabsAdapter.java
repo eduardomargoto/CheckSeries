@@ -45,7 +45,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
         Log.i(TAG, "getItem(" + position + ")");
         Fragment frag = null;
         if (position == 0) { //MYSERIES
-            frag = SerieFragment.newInstance(series);
+            frag = SerieFragment.newInstance();
         } else if (position == 1) { // NEXTS
             frag = new NextEpisodeFragment();
         } else if (position == 2) { // NEXTS

@@ -16,7 +16,7 @@
         android:required="false" />
 
     <application
-        android:name="android.support.multidex.MultiDexApplication"
+        android:name=".App"
         android:configChanges="orientation|screenSize"
         android:icon="@mipmap/ic_checkseries"
         android:label="@string/app_name"
@@ -38,7 +38,7 @@
         </receiver>
 
 
-        <activity android:name=".views.SplashScreen">
+        <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,55 +46,55 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@mipmap/ic_checkseries"
             android:label="@string/app_name" />
 
         <activity
-            android:name=".views.HistoricActivity"
+            android:name=".activity.HistoricActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@mipmap/ic_checkseries"
             android:label="@string/app_historic" />
 
         <activity
-            android:name=".views.NewSerieActivity"
+            android:name=".activity.NewSerieActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_newserie"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".views.SerieActivity"
+            android:name=".activity.SerieActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name_serie"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".views.SeasonActivity"
+            android:name=".activity.SeasonActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_season"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".views.ListEpisodesSeasonActivity"
+            android:name=".activity.ListEpisodesSeasonActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_episodes_season"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".views.ConfigurationActivity"
+            android:name=".activity.ConfigurationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_configuration"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".views.SeriesListActivity"
+            android:name=".activity.SeriesListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_serieslist"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".views.CommentActivity"
+            android:name=".activity.CommentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_act_serieslist"
             android:theme="@style/AppTheme"/>
