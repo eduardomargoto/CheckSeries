@@ -5,12 +5,13 @@
     <color name="colorPrimary">#9E9E9E</color>
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#607D8B</color>
+
     <color name="colorPrimaryText">#212121</color>
     <color name="colorLightPrimary">#F5F5F5</color>
     <color name="colorSecondText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorTextIcon">#212121</color>
-    <color name="grey">#DDD</color>
 
+    <color name="grey">#DDD</color>
     <color name="text_shadow">#7F000000</color>
 </resources>

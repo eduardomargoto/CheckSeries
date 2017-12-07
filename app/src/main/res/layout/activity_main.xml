@@ -16,9 +16,7 @@
             android:id="@+id/tb_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:minHeight="?attr/actionBarSize"
-            app:title="@string/app_name_serie"
-            tools:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:title="@string/app_name_serie">
 
             <ProgressBar
                 android:id="@+id/pb_updates"
