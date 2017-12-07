@@ -5,7 +5,7 @@ import android.util.Log;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
-import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -32,7 +32,10 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     @Override
     public void searchSerie(String query) {
         disposable = interactor.search(query)
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> view.showProgress())
+                .doOnTerminate(view::dismissProgress)
                 .subscribe(apiMediaObjects -> {
                     view.updateView(apiMediaObjects);
                 }, throwable -> {

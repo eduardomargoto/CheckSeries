@@ -61,13 +61,13 @@ public interface ApiTraktTv {
     @GET("/people/{id}?extended=full")
     ApiPerson getPeople(@Path("id") String personId);
 
-    @GET("/movies/{id}?extended=full")
+    @GET("/movies/{id}?extended=full,images")
     ApiMovie getMovie(@Path("id") String movieId);
 
     @Headers({"Content-Type:application/json",
             "trakt-api-version: 2",
             "trakt-api-key: " + BuildConfig.CLIENT_ID})
-    @GET("/search/{type}")
+    @GET("/search/{type}?extended=full,images")
     Observable<List<ApiSearchObject>> search(@Path("type") String types,
                                              @Query("query") String searchText);
 }

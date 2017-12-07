@@ -173,11 +173,12 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        presenter.onDestroy();
     }
 
     @Override
     public void configureView() {
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.app_searching));
 
         recyclerView.setHasFixedSize(true);

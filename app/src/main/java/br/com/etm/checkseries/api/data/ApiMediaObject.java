@@ -2,6 +2,7 @@ package br.com.etm.checkseries.api.data;
 
 import com.google.gson.annotations.SerializedName;
 
+
 /**
  * Created by eduardo on 07/12/17.
  */
@@ -12,8 +13,18 @@ public class ApiMediaObject {
     private String title;
     @SerializedName("year")
     private Integer year;
+    @SerializedName("images")
+    private ApiImages images;
     @SerializedName("ids")
     private ApiIdentifiers apiIdentifiers;
+
+    public ApiImages getImages() {
+        return images;
+    }
+
+    public void setImages(ApiImages images) {
+        this.images = images;
+    }
 
     public String getTitle() {
         return title;
