@@ -23,6 +23,7 @@ import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
 import br.com.etm.checkseries.api.data.ApiMediaObject;
+import br.com.etm.checkseries.api.data.ApiSearchObject;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.di.DaggerNewSerieComponent;
 import br.com.etm.checkseries.di.NewSerieModule;
@@ -162,7 +163,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         return true;
     }
 
-    public void updateView(List<ApiMediaObject> apiMediaObjectList) {
+    public void updateView(List<ApiSearchObject> apiSearchObjects) {
         Log.i(TAG, "updateView");
 //        NewSerieAdapter serieAdapter = new NewSerieAdapter(getActivity(), apiMediaObjectList);
 //        recyclerView.setAdapter(serieAdapter);

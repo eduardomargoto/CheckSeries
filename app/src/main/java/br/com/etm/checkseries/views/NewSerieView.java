@@ -2,7 +2,8 @@ package br.com.etm.checkseries.views;
 
 import java.util.List;
 
-import br.com.etm.checkseries.api.data.ApiMediaObject;
+
+import br.com.etm.checkseries.api.data.ApiSearchObject;
 
 /**
  * Created by eduardo on 07/12/17.
@@ -11,7 +12,7 @@ import br.com.etm.checkseries.api.data.ApiMediaObject;
 public interface NewSerieView {
 
     void configureView();
-    void updateView(List<ApiMediaObject> apiMediaObjectList);
+    void updateView(List<ApiSearchObject> apiSearchObjects);
     void showProgress();
     void dismissProgress();
 }
