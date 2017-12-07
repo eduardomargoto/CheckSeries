@@ -25,10 +25,11 @@ import java.util.List;
 import java.util.Locale;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
-import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.daos.DAO_Language;
-import br.com.etm.checkseries.daos.DAO_Serie;
+
+import br.com.etm.checkseries.deprecated.daos.DAO_EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
+import br.com.etm.checkseries.deprecated.daos.DAO_Language;
+import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Language;

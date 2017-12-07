@@ -1,17 +1,9 @@
 package br.com.etm.checkseries.utils;
 
 import android.app.backup.BackupAgentHelper;
-import android.app.backup.BackupDataInput;
-import android.app.backup.BackupDataOutput;
-import android.app.backup.FileBackupHelper;
-import android.app.backup.SharedPreferencesBackupHelper;
-import android.os.Environment;
-import android.os.ParcelFileDescriptor;
+
 import android.util.Log;
 
-import java.io.IOException;
-
-import br.com.etm.checkseries.daos.BDCore;
 
 
 /**
