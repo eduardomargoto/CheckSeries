@@ -10,5 +10,9 @@ import br.com.etm.checkseries.api.data.ApiMediaObject;
 
 public interface NewSerieView {
 
-    void configureView(List<ApiMediaObject> apiMediaObjectList);
+    void configureView();
+    void updateView(List<ApiMediaObject> apiMediaObjectList);
+    void showProgress();
+    void dismissProgress();
 }
+

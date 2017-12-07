@@ -6,6 +6,7 @@ package br.com.etm.checkseries.presenters;
 
 public interface NewSeriePresenter {
 
+    void onCreate();
     void searchSerie(String query);
     void onDestroy();
 }

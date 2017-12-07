@@ -25,11 +25,16 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     @Override
+    public void onCreate() {
+        view.configureView();
+    }
+
+    @Override
     public void searchSerie(String query) {
         disposable = interactor.search(query)
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(apiMediaObjects -> {
-                    view.configureView(apiMediaObjects);
+                    view.updateView(apiMediaObjects);
                 }, throwable -> {
                     Log.e("Presenter", "searchSerie", throwable);
                 });
