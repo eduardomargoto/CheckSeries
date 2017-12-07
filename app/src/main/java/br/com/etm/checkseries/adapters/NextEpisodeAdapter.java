@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_Serie;
+import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;

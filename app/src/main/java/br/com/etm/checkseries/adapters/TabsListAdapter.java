@@ -10,8 +10,8 @@ import android.util.Log;
 
 import java.util.List;
 
-import br.com.etm.checkseries.daos.DAO_Episode;
-import br.com.etm.checkseries.daos.DAO_ListSerie;
+import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
+import br.com.etm.checkseries.deprecated.daos.DAO_ListSerie;
 import br.com.etm.checkseries.deprecated.domains.ListOfUser;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.ListSeriesFragment;

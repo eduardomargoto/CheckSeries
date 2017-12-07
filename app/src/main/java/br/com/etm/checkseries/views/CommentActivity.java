@@ -28,7 +28,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.CommentAdapter;
-import br.com.etm.checkseries.daos.FirebaseCore;
+import br.com.etm.checkseries.deprecated.daos.FirebaseCore;
 import br.com.etm.checkseries.deprecated.domains.Comment;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Profile;

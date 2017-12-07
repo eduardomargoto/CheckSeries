@@ -15,14 +15,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.List;
-
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
-import br.com.etm.checkseries.daos.DAO_Language;
+import br.com.etm.checkseries.deprecated.daos.DAO_EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.daos.DAO_Language;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Language;
 
@@ -49,7 +45,7 @@ public class ConfigurationActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+//    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.TabsAdapter;
-import br.com.etm.checkseries.daos.DAO_EnvironmentConfig;
+import br.com.etm.checkseries.deprecated.daos.DAO_EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.utils.SerieComparator_Name;
