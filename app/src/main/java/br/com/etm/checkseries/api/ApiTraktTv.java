@@ -2,18 +2,16 @@ package br.com.etm.checkseries.api;
 
 import java.util.List;
 
-import br.com.etm.checkseries.ApiSearchObject;
 import br.com.etm.checkseries.BuildConfig;
 import br.com.etm.checkseries.api.data.ApiCheckInObject;
 import br.com.etm.checkseries.api.data.ApiEpisode;
-import br.com.etm.checkseries.api.data.ApiMediaObject;
 import br.com.etm.checkseries.api.data.ApiMovie;
 import br.com.etm.checkseries.api.data.ApiPerson;
 import br.com.etm.checkseries.api.data.ApiResponseToken;
+import br.com.etm.checkseries.api.data.ApiSearchObject;
 import br.com.etm.checkseries.api.data.ApiShow;
 import br.com.etm.checkseries.api.data.ApiToken;
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -66,8 +64,10 @@ public interface ApiTraktTv {
     @GET("/movies/{id}?extended=full")
     ApiMovie getMovie(@Path("id") String movieId);
 
-    @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
+    @Headers({"Content-Type:application/json",
+            "trakt-api-version: 2",
+            "trakt-api-key: " + BuildConfig.CLIENT_ID})
     @GET("/search/{type}")
-    Observable<List<ApiMediaObject>> search(@Path("type") String types,
-                                            @Query("query") String searchText);
+    Observable<List<ApiSearchObject>> search(@Path("type") String types,
+                                             @Query("query") String searchText);
 }
