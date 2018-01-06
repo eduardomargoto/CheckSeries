@@ -11,19 +11,28 @@ import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 
 public class ApiMediaObject {
 
+    private static final String MEDIA_SHOW = "show";
+    private static final String MEDIA_MOVIE = "movie";
+
     @SerializedName("title")
     private String title;
     @SerializedName("year")
     private Integer year;
-//    @SerializedName("images")
-//    private ApiImages images;
     @SerializedName("ids")
     private ApiIdentifiers apiIdentifiers;
-
 
     private String type;
     private ApiFanArtObject fanArtImages;
 
+    public String getIdToImage() {
+        switch (type) {
+            case MEDIA_MOVIE:
+                return apiIdentifiers.getImdb();
+            case MEDIA_SHOW:
+                return String.valueOf(apiIdentifiers.getTvdb());
+        }
+        return "";
+    }
 
     public String getType() {
         return type;
@@ -40,14 +49,6 @@ public class ApiMediaObject {
     public void setFanArtImages(ApiFanArtObject fanArtImages) {
         this.fanArtImages = fanArtImages;
     }
-
-    //    public ApiImages getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(ApiImages images) {
-//        this.images = images;
-//    }
 
     public String getTitle() {
         return title;

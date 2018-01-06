@@ -3,6 +3,7 @@ package br.com.etm.checkseries.views;
 import java.util.List;
 
 
+import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 
 /**
@@ -11,6 +12,7 @@ import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 
 public interface NewSerieView {
 
+    void returnImage(int position,ApiFanArtObject apiFanArtObject);
     void configureView();
     void updateView(List<ApiMediaObject> apiMediaObjects);
     void showProgress();

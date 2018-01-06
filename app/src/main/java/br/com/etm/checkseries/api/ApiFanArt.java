@@ -12,9 +12,9 @@ import retrofit2.http.Query;
 
 public interface ApiFanArt {
 
-    @GET("/movies/{id}")
+    @GET("movies/{id}")
     Observable<ApiFanArtObject> getImagesMovies(@Path("id") String movieId, @Query("api_key") String apiKeyFanArt);
 
-    @GET("/tv/{id}")
+    @GET("tv/{id}")
     Observable<ApiFanArtObject> getImagesShow(@Path("id") String showId, @Query("api_key") String apiKeyFanArt);
 }

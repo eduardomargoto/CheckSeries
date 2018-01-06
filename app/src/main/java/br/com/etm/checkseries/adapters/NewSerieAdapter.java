@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
+import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.utils.LoadingImageListener;
 import br.com.etm.checkseries.utils.UtilsImages;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +28,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
 
     private List<ApiMediaObject> mediaObjects;
     private AdapterView.OnItemClickListener onItemClickListener;
+    private LoadingImageListener onLoadingImageListener;
 
     public NewSerieAdapter(List<ApiMediaObject> mediaObjects) {
         this.mediaObjects = mediaObjects;
@@ -46,6 +49,11 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
         holder.bind(mediaObjects.get(position));
     }
 
+
+    public void setOnLoadingImageListener(LoadingImageListener onLoadingImageListener) {
+        this.onLoadingImageListener = onLoadingImageListener;
+    }
+
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -62,6 +70,11 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             this.mediaObjects = mediaObjects;
             notifyDataSetChanged();
         }
+    }
+
+    public void onLoadingImage(int position, ApiFanArtObject apiFanArtObject) {
+        mediaObjects.get(position).setFanArtImages(apiFanArtObject);
+        notifyItemChanged(position);
     }
 
     @Override
@@ -91,21 +104,24 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             });
         }
 
-
         private void bind(ApiMediaObject mediaObject) {
             itemView.setTag(mediaObject);
             ViewCompat.setElevation(cardView, 4);
-            ViewCompat.setElevation(tvNameSerie, 4);
-            ViewCompat.setElevation(tvAnoSerie, 4);
             tvNameSerie.setText(mediaObject.getTitle());
             tvAnoSerie.setText(String.valueOf(mediaObject.getYear()));
 
+            if (onLoadingImageListener != null && mediaObject.getFanArtImages() == null) {
+                onLoadingImageListener.onLoading(getAdapterPosition(), mediaObject.getIdToImage(), mediaObject.getType());
+            }
 
-            Picasso.with(itemView.getContext()).load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
-                    .placeholder(R.drawable.loading_animation_black)
-                    .error(R.drawable.image_area_36dp)
-                    .into(ivSerie);
-            UtilsImages.darkenImagen(ivSerie);
+            //TODO: create an algorithm to take the best image for the moment.
+            if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null) {
+                Picasso.with(itemView.getContext()).load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
+                        .placeholder(R.drawable.loading_animation_black)
+                        .error(R.drawable.image_area_36dp)
+                        .into(ivSerie);
+                UtilsImages.darkenImagen(ivSerie);
+            }
         }
 
     }

@@ -21,11 +21,13 @@ import javax.inject.Inject;
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
+import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.di.DaggerNewSerieComponent;
 import br.com.etm.checkseries.di.NewSerieModule;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.deprecated.utils.HttpConnection;
+import br.com.etm.checkseries.utils.LoadingImageListener;
 import br.com.etm.checkseries.views.NewSerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -108,6 +110,11 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     }
 
     @Override
+    public void returnImage(int position, ApiFanArtObject apiFanArtObject) {
+        serieAdapter.onLoadingImage(position, apiFanArtObject);
+    }
+
+    @Override
     public void configureView() {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.app_searching));
@@ -123,6 +130,8 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
             //ApiSearchObject searchObject = (ApiSearchObject) view.getTag();
             //presenter.addSerie(searchObject);
         });
+
+        serieAdapter.setOnLoadingImageListener((position, id, type) -> presenter.retrieveImages(position, id, type));
 
         recyclerView.setAdapter(serieAdapter);
     }

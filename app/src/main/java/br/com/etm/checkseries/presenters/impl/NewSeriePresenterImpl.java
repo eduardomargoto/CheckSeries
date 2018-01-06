@@ -45,36 +45,21 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> view.showProgress())
-                .subscribe(this::retrieveImages, throwable -> {
+                .doOnTerminate(view::dismissProgress)
+                .subscribe(view::updateView, throwable -> {
                     Log.e("Presenter", "searchSerie", throwable);
                 });
     }
 
     @Override
-    public void retrieveImages(List<ApiMediaObject> apiMediaObjects) {
-        Observable.just(apiMediaObjects)
-                .flatMapIterable(mediaObject -> apiMediaObjects)
-                .doOnTerminate(() -> {
-                    view.dismissProgress();
-                    view.updateView(apiMediaObjects);
-                })
-                .subscribe(mediaObject -> {
-                    String id = "";
-                    switch (mediaObject.getType()) {
-                        case MEDIA_SHOW:
-                            id = String.valueOf(mediaObject.getApiIdentifiers().getTvdb());
-                            break;
-                        case MEDIA_MOVIE:
-                            id = mediaObject.getApiIdentifiers().getImdb();
-                            break;
-                    }
-                    fanArtInteractor.getImages(id, mediaObject.getType())
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(mediaObject::setFanArtImages, throwable -> {
-                                Log.e("Presenter", "retrieveImages", throwable);
-                            });
-
+    public void retrieveImages(int position, String id, String type) {
+        fanArtInteractor.getImages(id, type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiFanArtObject -> {
+                    view.returnImage(position, apiFanArtObject);
+                }, throwable -> {
+                    Log.e("Presenter", "retrieveImages", throwable);
                 });
     }
 
