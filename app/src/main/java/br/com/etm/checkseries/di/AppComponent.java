@@ -3,6 +3,7 @@ package br.com.etm.checkseries.di;
 import javax.inject.Singleton;
 
 import br.com.etm.checkseries.App;
+import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import dagger.Component;
 
@@ -18,4 +19,6 @@ public interface AppComponent {
     void inject(App app);
 
     TraktTvInteractor traktTvInteractor();
+
+    FanArtInteractor fanArtInteractor();
 }

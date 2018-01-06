@@ -19,7 +19,7 @@ import com.appodeal.ads.Appodeal;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.TabsSerieAdapter;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.utils.SlidingTabLayout;
+import br.com.etm.checkseries.deprecated.utils.SlidingTabLayout;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 /**

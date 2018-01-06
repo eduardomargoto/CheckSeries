@@ -29,7 +29,7 @@ import br.com.etm.checkseries.adapters.TabsListAdapter;
 import br.com.etm.checkseries.deprecated.daos.DAO_List;
 import br.com.etm.checkseries.deprecated.daos.DAO_ListSerie;
 import br.com.etm.checkseries.deprecated.domains.ListOfUser;
-import br.com.etm.checkseries.utils.SlidingTabLayout;
+import br.com.etm.checkseries.deprecated.utils.SlidingTabLayout;
 import br.com.etm.checkseries.utils.UtilsEntitys;
 
 /**

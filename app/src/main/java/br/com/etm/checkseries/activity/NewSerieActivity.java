@@ -1,34 +1,17 @@
 package br.com.etm.checkseries.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.inject.Inject;
-
-import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.api.data.ApiMediaObject;
-import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.di.DaggerNewSerieComponent;
-import br.com.etm.checkseries.di.NewSerieModule;
 import br.com.etm.checkseries.fragments.NewSerieFragment;
-import br.com.etm.checkseries.presenters.NewSeriePresenter;
-import br.com.etm.checkseries.utils.HttpConnection;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

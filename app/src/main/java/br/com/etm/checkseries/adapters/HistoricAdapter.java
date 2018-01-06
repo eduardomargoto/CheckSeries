@@ -19,8 +19,8 @@ import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Episode;
-import br.com.etm.checkseries.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.HttpConnection;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 import static br.com.etm.checkseries.adapters.EpisodeAdapter.ITEM_EPISODE;

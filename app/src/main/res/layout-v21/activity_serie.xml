@@ -15,11 +15,11 @@
         android:minHeight="?attr/actionBarSize"
         tools:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <br.com.etm.checkseries.utils.SlidingTabLayout
+    <br.com.etm.checkseries.deprecated.utils.SlidingTabLayout
         android:id="@+id/sld_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </br.com.etm.checkseries.utils.SlidingTabLayout>
+    </br.com.etm.checkseries.deprecated.utils.SlidingTabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_tabs"

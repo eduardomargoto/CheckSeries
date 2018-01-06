@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,13 +21,11 @@ import javax.inject.Inject;
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
-import br.com.etm.checkseries.api.data.ApiMediaObject;
-import br.com.etm.checkseries.api.data.ApiSearchObject;
-import br.com.etm.checkseries.deprecated.domains.Serie;
+import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.di.DaggerNewSerieComponent;
 import br.com.etm.checkseries.di.NewSerieModule;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
-import br.com.etm.checkseries.utils.HttpConnection;
+import br.com.etm.checkseries.deprecated.utils.HttpConnection;
 import br.com.etm.checkseries.views.NewSerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,83 +52,13 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     NewSeriePresenter presenter;
 
     private Unbinder unbinder;
-    private List<Serie> serieList;
+    private List<ApiMediaObject> serieList;
     private ProgressDialog progressDialog = null;
+    private NewSerieAdapter serieAdapter;
 
     public static NewSerieFragment newInstance() {
         return new NewSerieFragment();
     }
-
-     /*et_serie_name.setOnEditorActionListener((v, actionId, event) -> {
-            progressDialog.setMessage(getResources().getString(R.string.app_searching));
-            progressDialog.show();
-            if (HttpConnection.isOnline(NewSerieActivity.this)) {
-             *//*   new Thread() {
-                    public void run() {
-                        try {
-                            List<Language> languages = new ArrayList<Language>();
-                            if (EnvironmentConfig.getInstance().getLanguage() == null)
-                                languages = APITheTVDB.getLanguages();
-                            series = APITheTVDB.getSeries(et_serie_name.getText().toString());
-                            series = updateAddedSeries(series, MainActivity.mySeries);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    setFragmentInActivity();
-                                    if (series.isEmpty()) {
-                                        tv_msg.setText(R.string.app_nofindnewseries);
-                                    }
-                                }
-                            });
-                            last_search_value = et_serie_name.getText().toString();
-                        } catch (UnknownHostException e) {
-                            Log.i("LOG-EXCEPTION", e.toString());
-                            e.printStackTrace();
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    tv_msg.setText(R.string.app_internet_off);
-                                }
-                            });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.i("LOG-EXCEPTION", e.toString());
-                        }
-                        progressDialog.dismiss();
-
-                    }
-                }.start();*//*
-            } else {
-                progressDialog.dismiss();
-                if (last_search_value.equalsIgnoreCase(et_serie_name.getText().toString())) {
-                    Log.i(TAG, "getlast_search_value = true");
-                    setFragmentInActivity();
-                } else {
-                    serieFragment = new NewSerieFragment(new ArrayList<>());
-
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.rl_fragment_container, serieFragment, "mainFrag");
-                    ft.commit();
-                    tv_msg.setText(R.string.app_internet_off);
-                }
-            }
-
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-            return true;
-        });*/
-
-/*        et_serie_name.setOnTouchListener((v, event) -> {
-            if (et_serie_name.getCompoundDrawables()[2] == null)
-                return false;
-
-            if (event.getX() > et_serie_name.getWidth() - et_serie_name.getPaddingRight() - et_serie_name.getCompoundDrawables()[2].getIntrinsicWidth()) {
-                et_serie_name.setText("");
-            }
-            return false;
-        });*/
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,10 +90,14 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         return true;
     }
 
-    public void updateView(List<ApiSearchObject> apiSearchObjects) {
+    public void updateView(List<ApiMediaObject> apiMediaObjects) {
         Log.i(TAG, "updateView");
-//        NewSerieAdapter serieAdapter = new NewSerieAdapter(getActivity(), apiMediaObjectList);
-//        recyclerView.setAdapter(serieAdapter);
+        if(serieAdapter == null) {
+            serieAdapter = new NewSerieAdapter(apiMediaObjects);
+            recyclerView.setAdapter(serieAdapter);
+        } else {
+            serieAdapter.setMediaObjects(apiMediaObjects);
+        }
     }
 
     @Override
@@ -185,10 +116,14 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        if (serieList == null)
-            serieList = new ArrayList<>();
+        serieAdapter = new NewSerieAdapter(serieList);
+        serieAdapter.setOnItemClickListener((adapterView, view, i, l) -> {
+            // TODO: add serie
 
-        NewSerieAdapter serieAdapter = new NewSerieAdapter(getActivity(), serieList);
+            //ApiSearchObject searchObject = (ApiSearchObject) view.getTag();
+            //presenter.addSerie(searchObject);
+        });
+
         recyclerView.setAdapter(serieAdapter);
     }
 

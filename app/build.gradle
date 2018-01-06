@@ -22,6 +22,8 @@ android {
     productFlavors {
         stage {
             buildConfigField "String", "API_URL", "\"https://api-staging.trakt.tv\""
+            buildConfigField "String", "API_FANART_URL", "\"http://webservice.fanart.tv/v3/\""
+            buildConfigField "String", "API_KEY_FANART", "\"50d914d8f4d05994da617693b5527857\""
             buildConfigField "String", "CLIENT_ID", "\"484f0ca5b565555bc592c638e1a4f940d39adce4451e52c6905f733194753dbc\""
             buildConfigField "String", "CLIENTE_SECRET", "\"e8a0303e5dc8e0139842c406293d9fb383c4a826886a2d4ec1e3171059176842\""
             buildConfigField "String", "AUTHORIZE_URI", "\"urn:ietf:wg:oauth:2.0:oob\""
@@ -29,6 +31,8 @@ android {
         }
         prod {
             buildConfigField "String", "API_URL", "\"https://api.trakt.tv\""
+            buildConfigField "String", "API_FANART_URL", "\"http://webservice.fanart.tv/v3/\""
+            buildConfigField "String", "API_KEY_FANART", "\"50d914d8f4d05994da617693b5527857\""
             buildConfigField "String", "CLIENT_ID", "\"484f0ca5b565555bc592c638e1a4f940d39adce4451e52c6905f733194753dbc\""
             buildConfigField "String", "CLIENTE_SECRET", "\"e8a0303e5dc8e0139842c406293d9fb383c4a826886a2d4ec1e317105917684\""
             buildConfigField "String", "AUTHORIZE_URI", "\"urn:ietf:wg:oauth:2.0:oob\""

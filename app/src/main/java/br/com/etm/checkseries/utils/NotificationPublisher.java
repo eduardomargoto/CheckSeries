@@ -35,6 +35,8 @@ import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Language;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.SplashScreen;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.HttpConnection;
 
 /**
  * Created by EDUARDO_MARGOTO on 26/01/2016.

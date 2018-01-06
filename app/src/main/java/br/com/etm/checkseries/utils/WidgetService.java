@@ -19,6 +19,7 @@ import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
 
 /**
  * Created by EDUARDO_MARGOTO on 10/25/2016.

@@ -32,6 +32,7 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.ExecutionException;
 
 import br.com.etm.checkseries.R;
+import br.com.etm.checkseries.deprecated.utils.UtilsCacheMemory;
 
 /**
  * Created by EDUARDO_MARGOTO on 24/10/2015.

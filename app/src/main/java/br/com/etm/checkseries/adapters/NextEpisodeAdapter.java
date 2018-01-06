@@ -29,7 +29,7 @@ import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 /**
@@ -213,8 +213,8 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                    .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
 //                    .centerCrop()
 //                    .placeholder(R.drawable.loading_animation_white)
-//                    .into(mvholder.iv_serie);
-//            UtilsImages.darkenImagen(mvholder.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
+//                    .into(mvholder.ivSerie);
+//            UtilsImages.darkenImagen(mvholder.ivSerie); // escurecer as imagens para evitar problemas ao visualizar os icones
         }
     }
 

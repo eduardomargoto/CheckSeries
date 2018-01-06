@@ -2,7 +2,8 @@ package br.com.etm.checkseries.api;
 
 import java.util.List;
 
-import br.com.etm.checkseries.api.data.ApiSearchObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.mappers.SearchObjectMapper;
 import io.reactivex.Observable;
 
 /**
@@ -13,21 +14,25 @@ public class TraktTvInteractorImpl implements TraktTvInteractor {
 
     private static final String DEFAULT_TYPE_SEARCH = "movie,show";
     private ApiTraktTv api;
+    private SearchObjectMapper searchObjectMapper;
 
-    public TraktTvInteractorImpl(ApiTraktTv api) {
+    public TraktTvInteractorImpl(ApiTraktTv api, SearchObjectMapper searchObjectMapper) {
         this.api = api;
+        this.searchObjectMapper =searchObjectMapper;
     }
 
     @Override
-    public Observable<List<ApiSearchObject>> search(String query) {
-        return api.search(DEFAULT_TYPE_SEARCH, query);
+    public Observable<List<ApiMediaObject>> search(String query) {
+        return api.search(DEFAULT_TYPE_SEARCH, query)
+                .map(searchObjectMapper::transform);
     }
 
     @Override
-    public Observable<List<ApiSearchObject>> search(String type, String query) {
+    public Observable<List<ApiMediaObject>> search(String type, String query) {
         if(type == null || type.isEmpty()){
             type = DEFAULT_TYPE_SEARCH;
         }
-        return api.search(type, query);
+        return api.search(type, query)
+                .map(searchObjectMapper::transform);
     }
 }

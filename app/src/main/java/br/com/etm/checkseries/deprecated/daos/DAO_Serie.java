@@ -11,7 +11,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.deprecated.domains.ListOfUser;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 /**

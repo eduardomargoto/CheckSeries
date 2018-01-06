@@ -31,8 +31,8 @@ import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.EpisodeInformationFragment;
 import br.com.etm.checkseries.fragments.HelpFragment;
-import br.com.etm.checkseries.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.HttpConnection;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.HttpConnection;
 import br.com.etm.checkseries.utils.UtilsImages;
 import br.com.etm.checkseries.activity.ListEpisodesSeasonActivity;
 

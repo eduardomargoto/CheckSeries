@@ -17,9 +17,9 @@ import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.deprecated.domains.Serie;
-import br.com.etm.checkseries.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.HttpConnection;
-import br.com.etm.checkseries.utils.UtilsCacheMemory;
+import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
+import br.com.etm.checkseries.deprecated.utils.HttpConnection;
+import br.com.etm.checkseries.deprecated.utils.UtilsCacheMemory;
 import br.com.etm.checkseries.utils.UtilsImages;
 
 /**
@@ -113,9 +113,9 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.MyViewHo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (serieList.get(position).getBm_poster() != null)
                 new UtilsImages().loadBitmap(serieList.get(position).getBm_poster(), holder.iv_serie, this.context, 75, 120, serieList.get(position).getId().toString());
-//                holder.iv_serie.setImageBitmap(serieList.get(position).getBm_poster());
+//                holder.ivSerie.setImageBitmap(serieList.get(position).getBm_poster());
 //            else
-//                holder.iv_serie.setImageResource(R.drawable.no_image_avaiable);
+//                holder.ivSerie.setImageResource(R.drawable.no_image_avaiable);
         } else {
             Bitmap bitmap = null;
             if (serieList.get(position).getBm_poster() != null)
@@ -126,7 +126,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.MyViewHo
             bitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
             bitmap = UtilsImages.getRoundedCornerBitmap(context, bitmap, 4, width, height, false, false, false, false);
             new UtilsImages().loadBitmap(bitmap, holder.iv_serie, this.context, 75, 120, serieList.get(position).getId().toString());
-//            holder.iv_serie.setImageBitmap(bitmap);
+//            holder.ivSerie.setImageBitmap(bitmap);
         }
 
 

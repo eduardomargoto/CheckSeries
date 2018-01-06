@@ -1,7 +1,7 @@
 package br.com.etm.checkseries.di;
 
 import br.com.etm.checkseries.fragments.NewSerieFragment;
-import br.com.etm.checkseries.scope.FragmentScope;
+import br.com.etm.checkseries.scopes.FragmentScope;
 import dagger.Component;
 
 /**

@@ -18,7 +18,7 @@ import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.fragments.EpisodeInformationFragment;
-import br.com.etm.checkseries.utils.SlidingTabLayout;
+import br.com.etm.checkseries.deprecated.utils.SlidingTabLayout;
 
 /**
  * Created by EDUARDO_MARGOTO on 03/01/2016.

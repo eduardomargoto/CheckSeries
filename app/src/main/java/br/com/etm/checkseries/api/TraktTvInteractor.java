@@ -2,8 +2,7 @@ package br.com.etm.checkseries.api;
 
 import java.util.List;
 
-import br.com.etm.checkseries.api.data.ApiMediaObject;
-import br.com.etm.checkseries.api.data.ApiSearchObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import io.reactivex.Observable;
 
 /**
@@ -12,7 +11,7 @@ import io.reactivex.Observable;
 
 public interface TraktTvInteractor {
 
-    Observable<List<ApiSearchObject>> search(String query);
+    Observable<List<ApiMediaObject>> search(String query);
 
-    Observable<List<ApiSearchObject>> search(String type, String query);
+    Observable<List<ApiMediaObject>> search(String type, String query);
 }
