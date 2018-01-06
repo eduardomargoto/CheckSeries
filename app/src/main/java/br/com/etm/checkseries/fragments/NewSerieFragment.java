@@ -27,10 +27,11 @@ import br.com.etm.checkseries.di.DaggerNewSerieComponent;
 import br.com.etm.checkseries.di.NewSerieModule;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.deprecated.utils.HttpConnection;
-import br.com.etm.checkseries.utils.LoadingImageListener;
+import br.com.etm.checkseries.utils.Utils;
 import br.com.etm.checkseries.views.NewSerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.Unbinder;
 
@@ -54,7 +55,6 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     NewSeriePresenter presenter;
 
     private Unbinder unbinder;
-    private List<ApiMediaObject> serieList;
     private ProgressDialog progressDialog = null;
     private NewSerieAdapter serieAdapter;
 
@@ -86,14 +86,20 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         return view;
     }
 
+    @OnClick(R.id.iv_clear_search)
+    public void onClickClearSearch(){
+        etSearch.setText("");
+        Utils.showKeyboard(getContext());
+    }
+
     @OnEditorAction(R.id.et_name_serie)
     protected boolean onSearch() {
         presenter.searchSerie(etSearch.getText().toString());
+        Utils.hideKeyboard(getContext(), etSearch);
         return true;
     }
 
     public void updateView(List<ApiMediaObject> apiMediaObjects) {
-        Log.i(TAG, "updateView");
         if(serieAdapter == null) {
             serieAdapter = new NewSerieAdapter(apiMediaObjects);
             recyclerView.setAdapter(serieAdapter);
@@ -123,7 +129,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        serieAdapter = new NewSerieAdapter(serieList);
+        serieAdapter = new NewSerieAdapter(null);
         serieAdapter.setOnItemClickListener((adapterView, view, i, l) -> {
             // TODO: add serie
 
