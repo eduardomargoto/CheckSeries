@@ -15,9 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -104,35 +101,35 @@ public class SerieInformationFragment extends Fragment {
         d = Calendar.getInstance();
         d.setTime(mySerie.getFirst_aired());
 
-        Picasso.with(getActivity()).load(APITheTVDB.PATH_BANNERS + mySerie.getFanArt())
-                .stableKey(mySerie.getFanArtFilenameCache())
-                .resize(UtilsImages.getWidthAllDensity(getActivity()), UtilsImages.getHeightDensity(getContext()))
-                .placeholder(R.drawable.loading_animation_white)
-                .error(R.drawable.image_area_48dp)
-                .into(iv_background);
+//        Picasso.with(getActivity()).load(APITheTVDB.PATH_BANNERS + mySerie.getFanArt())
+//                .stableKey(mySerie.getFanArtFilenameCache())
+//                .resize(UtilsImages.getWidthAllDensity(getActivity()), UtilsImages.getHeightDensity(getContext()))
+//                .placeholder(R.drawable.loading_animation_white)
+//                .error(R.drawable.image_area_48dp)
+//                .into(iv_background);
         UtilsImages.darkenImagen(iv_background); // escurecer as imagens para evitar problemas ao visualizar os icones
 
         if (EnvironmentConfig.getInstance().isImageOnlyWifi()) {
             if (HttpConnection.isConnectionWifiOnline(getContext())) {
-                Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + mySerie.getPoster())
-                        .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()) - 30)
-                        .centerInside()
-                        .placeholder(R.drawable.loading_animation_black)
-                        .error(R.drawable.image_area_48dp)
-                        .into(iv_banner);
+//                Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + mySerie.getPoster())
+//                        .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()) - 30)
+//                        .centerInside()
+//                        .placeholder(R.drawable.loading_animation_black)
+//                        .error(R.drawable.image_area_48dp)
+//                        .into(iv_banner);
             } else {
-                Picasso.with(getContext()).load(R.drawable.image_area_48dp)
-                        .memoryPolicy(MemoryPolicy.NO_CACHE)
-                        .into(iv_banner);
+//                Picasso.with(getContext()).load(R.drawable.image_area_48dp)
+//                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                        .into(iv_banner);
                 UtilsImages.darkenImagen(iv_banner);
             }
         } else {
-            Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + mySerie.getPoster())
-                    .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()) - 30)
-                    .centerInside()
-                    .placeholder(R.drawable.loading_animation_black)
-                    .error(R.drawable.image_area_48dp)
-                    .into(iv_banner);
+//            Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + mySerie.getPoster())
+//                    .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()) - 30)
+//                    .centerInside()
+//                    .placeholder(R.drawable.loading_animation_black)
+//                    .error(R.drawable.image_area_48dp)
+//                    .into(iv_banner);
         }
 
 //            tv_rating.setText("Avaliações: " + mySerie.get);

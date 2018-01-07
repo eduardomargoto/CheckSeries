@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 
-import com.squareup.picasso.Picasso;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -135,14 +133,14 @@ public class HelpFragment {
 
         if (!s.getFanArt().equals(serie.getFanArt())) {
             if (!s.getFanArt().equals("")) {
-                Bitmap bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + s.getFanArt())
-                        .stableKey(s.getFanArtFilenameCache())
-                        .get();
-                if (bitmap != null) {
-                    UtilsImages.saveToInternalSorage(bitmap, s.getFanArtFilename(), context);
-                    UtilsImages.removerImagem(context, serie.getFanArt().replaceAll("/", "-"), "", true);
-                    bitmap.recycle();
-                }
+//                Bitmap bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + s.getFanArt())
+//                        .stableKey(s.getFanArtFilenameCache())
+//                        .get();
+//                if (bitmap != null) {
+//                    UtilsImages.saveToInternalSorage(bitmap, s.getFanArtFilename(), context);
+//                    UtilsImages.removerImagem(context, serie.getFanArt().replaceAll("/", "-"), "", true);
+//                    bitmap.recycle();
+//                }
             }
         }
 
@@ -184,15 +182,14 @@ public class HelpFragment {
 
             if (!s.getFanArt().equals(serieList.get(i).getFanArt())) {
                 if (!s.getFanArt().equals("")) {
-                    Bitmap bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + s.getFanArt())
-                            .stableKey(s.getFanArtFilenameCache())
-                            .get();
-                    if (bitmap != null) {
-                        UtilsImages.saveToInternalSorage(bitmap, s.getFanArtFilename(), context);
-                        UtilsImages.removerImagem(context, serieList.get(i).getFanArt().replaceAll("/", "-"), "", true);
-                        bitmap.recycle();
-                    }
-
+//                    Bitmap bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + s.getFanArt())
+//                            .stableKey(s.getFanArtFilenameCache())
+//                            .get();
+//                    if (bitmap != null) {
+//                        UtilsImages.saveToInternalSorage(bitmap, s.getFanArtFilename(), context);
+//                        UtilsImages.removerImagem(context, serieList.get(i).getFanArt().replaceAll("/", "-"), "", true);
+//                        bitmap.recycle();
+//                    }
                 }
             }
             boolean isNew = false;

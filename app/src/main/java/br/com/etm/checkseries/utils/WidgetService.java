@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.squareup.picasso.Picasso;
+
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -93,19 +93,19 @@ class CallsListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFacto
         }
 
 
-        try {
-            row.setImageViewBitmap(R.id.iv_serie,
-                    Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getPoster())
-                            .resize(70, 100)
-                            .stableKey(serie.getPosterFilenameCache())
-                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_36dp)
-                            .get()
+//        try {
+//            row.setImageViewBitmap(R.id.iv_serie,
+//                    Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getPoster())
+//                            .resize(70, 100)
+//                            .stableKey(serie.getPosterFilenameCache())
+//                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_36dp)
+//                            .get()
 
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//            );
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         return row;

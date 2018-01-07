@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,15 +110,16 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             tvNameSerie.setText(mediaObject.getTitle());
             tvAnoSerie.setText(String.valueOf(mediaObject.getYear()));
 
-            if (onLoadingImageListener != null && mediaObject.getFanArtImages() == null) {
+            if (onLoadingImageListener != null
+                    && mediaObject.getFanArtImages() == null
+                    && mediaObject.getIdToImage() != null) {
                 onLoadingImageListener.onLoading(getAdapterPosition(), mediaObject.getIdToImage(), mediaObject.getType());
             }
 
             //TODO: create an algorithm to take the best image for the moment.
             if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null) {
-                Picasso.with(itemView.getContext()).load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
-                        .placeholder(R.drawable.loading_animation_black)
-                        .error(R.drawable.image_area_36dp)
+                Glide.with(itemView.getContext())
+                        .load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
                         .into(ivSerie);
                 UtilsImages.darkenImagen(ivSerie);
             }

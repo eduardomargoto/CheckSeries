@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -169,23 +168,23 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 File file = UtilsImages.getFilesDirectory(context, serie.getFanArtFilename());
                 if (file == null) {
                     Bitmap bitmap = null;
-                    try {
-                        bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-                                .stableKey(serie.getFanArtFilenameCache())
-                                .get();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
+//                                .stableKey(serie.getFanArtFilenameCache())
+//                                .get();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
 
                     UtilsImages.saveToInternalSorage(bitmap, serie.getFanArtFilename(), context);
                     bitmap.recycle();
                 }
-                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-                        .stableKey(serie.getFanArtFilenameCache())
-                        .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
-                        .placeholder(R.drawable.loading_animation_black)
-                        .error(R.drawable.image_area_48dp)
-                        .into(mvholder.iv_serie);
+//                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
+//                        .stableKey(serie.getFanArtFilenameCache())
+//                        .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
+//                        .placeholder(R.drawable.loading_animation_black)
+//                        .error(R.drawable.image_area_48dp)
+//                        .into(mvholder.iv_serie);
 
                 UtilsImages.darkenImagen(mvholder.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
             } else {
@@ -198,14 +197,14 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     height = (UtilsImages.getHeightDensity(context) - 140);
                 }
                 mvholder.rl_view.setMinimumHeight(height);
-
-                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getPoster())
-                        .stableKey(serie.getFanArtFilenameCache())
-                        .resize(width, height)
-                        .centerInside()
-                        .placeholder(R.drawable.loading_animation_black)
-                        .error(R.drawable.image_area_48dp)
-                        .into(mvholder.iv_serie);
+//
+//                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getPoster())
+//                        .stableKey(serie.getFanArtFilenameCache())
+//                        .resize(width, height)
+//                        .centerInside()
+//                        .placeholder(R.drawable.loading_animation_black)
+//                        .error(R.drawable.image_area_48dp)
+//                        .into(mvholder.iv_serie);
             }
 
 //            Picasso.with(context).load(UtilsImages.getFilesDirectory(context, serie.getFanArtFilename()))

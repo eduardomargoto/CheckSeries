@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,11 +49,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         if (position == comments.size() - 1) {
             holder.line.setVisibility(View.INVISIBLE);
         }
-        Picasso.with(context).load("https://lh6.googleusercontent.com/" + comment.getImage_url())
-                .placeholder(R.drawable.loading_animation_black)
-                .resize(48, 48)
-                .error(R.drawable.no_user)
-                .into(holder.imv_user);
+//        Picasso.with(context).load("https://lh6.googleusercontent.com/" + comment.getImage_url())
+//                .placeholder(R.drawable.loading_animation_black)
+//                .resize(48, 48)
+//                .error(R.drawable.no_user)
+//                .into(holder.imv_user);
 
         if (comment.getSpoiler().equals("true")) {
             holder.txv_comment.setText(context.getResources().getString(R.string.app_alert_spoiler));

@@ -77,11 +77,6 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         View view = inflater.inflate(R.layout.fragment_newserie, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        if (!HttpConnection.isOnline(getActivity())) {
-            tvMessage.setVisibility(View.VISIBLE);
-            tvMessage.setText(R.string.app_internet_off);
-        }
-
         presenter.onCreate();
         return view;
     }
@@ -122,6 +117,11 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
 
     @Override
     public void configureView() {
+        if (!HttpConnection.isOnline(getActivity())) {
+            tvMessage.setVisibility(View.VISIBLE);
+            tvMessage.setText(R.string.app_internet_off);
+        }
+
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.app_searching));
 
@@ -131,10 +131,8 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
 
         serieAdapter = new NewSerieAdapter(null);
         serieAdapter.setOnItemClickListener((adapterView, view, i, l) -> {
-            // TODO: add serie
-
-            //ApiSearchObject searchObject = (ApiSearchObject) view.getTag();
-            //presenter.addSerie(searchObject);
+            ApiMediaObject mediaObject = (ApiMediaObject) view.getTag();
+            presenter.addSerie(mediaObject);
         });
 
         serieAdapter.setOnLoadingImageListener((position, id, type) -> presenter.retrieveImages(position, id, type));

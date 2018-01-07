@@ -16,9 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
-
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
@@ -101,24 +98,24 @@ public class EpisodeInformationFragment extends Fragment {
 
             if (EnvironmentConfig.getInstance().isImageOnlyWifi()) {
                 if (HttpConnection.isConnectionWifiOnline(getContext())) {
-                    Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + episode.getFilename())
-                            .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()))
-                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_48dp)
-                            .into(iv_banner);
+//                    Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + episode.getFilename())
+//                            .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()))
+//                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_48dp)
+//                            .into(iv_banner);
                     UtilsImages.darkenImagen(iv_banner);
                 } else {
-                    Picasso.with(getContext()).load(R.drawable.image_area_48dp)
-                            .memoryPolicy(MemoryPolicy.NO_CACHE)
-                            .into(iv_banner);
+//                    Picasso.with(getContext()).load(R.drawable.image_area_48dp)
+//                            .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                            .into(iv_banner);
                     UtilsImages.darkenImagen(iv_banner);
                 }
             } else {
-                Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + episode.getFilename())
-                        .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()))
-                        .placeholder(R.drawable.loading_animation_black)
-                        .error(R.drawable.image_area_48dp)
-                        .into(iv_banner);
+//                Picasso.with(getContext()).load(APITheTVDB.PATH_BANNERS + episode.getFilename())
+//                        .resize(UtilsImages.getWidthAllDensity(getContext()), UtilsImages.getHeightDensity(getContext()))
+//                        .placeholder(R.drawable.loading_animation_black)
+//                        .error(R.drawable.image_area_48dp)
+//                        .into(iv_banner);
                 UtilsImages.darkenImagen(iv_banner);
             }
 
@@ -129,27 +126,27 @@ public class EpisodeInformationFragment extends Fragment {
             tv_overview.setText(episode.getOverview());
 
             if (episode.isWatched()) {
-                Picasso.with(getContext()).load(R.drawable.ic_check_circle_white_24dp).resize(48, 48)
-                        .into(iv_watched);
+//                Picasso.with(getContext()).load(R.drawable.ic_check_circle_white_24dp).resize(48, 48)
+//                        .into(iv_watched);
                 iv_next_skip.setVisibility(View.INVISIBLE);
             } else {
-                Picasso.with(getContext()).load(R.drawable.ic_check).resize(48, 48)
-                        .into(iv_watched);
+//                Picasso.with(getContext()).load(R.drawable.ic_check).resize(48, 48)
+//                        .into(iv_watched);
             }
 
             if (episode.isSkipped()) {
-                Picasso.with(getContext()).load(R.drawable.skip_next_marked_24dp).resize(48, 48)
-                        .into(iv_next_skip);
+//                Picasso.with(getContext()).load(R.drawable.skip_next_marked_24dp).resize(48, 48)
+//                        .into(iv_next_skip);
             } else {
-                Picasso.with(getContext()).load(R.drawable.skip_next_24dp).resize(48, 48)
-                        .into(iv_next_skip);
+//                Picasso.with(getContext()).load(R.drawable.skip_next_24dp).resize(48, 48)
+//                        .into(iv_next_skip);
             }
         } else
 
         {
-            Picasso.with(getContext()).load(R.drawable.image_area_48dp)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE)
-                    .into(iv_banner);
+//            Picasso.with(getContext()).load(R.drawable.image_area_48dp)
+//                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                    .into(iv_banner);
             UtilsImages.darkenImagen(iv_banner);
             tv_name_episode.setText("Nenhum episódio encontrado");
 
@@ -233,13 +230,13 @@ public class EpisodeInformationFragment extends Fragment {
         public void onClick(View v) {
             if (episode.isSkipped()) {
                 episode.setSkipped(false);
-                Picasso.with(getContext()).load(R.drawable.skip_next_24dp).resize(48, 48)
-                        .into(iv_next_skip);
+//                Picasso.with(getContext()).load(R.drawable.skip_next_24dp).resize(48, 48)
+//                        .into(iv_next_skip);
 
             } else {
                 episode.setSkipped(true);
-                Picasso.with(getContext()).load(R.drawable.skip_next_marked_24dp).resize(48, 48)
-                        .into(iv_next_skip);
+//                Picasso.with(getContext()).load(R.drawable.skip_next_marked_24dp).resize(48, 48)
+//                        .into(iv_next_skip);
             }
 
             if (!USING_TABS)
@@ -264,14 +261,14 @@ public class EpisodeInformationFragment extends Fragment {
             if (episode.isWatched()) {
                 episode.setWatched(false);
                 episode.setSkipped(false);
-                Picasso.with(getContext()).load(R.drawable.ic_check).resize(48, 48)
-                        .into(iv_watched);
+//                Picasso.with(getContext()).load(R.drawable.ic_check).resize(48, 48)
+//                        .into(iv_watched);
 
             } else {
                 episode.setWatched(true);
                 episode.setSkipped(false);
-                Picasso.with(getContext()).load(R.drawable.ic_check_circle_white_24dp).resize(48, 48)
-                        .into(iv_watched);
+//                Picasso.with(getContext()).load(R.drawable.ic_check_circle_white_24dp).resize(48, 48)
+//                        .into(iv_watched);
                 iv_next_skip.setVisibility(View.INVISIBLE);
             }
             new Thread() {

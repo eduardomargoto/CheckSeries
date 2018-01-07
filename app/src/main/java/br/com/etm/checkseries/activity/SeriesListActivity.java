@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,6 @@ public class SeriesListActivity extends AppCompatActivity {
     public ViewPager mViewPager;
     private SlidingTabLayout mSlidingTabLayout;
     public Context context;
-    public Picasso picasso;
 
     private Handler handler = new Handler();
 
@@ -53,7 +51,7 @@ public class SeriesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series_list);
         context = this;
-        picasso = Picasso.with(this);
+//        picasso = Picasso.with(this);
         listOfUserList = new DAO_List(this).findAll();
 
         //TOOLBAR

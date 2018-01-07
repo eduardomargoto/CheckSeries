@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -172,23 +171,23 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 File file = UtilsImages.getFilesDirectory(contextActivity, serie.getFanArtFilename());
 
                 if (!file.exists()) {
-                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-                            .stableKey(serie.getFanArtFilenameCache())
-//                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
-//                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_48dp)
-                            .into(hold.iv_serie);
+//                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
+//                            .stableKey(serie.getFanArtFilenameCache())
+////                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
+////                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_48dp)
+//                            .into(hold.iv_serie);
 
                     UtilsImages.darkenImagen(hold.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
                     new Thread() {
                         @Override
                         public void run() {
                             Bitmap bitmap = null;
-                            try {
-                                bitmap = Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt()).get();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+//                            try {
+//                                bitmap = Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt()).get();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
 
                             UtilsImages.saveToInternalSorage(bitmap, serie.getFanArtFilename(), contextActivity);
                             bitmap.recycle();
@@ -196,12 +195,12 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     }.start();
 
                 } else {
-                    Picasso.with(contextActivity).load(UtilsImages.getFilesDirectory(contextActivity, serie.getFanArtFilename()))
-                            .stableKey(serie.getFanArtFilenameCache())
-//                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
-//                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_48dp)
-                            .into(hold.iv_serie);
+//                    Picasso.with(contextActivity).load(UtilsImages.getFilesDirectory(contextActivity, serie.getFanArtFilename()))
+//                            .stableKey(serie.getFanArtFilenameCache())
+////                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
+////                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_48dp)
+//                            .into(hold.iv_serie);
 
                     UtilsImages.darkenImagen(hold.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
                 }
@@ -216,20 +215,20 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 mvh.rl_view.setMinimumHeight(height);
                 if (HttpConnection.isOnline(contextActivity)) {
-                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + s.getPoster())
-                            .stableKey(s.getPosterFilenameCache())
-                            .resize(width, height)
-                            .centerInside()
-                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_36dp)
-                            .into(mvh.iv_serie);
+//                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + s.getPoster())
+//                            .stableKey(s.getPosterFilenameCache())
+//                            .resize(width, height)
+//                            .centerInside()
+//                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_36dp)
+//                            .into(mvh.iv_serie);
                 } else {
-                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + s.getPoster())
-                            .stableKey(s.getPosterFilenameCache())
-                            .resize(width, height)
-                            .centerInside()
-                            .error(R.drawable.image_area_36dp)
-                            .into(mvh.iv_serie);
+//                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + s.getPoster())
+//                            .stableKey(s.getPosterFilenameCache())
+//                            .resize(width, height)
+//                            .centerInside()
+//                            .error(R.drawable.image_area_36dp)
+//                            .into(mvh.iv_serie);
                     UtilsImages.darkenImagen(mvh.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
                 }
             }
@@ -386,14 +385,14 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 String str_action = "";
                 if (serie.isFavorite()) {
                     serie.setFavorite(false);
-                    Picasso.with(contextActivity).load(R.drawable.star_outline_24dp)
-                            .into(iv_favorite);
+//                    Picasso.with(contextActivity).load(R.drawable.star_outline_24dp)
+//                            .into(iv_favorite);
                     str_action = v.getResources().getString(R.string.app_action_revfavorite_serie);
                     Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                 } else {
                     serie.setFavorite(true);
-                    Picasso.with(contextActivity).load(R.drawable.star_24dp)
-                            .into(iv_favorite);
+//                    Picasso.with(contextActivity).load(R.drawable.star_24dp)
+//                            .into(iv_favorite);
                     str_action = v.getResources().getString(R.string.app_action_addfavorite_serie);
                     Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                 }

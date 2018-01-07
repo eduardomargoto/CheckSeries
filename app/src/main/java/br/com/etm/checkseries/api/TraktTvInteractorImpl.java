@@ -13,6 +13,7 @@ import io.reactivex.Observable;
 public class TraktTvInteractorImpl implements TraktTvInteractor {
 
     private static final String DEFAULT_TYPE_SEARCH = "movie,show";
+    private static final String SERIE_TYPE_SEARCH = "show";
     private ApiTraktTv api;
     private SearchObjectMapper searchObjectMapper;
 
@@ -23,14 +24,14 @@ public class TraktTvInteractorImpl implements TraktTvInteractor {
 
     @Override
     public Observable<List<ApiMediaObject>> search(String query) {
-        return api.search(DEFAULT_TYPE_SEARCH, query)
+        return api.search(SERIE_TYPE_SEARCH, query)
                 .map(searchObjectMapper::transform);
     }
 
     @Override
     public Observable<List<ApiMediaObject>> search(String type, String query) {
         if(type == null || type.isEmpty()){
-            type = DEFAULT_TYPE_SEARCH;
+            type = SERIE_TYPE_SEARCH;
         }
         return api.search(type, query)
                 .map(searchObjectMapper::transform);

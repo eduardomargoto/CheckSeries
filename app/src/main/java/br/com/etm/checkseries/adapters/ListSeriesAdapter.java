@@ -15,8 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -122,23 +120,23 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
                 new Thread() {
                     @Override
                     public void run() {
-                        Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-                                .stableKey(serie.getFanArtFilenameCache())
-                                .resize(UtilsImages.getWidthAllDensity(contextActivity), 350)
-                                .centerCrop()
-                                .placeholder(R.drawable.loading_animation_white)
-                                .error(R.drawable.image_area_36dp)
-                                .into(hold.iv_serie);
+//                        Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
+//                                .stableKey(serie.getFanArtFilenameCache())
+//                                .resize(UtilsImages.getWidthAllDensity(contextActivity), 350)
+//                                .centerCrop()
+//                                .placeholder(R.drawable.loading_animation_white)
+//                                .error(R.drawable.image_area_36dp)
+//                                .into(hold.iv_serie);
 
                         UtilsImages.darkenImagen(hold.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
                         Bitmap bitmap = null;
-                        try {
-                            bitmap = Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-                                    .get();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            bitmap = Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
+//                                    .get();
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
                         UtilsImages.saveToInternalSorage(bitmap, serie.getFanArtFilename(), contextActivity);
                         bitmap.recycle();
@@ -147,13 +145,13 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
 
 
             } else {
-                Picasso.with(contextActivity).load(UtilsImages.getFilesDirectory(contextActivity, serieList.get(position).getFanArtFilename()))
-                        .stableKey(serieList.get(position).getFanArtFilenameCache())
-                        .resize(UtilsImages.getWidthAllDensity(contextActivity), 350)
-                        .centerCrop()
-                        .placeholder(R.drawable.loading_animation_white)
-                        .error(R.drawable.image_area_36dp)
-                        .into(holder.iv_serie);
+//                Picasso.with(contextActivity).load(UtilsImages.getFilesDirectory(contextActivity, serieList.get(position).getFanArtFilename()))
+//                        .stableKey(serieList.get(position).getFanArtFilenameCache())
+//                        .resize(UtilsImages.getWidthAllDensity(contextActivity), 350)
+//                        .centerCrop()
+//                        .placeholder(R.drawable.loading_animation_white)
+//                        .error(R.drawable.image_area_36dp)
+//                        .into(holder.iv_serie);
                 UtilsImages.darkenImagen(holder.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
             }
 
@@ -169,12 +167,12 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
                 width = UtilsImages.getWidthAllDensity(contextActivity);
                 height = (UtilsImages.getHeightDensity(contextActivity) - 140);
             }
-            Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serieList.get(position).getPoster())
-                    .stableKey(serieList.get(position).getFanArtFilenameCache())
-                    .resize(width, height)
-                    .centerInside()
-                    .placeholder(R.drawable.loading_animation_white)
-                    .into(mvh.iv_serie);
+//            Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + serieList.get(position).getPoster())
+//                    .stableKey(serieList.get(position).getFanArtFilenameCache())
+//                    .resize(width, height)
+//                    .centerInside()
+//                    .placeholder(R.drawable.loading_animation_white)
+//                    .into(mvh.iv_serie);
 
         }
 
@@ -245,12 +243,12 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
                     String str_action = "";
                     if (serie.isFavorite()) {
                         serie.setFavorite(false);
-                        Picasso.with(contextActivity).load(R.drawable.star_outline_24dp).into(iv_favorite);
+//                        Picasso.with(contextActivity).load(R.drawable.star_outline_24dp).into(iv_favorite);
                         str_action = v.getResources().getString(R.string.app_action_revfavorite_serie);
                         Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                     } else {
                         serie.setFavorite(true);
-                        Picasso.with(contextActivity).load(R.drawable.star_24dp).into(iv_favorite);
+//                        Picasso.with(contextActivity).load(R.drawable.star_24dp).into(iv_favorite);
                         str_action = v.getResources().getString(R.string.app_action_addfavorite_serie);
                         Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                     }

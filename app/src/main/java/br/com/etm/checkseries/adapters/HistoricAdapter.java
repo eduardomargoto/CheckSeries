@@ -12,8 +12,6 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
 import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
@@ -68,24 +66,24 @@ public class HistoricAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (episodes.get(position) != null) {
                 if (EnvironmentConfig.getInstance().isImageOnlyWifi()) {
                     if (HttpConnection.isConnectionWifiOnline(contextActivity)) {
-                        Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + episodes.get(position).getFilename())
-                                .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
-                                .placeholder(R.drawable.loading_animation_black)
-                                .error(R.drawable.image_area_48dp)
-                                .into(holder.iv_banner);
+//                        Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + episodes.get(position).getFilename())
+//                                .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
+//                                .placeholder(R.drawable.loading_animation_black)
+//                                .error(R.drawable.image_area_48dp)
+//                                .into(holder.iv_banner);
                         UtilsImages.darkenImagen(holder.iv_banner);
                     } else {
-                        Picasso.with(contextActivity).load(R.drawable.image_area_48dp)
-                                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                .into(holder.iv_banner);
+//                        Picasso.with(contextActivity).load(R.drawable.image_area_48dp)
+//                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                                .into(holder.iv_banner);
                         UtilsImages.darkenImagen(holder.iv_banner);
                     }
                 } else {
-                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + episodes.get(position).getFilename())
-                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
-                            .placeholder(R.drawable.loading_animation_black)
-                            .error(R.drawable.image_area_48dp)
-                            .into(holder.iv_banner);
+//                    Picasso.with(contextActivity).load(APITheTVDB.PATH_BANNERS + episodes.get(position).getFilename())
+//                            .resize(UtilsImages.getWidthAllDensity(contextActivity), UtilsImages.getHeightDensity(contextActivity))
+//                            .placeholder(R.drawable.loading_animation_black)
+//                            .error(R.drawable.image_area_48dp)
+//                            .into(holder.iv_banner);
                     UtilsImages.darkenImagen(holder.iv_banner);
                 }
 
@@ -178,10 +176,10 @@ public class HistoricAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tv_name_episode = (TextView) itemView.findViewById(R.id.tv_name_episode);
             tv_date_episode = (TextView) itemView.findViewById(R.id.tv_date_episode);
             tv_dateWatched_episode = (TextView) itemView.findViewById(R.id.tv_dateWatched_episode);
-
-            Picasso.with(contextActivity).load(R.drawable.ic_history)
-                    .resize(36, 36)
-                    .into(iv_ic_history);
+//
+//            Picasso.with(contextActivity).load(R.drawable.ic_history)
+//                    .resize(36, 36)
+//                    .into(iv_ic_history);
 
         }
     }

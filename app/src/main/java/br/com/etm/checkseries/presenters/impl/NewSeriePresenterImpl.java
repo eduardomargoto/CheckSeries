@@ -20,9 +20,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NewSeriePresenterImpl implements NewSeriePresenter {
 
-    private static final String MEDIA_SHOW = "show";
-    private static final String MEDIA_MOVIE = "movie";
-
     private NewSerieView view;
     private TraktTvInteractor interactor;
     private FanArtInteractor fanArtInteractor;
@@ -68,5 +65,11 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+    }
+
+    @Override
+    public void addSerie(ApiMediaObject mediaObject) {
+        Log.i("NewSeriePresenter", mediaObject.toString());
+        //TODO: to o implementation
     }
 }
