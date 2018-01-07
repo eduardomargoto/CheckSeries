@@ -1,5 +1,6 @@
 package br.com.etm.checkseries;
 
+import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 import br.com.etm.checkseries.api.ApiFanArt;
 import br.com.etm.checkseries.api.ApiTraktTv;

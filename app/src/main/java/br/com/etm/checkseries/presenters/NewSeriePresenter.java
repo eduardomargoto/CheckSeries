@@ -1,6 +1,8 @@
 package br.com.etm.checkseries.presenters;
 
 
+import android.content.Context;
+
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 
 /**
@@ -15,5 +17,5 @@ public interface NewSeriePresenter {
     void retrieveImages(int position, String id, String type);
     void onDestroy();
 
-    void addSerie(ApiMediaObject mediaObject);
+    void addSerie(Context context, int position, ApiMediaObject mediaObject);
 }

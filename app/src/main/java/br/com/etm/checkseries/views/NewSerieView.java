@@ -17,5 +17,7 @@ public interface NewSerieView {
     void updateView(List<ApiMediaObject> apiMediaObjects);
     void showProgress();
     void dismissProgress();
+
+    void onSerieAdded(int position);
 }
 

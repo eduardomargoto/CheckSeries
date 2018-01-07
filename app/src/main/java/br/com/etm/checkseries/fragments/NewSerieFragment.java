@@ -82,7 +82,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     }
 
     @OnClick(R.id.iv_clear_search)
-    public void onClickClearSearch(){
+    public void onClickClearSearch() {
         etSearch.setText("");
         Utils.showKeyboard(getContext());
     }
@@ -95,7 +95,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     }
 
     public void updateView(List<ApiMediaObject> apiMediaObjects) {
-        if(serieAdapter == null) {
+        if (serieAdapter == null) {
             serieAdapter = new NewSerieAdapter(apiMediaObjects);
             recyclerView.setAdapter(serieAdapter);
         } else {
@@ -130,9 +130,9 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         serieAdapter = new NewSerieAdapter(null);
-        serieAdapter.setOnItemClickListener((adapterView, view, i, l) -> {
+        serieAdapter.setOnItemClickListener((adapterView, view, position, l) -> {
             ApiMediaObject mediaObject = (ApiMediaObject) view.getTag();
-            presenter.addSerie(mediaObject);
+            presenter.addSerie(getContext(), position, mediaObject);
         });
 
         serieAdapter.setOnLoadingImageListener((position, id, type) -> presenter.retrieveImages(position, id, type));
@@ -148,6 +148,13 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
     @Override
     public void dismissProgress() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void onSerieAdded(int position) {
+        if (serieAdapter != null) {
+            serieAdapter.onAddFinished(position);
+        }
     }
 
 }

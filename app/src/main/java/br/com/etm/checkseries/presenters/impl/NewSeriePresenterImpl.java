@@ -1,5 +1,9 @@
 package br.com.etm.checkseries.presenters.impl;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.List;
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
 import io.reactivex.Observable;
@@ -68,8 +73,16 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     @Override
-    public void addSerie(ApiMediaObject mediaObject) {
+    public void addSerie(Context context, int position, ApiMediaObject mediaObject) {
         Log.i("NewSeriePresenter", mediaObject.toString());
-        //TODO: to o implementation
+
+        Uri uri = context.getContentResolver()
+                .insert(Contract.Show.URI, mediaObject.getContentValues());
+
+        if (uri != null) {
+            view.onSerieAdded(position);
+        }
     }
+
+
 }

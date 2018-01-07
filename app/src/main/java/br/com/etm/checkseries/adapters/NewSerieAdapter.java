@@ -1,5 +1,6 @@
 package br.com.etm.checkseries.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import java.util.List;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.data.DbProvider;
 import br.com.etm.checkseries.utils.LoadingImageListener;
 import br.com.etm.checkseries.utils.UtilsImages;
 import butterknife.BindView;
@@ -59,6 +61,9 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
 
     private void onItemHolderClick(MyViewHolder itemHolder) {
         if (onItemClickListener != null) {
+            itemHolder.ivAddSerie.setImageDrawable(ContextCompat.
+                    getDrawable(itemHolder.itemView.getContext(), R.drawable.loading_animation_white));
+
             onItemClickListener.onItemClick(null, itemHolder.itemView,
                     itemHolder.getAdapterPosition(), itemHolder.getItemId());
         }
@@ -69,6 +74,11 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             this.mediaObjects = mediaObjects;
             notifyDataSetChanged();
         }
+    }
+
+    public void onAddFinished(int position) {
+        mediaObjects.get(position).setAdded(true);
+        notifyItemChanged(position);
     }
 
     public void onLoadingImage(int position, ApiFanArtObject apiFanArtObject) {
@@ -109,6 +119,14 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             tvNameSerie.setText(mediaObject.getTitle());
             tvAnoSerie.setText(String.valueOf(mediaObject.getYear()));
 
+            if(mediaObject.isAdded()) {
+                ivAddSerie.setImageDrawable(ContextCompat.
+                        getDrawable(itemView.getContext(), R.drawable.ic_check_circle_white_24dp));
+            } else {
+                ivAddSerie.setImageDrawable(ContextCompat.
+                        getDrawable(itemView.getContext(), R.drawable.ic_add_white_24dp));
+            }
+
             if (onLoadingImageListener != null
                     && mediaObject.getFanArtImages() == null
                     && mediaObject.getIdToImage() != null) {
@@ -117,15 +135,17 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
 
             //TODO: create an algorithm to take the best image for the moment.
             if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null) {
-
+                ivSerie.setAdjustViewBounds(true);
                 Picasso.with(itemView.getContext())
                         .load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
-                        .error(R.drawable.image_area_36dp)
-                        .placeholder(R.drawable.loading_animation_black)
+                        .error(R.drawable.ic_panorama_white)
                         .into(ivSerie);
-
-                UtilsImages.darkenImagen(ivSerie);
+            } else {
+                ivSerie.setAdjustViewBounds(false);
+                ivSerie.setImageDrawable(ContextCompat.
+                        getDrawable(itemView.getContext(), R.drawable.ic_panorama_white));
             }
+            UtilsImages.darkenImagen(ivSerie);
         }
 
     }

@@ -1,8 +1,11 @@
 package br.com.etm.checkseries.api.data.tracktv;
 
+import android.content.ContentValues;
+
 import com.google.gson.annotations.SerializedName;
 
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
+import br.com.etm.checkseries.data.Contract;
 
 
 /**
@@ -21,6 +24,7 @@ public class ApiMediaObject {
     @SerializedName("ids")
     private ApiIdentifiers apiIdentifiers;
 
+    private boolean added;
     private String type;
     private ApiFanArtObject fanArtImages;
 
@@ -32,6 +36,14 @@ public class ApiMediaObject {
                 return String.valueOf(apiIdentifiers.getTvdb());
         }
         return "";
+    }
+
+    public boolean isAdded() {
+        return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
     }
 
     public String getType() {
@@ -72,5 +84,11 @@ public class ApiMediaObject {
 
     public void setApiIdentifiers(ApiIdentifiers apiIdentifiers) {
         this.apiIdentifiers = apiIdentifiers;
+    }
+
+    public ContentValues getContentValues(){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Show.COLUMN_NAME, title);
+        return contentValues;
     }
 }
