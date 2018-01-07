@@ -1,7 +1,6 @@
 package br.com.etm.checkseries;
 
 import android.support.multidex.MultiDexApplication;
-
 import br.com.etm.checkseries.api.ApiFanArt;
 import br.com.etm.checkseries.api.ApiTraktTv;
 import br.com.etm.checkseries.di.AppComponent;
@@ -18,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends MultiDexApplication {
 
     private static AppComponent appComponent;
-
     private static Retrofit.Builder builder = new Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
@@ -48,7 +46,9 @@ public class App extends MultiDexApplication {
     }
 
     private void initComponent() {
-        appComponent = DaggerAppComponent.builder().appModule(new AppModule()).build();
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule())
+                .build();
         appComponent.inject(this);
     }
 

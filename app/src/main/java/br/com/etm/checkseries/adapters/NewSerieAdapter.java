@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,9 +117,13 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
 
             //TODO: create an algorithm to take the best image for the moment.
             if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null) {
-                Glide.with(itemView.getContext())
+
+                Picasso.with(itemView.getContext())
                         .load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())
+                        .error(R.drawable.image_area_36dp)
+                        .placeholder(R.drawable.loading_animation_black)
                         .into(ivSerie);
+
                 UtilsImages.darkenImagen(ivSerie);
             }
         }

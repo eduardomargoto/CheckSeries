@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         UtilsEntitys.setOrientationConfigDevice(this);
 
-        ViewCompat.setElevation(mToolbar, 4);
-        ViewCompat.setElevation(mTabLayout, 4);
+        ViewCompat.setElevation(mToolbar, 8);
+        ViewCompat.setElevation(mTabLayout, 8);
         setSupportActionBar(mToolbar);
 
         pbContainer.setVisibility(View.VISIBLE);
