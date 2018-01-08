@@ -27,7 +27,7 @@ public class DbProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW, SHOW);
-        matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID + "/*", SHOW);
+        matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID, SHOW_BY_ID);
         return matcher;
     }
 

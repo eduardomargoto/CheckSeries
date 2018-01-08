@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
 
     @OnEditorAction(R.id.et_name_serie)
     protected boolean onSearch() {
-        presenter.searchSerie(etSearch.getText().toString());
+        presenter.searchSerie(getContext(), etSearch.getText().toString());
         Utils.hideKeyboard(getContext(), etSearch);
         return true;
     }
@@ -132,7 +131,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         serieAdapter = new NewSerieAdapter(null);
         serieAdapter.setOnItemClickListener((adapterView, view, position, l) -> {
             ApiMediaObject mediaObject = (ApiMediaObject) view.getTag();
-            presenter.addSerie(getContext(), position, mediaObject);
+            presenter.insert(getContext(), position, mediaObject);
         });
 
         serieAdapter.setOnLoadingImageListener((position, id, type) -> presenter.retrieveImages(position, id, type));

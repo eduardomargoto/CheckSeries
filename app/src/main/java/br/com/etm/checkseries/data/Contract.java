@@ -4,8 +4,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.google.common.collect.ImmutableList;
-
 import br.com.etm.checkseries.BuildConfig;
 
 /**
@@ -38,17 +36,14 @@ public class Contract {
 
         public static final int POSITION_ID = 0;
         public static final int POSITION_NAME = 1;
-        public static final ImmutableList<String> SHOWS_COLUMNS = ImmutableList.of(
+
+        public static final String[] SHOWS_COLUMNS = new String[]{
                 _ID,
                 COLUMN_NAME
-        );
+        };
 
-        public static Uri makeUriForStock(String symbol) {
-            return URI.buildUpon().appendPath(symbol).build();
-        }
-
-        static String getStockFromUri(Uri queryUri) {
-            return queryUri.getLastPathSegment();
+        public static Uri makeUriWithId(String tracktId) {
+            return URI.buildUpon().appendPath(tracktId).build();
         }
     }
 }

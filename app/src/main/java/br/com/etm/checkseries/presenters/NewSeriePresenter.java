@@ -12,10 +12,10 @@ import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 public interface NewSeriePresenter {
 
     void onCreate();
-    void searchSerie(String query);
+    void searchSerie(Context context, String query);
 
     void retrieveImages(int position, String id, String type);
     void onDestroy();
 
-    void addSerie(Context context, int position, ApiMediaObject mediaObject);
+    void insert(Context context, int position, ApiMediaObject mediaObject);
 }

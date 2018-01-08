@@ -122,6 +122,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             if(mediaObject.isAdded()) {
                 ivAddSerie.setImageDrawable(ContextCompat.
                         getDrawable(itemView.getContext(), R.drawable.ic_check_circle_white_24dp));
+                ivAddSerie.setEnabled(false);
             } else {
                 ivAddSerie.setImageDrawable(ContextCompat.
                         getDrawable(itemView.getContext(), R.drawable.ic_add_white_24dp));

@@ -88,6 +88,7 @@ public class ApiMediaObject {
 
     public ContentValues getContentValues(){
         ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Show._ID, apiIdentifiers.getTrakt());
         contentValues.put(Contract.Show.COLUMN_NAME, title);
         return contentValues;
     }

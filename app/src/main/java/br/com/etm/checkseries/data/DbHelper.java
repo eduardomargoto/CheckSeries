@@ -10,10 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-
     private static final String NAME = "CheckSeries.db";
     private static final int VERSION = 1;
-
 
     DbHelper(Context context) {
         super(context, NAME, null, VERSION);

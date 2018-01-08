@@ -1,20 +1,15 @@
 package br.com.etm.checkseries.presenters.impl;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
-
-import java.util.List;
-
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -42,13 +37,28 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     @Override
-    public void searchSerie(String query) {
+    public void searchSerie(Context context, String query) {
         disposable = interactor.search(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> view.showProgress())
                 .doOnTerminate(view::dismissProgress)
-                .subscribe(view::updateView, throwable -> {
+                .subscribe(apiMediaObjects -> {
+                    for (ApiMediaObject mediaObject : apiMediaObjects) {
+                        Cursor cursor = context.getContentResolver().query(
+                                Contract.Show.makeUriWithId(String.valueOf(mediaObject.getApiIdentifiers().getTrakt()))
+                                , Contract.Show.SHOWS_COLUMNS, null
+                                , new String[]{String.valueOf(mediaObject.getApiIdentifiers().getTrakt())}
+                                , ""
+                        );
+                        if (cursor != null && cursor.moveToFirst()) {
+                            mediaObject.setAdded(true);
+                        }
+                        cursor.close();
+                    }
+
+                    view.updateView(apiMediaObjects);
+                }, throwable -> {
                     Log.e("Presenter", "searchSerie", throwable);
                 });
     }
@@ -73,7 +83,7 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     @Override
-    public void addSerie(Context context, int position, ApiMediaObject mediaObject) {
+    public void insert(Context context, int position, ApiMediaObject mediaObject) {
         Log.i("NewSeriePresenter", mediaObject.toString());
 
         Uri uri = context.getContentResolver()
