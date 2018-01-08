@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -20,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import butterknife.BindView;
@@ -39,8 +39,11 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<ApiShow> apiShows;
 
     public SerieAdapter(List<ApiShow> apiShows) {
-        if (apiShows != null) {this.apiShows = apiShows;
-        } else {this.apiShows = new ArrayList<>();}
+        if (apiShows != null) {
+            this.apiShows = apiShows;
+        } else {
+            this.apiShows = new ArrayList<>();
+        }
     }
 
     @Override
@@ -73,7 +76,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if (apiShows.get(position).getApiIdentifiers() == null)
+        if (apiShows.get(position).getTraktId() != null)
             return NATIVE_ADS;
         else return ITEM_SERIE;
     }
@@ -81,49 +84,49 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ic_check_episode)
-        ImageButton ic_check_epsiode;
+        ImageButton ibCheckEpisode;
 
         @BindView(R.id.iv_serie)
         ImageView ivSerie;
 
         @BindView(R.id.iv_favorite)
-        ImageView iv_favorite;
-
-        @BindView(R.id.iv_options_serie)
-        ImageView iv_options_serie;
+        ImageView ivFavourite;
 
         @BindView(R.id.tv_title)
         TextView tvTitle;
 
         @BindView(R.id.tv_network_serie)
-        TextView tv_network_serie;
+        TextView tvNetwork;
 
         @BindView(R.id.tv_size_episodes)
-        TextView tv_size_episodes;
+        TextView tvTotalEpisodes;
 
         @BindView(R.id.tv_nextepisode_serie)
-        TextView tv_nextepisode_serie;
+        TextView tvNextEpisodeTitle;
 
         @BindView(R.id.tv_nextepisodetime_serie)
-        TextView tv_nextepisodetime_serie;
-
-        @BindView(R.id.rl_view)
-        RelativeLayout rl_view;
+        TextView tvTimeNextEpisode;
 
         @BindView(R.id.pb_episodes)
-        ProgressBar pb_episodes;
+        ProgressBar pbEpisodes;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-
-        private void bind(ApiShow apiShow){
+        private void bind(ApiShow apiShow) {
             tvTitle.setText(apiShow.getTitle());
+            tvNetwork.setText(apiShow.getNetwork());
+            tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
+                    , apiShow.getNextEpisode().getNumber()
+                    , apiShow.getTotalEpisodes()));
+            tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitle());
+            tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));
 
             Picasso.with(itemView.getContext())
-                    .load(apiShow.getFanArtImages().getShowBackgroundImages().get(0).getUrl())
+                    .load(apiShow.getBackgroundUrl())
+                    .error(R.drawable.ic_panorama_white)
                     .into(ivSerie);
         }
     }

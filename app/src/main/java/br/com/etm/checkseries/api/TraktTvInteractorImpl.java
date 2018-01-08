@@ -2,6 +2,7 @@ package br.com.etm.checkseries.api;
 
 import java.util.List;
 
+import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.api.mappers.SearchObjectMapper;
@@ -41,5 +42,10 @@ public class TraktTvInteractorImpl implements TraktTvInteractor {
     @Override
     public Observable<ApiShow> getShow(String showId) {
         return api.getShow(showId);
+    }
+
+    @Override
+    public Observable<ApiEpisode> getEpisode(String showId, int season, int episodeNumber) {
+        return api.getEpisode(showId, season, episodeNumber);
     }
 }

@@ -20,8 +20,10 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_SHOW_TABLE = getSQLCreateShowTable();
+        final String SQL_CREATE_EPISODE_TABLE = getSQLCreateEpisodeTable();
 
         db.execSQL(SQL_CREATE_SHOW_TABLE);
+        db.execSQL(SQL_CREATE_EPISODE_TABLE);
     }
 
     private String getSQLCreateShowTable() {
@@ -33,10 +35,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 + Contract.Show.COLUMN_TMDB_ID + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_YEAR + " INTEGER NOT NULL, "
                 + Contract.Show.COLUMN_TYPE + " TEXT NOT NULL, "
-                + Contract.Show.COLUMN_LOGO_URL + " TEXT NOT NULL, "
+                + Contract.Show.COLUMN_BACKGROUND_URL + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_BANNER_URL + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_POSTER_URL + " TEXT NOT NULL, "
-                + Contract.Show.COLUMN_FANART_URL + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_OVERVIEW + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_FIRST_AIRED + " TEXT NOT NULL, "
                 + Contract.Show.COLUMN_AIR_DATE + " TEXT NOT NULL, "
@@ -52,13 +53,39 @@ public class DbHelper extends SQLiteOpenHelper {
                 + Contract.Show.COLUMN_VOTES + " INTEGER NOT NULL, "
                 + Contract.Show.COLUMN_COMMENT_COUNT + " INTEGER NOT NULL, "
                 + Contract.Show.COLUMN_GENRES + " TEXT NOT NULL, "
+                + Contract.Show.COLUMN_FAVOURITE + " BOOLEAN NOT NULL, "
                 + Contract.Show.COLUMN_TOTAL_EPISODES + " INTEGER NOT NULL "
+                + ")";
+    }
+
+
+    private String getSQLCreateEpisodeTable() {
+        return "CREATE TABLE " + Contract.Episode.TABLE_NAME + "( "
+                + Contract.Episode._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + Contract.Episode.COLUMN_TITLE + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_TVDB_ID + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_IMDB_ID + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_TMDB_ID + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_OVERVIEW + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_SEASON + " INTEGER NOT NULL, "
+                + Contract.Episode.COLUMN_NUMBER_ABS + " INTEGER , "
+                + Contract.Episode.COLUMN_NUMBER + " INTEGER NOT NULL, "
+                + Contract.Episode.COLUMN_COMMENT_COUNT + " INTEGER NOT NULL, "
+                + Contract.Episode.COLUMN_VOTES + " INTEGER NOT NULL, "
+                + Contract.Episode.COLUMN_FIRST_AIRED + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_RATING + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_RUNTIME + " INTEGER NOT NULL, "
+                + Contract.Episode.COLUMN_AVAILABLE_TRANSLATIONS + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_UPDATED_AT + " TEXT NOT NULL, "
+                + Contract.Episode.COLUMN_BACKGROUND_URL + " TEXT , "
+                + Contract.Episode.COLUMN_SHOW_ID + " INTEGER NOT NULL "
                 + ")";
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Contract.Show.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Episode.TABLE_NAME);
         onCreate(db);
     }
 }

@@ -109,7 +109,7 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
 
 
         if (!EnvironmentConfig.getInstance().isLayoutCompat()) {
-//            holder.rl_view.setMinimumHeight(UtilsImages.getHeightDensity(contextActivity));
+//            holder.containerView.setMinimumHeight(UtilsImages.getHeightDensity(contextActivity));
             holder.rl_view.setMinimumHeight(350);
 
             final Serie serie = serieList.get(position);
@@ -243,12 +243,12 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
                     String str_action = "";
                     if (serie.isFavorite()) {
                         serie.setFavorite(false);
-//                        Picasso.with(contextActivity).load(R.drawable.star_outline_24dp).into(iv_favorite);
+//                        Picasso.with(contextActivity).load(R.drawable.star_outline_24dp).into(ivFavourite);
                         str_action = v.getResources().getString(R.string.app_action_revfavorite_serie);
                         Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                     } else {
                         serie.setFavorite(true);
-//                        Picasso.with(contextActivity).load(R.drawable.star_24dp).into(iv_favorite);
+//                        Picasso.with(contextActivity).load(R.drawable.star_24dp).into(ivFavourite);
                         str_action = v.getResources().getString(R.string.app_action_addfavorite_serie);
                         Toast.makeText(v.getContext(), serie.getName() + " " + str_action, Toast.LENGTH_SHORT).show();
                     }

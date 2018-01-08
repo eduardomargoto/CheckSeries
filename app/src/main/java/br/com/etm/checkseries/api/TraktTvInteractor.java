@@ -2,6 +2,7 @@ package br.com.etm.checkseries.api;
 
 import java.util.List;
 
+import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import io.reactivex.Observable;
@@ -19,4 +20,6 @@ public interface TraktTvInteractor {
     Observable<List<ApiMediaObject>> search(String type, String query);
 
     Observable<ApiShow> getShow(String showId);
+
+    Observable<ApiEpisode> getEpisode(String showId, int season, int episodeNumber);
 }

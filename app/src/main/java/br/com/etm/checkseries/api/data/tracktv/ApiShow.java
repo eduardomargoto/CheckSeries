@@ -5,19 +5,30 @@ import android.database.Cursor;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import br.com.etm.checkseries.api.data.fanart.ApiFanArtImages;
-import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
 import br.com.etm.checkseries.data.Contract;
 
 /**
  * Created by eduardo on 07/12/17.
  */
 
-public class ApiShow extends ApiMediaObject {
+public class ApiShow {
+
+    private String title;
+    private Integer year;
+    private Integer traktId;
+    private Integer tvdbId;
+    private String imdbId;
+    private Integer tmdbId;
+    private String type;
+
+    private boolean favourite;
+
+    private String bannerUrl;
+    private String posterUrl;
+    private String backgroundUrl;
 
     @SerializedName("overview")
     private String overview;
@@ -50,29 +61,24 @@ public class ApiShow extends ApiMediaObject {
     @SerializedName("aired_episodes")
     private Integer totalEpisodes;
 
+    private ApiEpisode nextEpisode;
+
     public ApiShow(Cursor cursor) {
 
-        setApiIdentifiers(new ApiIdentifiers());
-        getApiIdentifiers().setTrakt(cursor.getInt(Contract.Show.POSITION_ID));
-        getApiIdentifiers().setTvdb(cursor.getInt(Contract.Show.POSITION_TVDB_ID));
-        getApiIdentifiers().setImdb(cursor.getString(Contract.Show.POSITION_IMDB_ID));
-        getApiIdentifiers().setTmdb(cursor.getInt(Contract.Show.POSITION_TMDB_ID));
+        traktId = cursor.getInt(Contract.Show.POSITION_ID);
+        tvdbId = cursor.getInt(Contract.Show.POSITION_TVDB_ID);
+        imdbId = cursor.getString(Contract.Show.POSITION_IMDB_ID);
+        tmdbId = cursor.getInt(Contract.Show.POSITION_TMDB_ID);
 
-        setTitle(cursor.getString(Contract.Show.POSITION_TITLE));
-        setYear(cursor.getInt(Contract.Show.POSITION_YEAR));
-        setType(cursor.getString(Contract.Show.POSITION_TYPE));
+        title = cursor.getString(Contract.Show.POSITION_TITLE);
+        year = cursor.getInt(Contract.Show.POSITION_YEAR);
+        type = cursor.getString(Contract.Show.POSITION_TYPE);
 
-        setFanArtImages(new ApiFanArtObject());
-        getFanArtImages().setHdTvLogoImages(new ArrayList<>());
-        getFanArtImages().getHdTvLogoImages().add(new ApiFanArtImages(cursor.getString(Contract.Show.POSITION_LOGO_URL)));
+        backgroundUrl = cursor.getString(Contract.Show.POSITION_BACKGROUND_URL);
+        bannerUrl = cursor.getString(Contract.Show.POSITION_BANNER_URL);
+        posterUrl = cursor.getString(Contract.Show.POSITION_POSTER_URL);
 
-        getFanArtImages().setSeasonBannerImages(new ArrayList<>());
-        getFanArtImages().getSeasonBannerImages().add(new ApiFanArtImages(cursor.getString(Contract.Show.POSITION_BANNER_URL)));
-
-        getFanArtImages().setTvPosterImages(new ArrayList<>());
-        getFanArtImages().getTvPosterImages().add(new ApiFanArtImages(cursor.getString(Contract.Show.POSITION_POSTER_URL)));
-        getFanArtImages().setSeasonFanArtImages(new ArrayList<>());
-        getFanArtImages().getSeasonFanArtImages().add(new ApiFanArtImages(cursor.getString(Contract.Show.POSITION_FANART_URL)));
+        favourite = cursor.getInt(Contract.Show.POSITION_FAVOURITE) == 1;
 
         overview = cursor.getString(Contract.Show.POSITION_OVERVIEW);
         dateFirstAired = cursor.getString(Contract.Show.POSITION_FIRST_AIRED);
@@ -95,6 +101,104 @@ public class ApiShow extends ApiMediaObject {
                 .split(","));
         totalEpisodes = cursor.getInt(Contract.Show.POSITION_TOTAL_EPISODES);
 
+        nextEpisode = new ApiEpisode(cursor);
+
+    }
+
+    public ApiEpisode getNextEpisode() {
+        return nextEpisode;
+    }
+
+    public void setNextEpisode(ApiEpisode nextEpisode) {
+        this.nextEpisode = nextEpisode;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getTraktId() {
+        return traktId;
+    }
+
+    public void setTraktId(Integer traktId) {
+        this.traktId = traktId;
+    }
+
+    public Integer getTvdbId() {
+        return tvdbId;
+    }
+
+    public void setTvdbId(Integer tvdbId) {
+        this.tvdbId = tvdbId;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public Integer getTmdbId() {
+        return tmdbId;
+    }
+
+    public void setTmdbId(Integer tmdbId) {
+        this.tmdbId = tmdbId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
+
+    public String getBackgroundUrl() {
+        return backgroundUrl;
+    }
+
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 
     public String getOverview() {
@@ -217,32 +321,33 @@ public class ApiShow extends ApiMediaObject {
         this.totalEpisodes = totalEpisodes;
     }
 
-    public ContentValues getContentValues(){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.Show._ID, getApiIdentifiers().getTrakt());
-        contentValues.put(Contract.Show.COLUMN_NAME, getTitle());
-        contentValues.put(Contract.Show.COLUMN_TVDB_ID, getApiIdentifiers().getTvdb());
-        contentValues.put(Contract.Show.COLUMN_IMDB_ID, getApiIdentifiers().getImdb());
-        contentValues.put(Contract.Show.COLUMN_TMDB_ID, getApiIdentifiers().getTmdb());
-        contentValues.put(Contract.Show.COLUMN_YEAR, getYear());
-        contentValues.put(Contract.Show.COLUMN_TYPE, getType());
+    public void setMediaObject(ApiMediaObject mediaObject){
+        title = mediaObject.getTitle();
+        type = mediaObject.getType();
+        traktId = mediaObject.getApiIdentifiers().getTrakt();
+        imdbId = mediaObject.getApiIdentifiers().getImdb();
+        tvdbId = mediaObject.getApiIdentifiers().getTvdb();
+        tmdbId = mediaObject.getApiIdentifiers().getTmdb();
 
-        if(getFanArtImages() != null && getFanArtImages().getHdTvLogoImages() != null
-                && !getFanArtImages().getHdTvLogoImages().isEmpty()) {
-            contentValues.put(Contract.Show.COLUMN_LOGO_URL, getFanArtImages().getHdTvLogoImages().get(0).getUrl());
-        } else {contentValues.put(Contract.Show.COLUMN_LOGO_URL, "");}
-        if(getFanArtImages() != null && getFanArtImages().getSeasonBannerImages() != null
-                && !getFanArtImages().getSeasonBannerImages().isEmpty()) {
-            contentValues.put(Contract.Show.COLUMN_BANNER_URL, getFanArtImages().getSeasonBannerImages().get(0).getUrl());
-        } else {contentValues.put(Contract.Show.COLUMN_BANNER_URL, "");}
-        if(getFanArtImages() != null && getFanArtImages().getTvPosterImages() != null
-                && !getFanArtImages().getTvPosterImages().isEmpty()) {
-            contentValues.put(Contract.Show.COLUMN_POSTER_URL, getFanArtImages().getTvPosterImages().get(0).getUrl());
-        } else {contentValues.put(Contract.Show.COLUMN_POSTER_URL, "");}
-        if(getFanArtImages() != null && getFanArtImages().getSeasonFanArtImages() != null
-                && !getFanArtImages().getSeasonFanArtImages().isEmpty()) {
-            contentValues.put(Contract.Show.COLUMN_FANART_URL, getFanArtImages().getSeasonFanArtImages().get(0).getUrl());
-        } else {contentValues.put(Contract.Show.COLUMN_FANART_URL, "");}
+        //TODO: get the best images, looking likes and season.
+        backgroundUrl = mediaObject.getFanArtImages().getShowBackgroundImages().get(0).getUrl();
+        bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
+        posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.Show._ID, traktId);
+        contentValues.put(Contract.Show.COLUMN_NAME, title);
+        contentValues.put(Contract.Show.COLUMN_TVDB_ID, tvdbId);
+        contentValues.put(Contract.Show.COLUMN_IMDB_ID, imdbId);
+        contentValues.put(Contract.Show.COLUMN_TMDB_ID, tmdbId);
+        contentValues.put(Contract.Show.COLUMN_YEAR, year);
+        contentValues.put(Contract.Show.COLUMN_TYPE, type);
+
+        contentValues.put(Contract.Show.COLUMN_BACKGROUND_URL, backgroundUrl);
+        contentValues.put(Contract.Show.COLUMN_BANNER_URL, bannerUrl);
+        contentValues.put(Contract.Show.COLUMN_POSTER_URL, posterUrl);
 
         contentValues.put(Contract.Show.COLUMN_OVERVIEW, overview);
         contentValues.put(Contract.Show.COLUMN_FIRST_AIRED, dateFirstAired);
@@ -260,6 +365,8 @@ public class ApiShow extends ApiMediaObject {
         contentValues.put(Contract.Show.COLUMN_COMMENT_COUNT, commentCount);
         contentValues.put(Contract.Show.COLUMN_GENRES, genres.toString());
         contentValues.put(Contract.Show.COLUMN_TOTAL_EPISODES, totalEpisodes);
+
+        contentValues.put(Contract.Show.COLUMN_FAVOURITE, favourite);
 
         return contentValues;
     }

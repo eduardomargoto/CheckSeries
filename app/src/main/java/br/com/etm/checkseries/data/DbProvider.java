@@ -20,6 +20,8 @@ public class DbProvider extends ContentProvider {
     private static final int SHOW = 100;
     private static final int SHOW_BY_ID = 101;
 
+    private static final int EPISODE = 200;
+
     private static final UriMatcher uriMatcher = buildUriMatcher();
 
     private DbHelper dbHelper;
@@ -27,6 +29,7 @@ public class DbProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW, SHOW);
+        matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE, EPISODE);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID, SHOW_BY_ID);
         return matcher;
     }
@@ -47,7 +50,7 @@ public class DbProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case SHOW:
                 returnCursor = db.query(
-                        Contract.Show.TABLE_NAME,
+                        Contract.Show.TABLE_NAME + ", " + Contract.Episode.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -108,6 +111,14 @@ public class DbProvider extends ContentProvider {
                 );
                 returnUri = Contract.Show.URI;
                 break;
+            case EPISODE:
+                db.insert(
+                        Contract.Episode.TABLE_NAME,
+                        null,
+                        values
+                );
+                returnUri = Contract.Show.URI;
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown URI:" + uri);
         }
@@ -133,6 +144,14 @@ public class DbProvider extends ContentProvider {
             case SHOW:
                 rowsDeleted = db.delete(
                         Contract.Show.TABLE_NAME,
+                        selection,
+                        selectionArgs
+                );
+
+                break;
+            case EPISODE:
+                rowsDeleted = db.delete(
+                        Contract.Episode.TABLE_NAME,
                         selection,
                         selectionArgs
                 );

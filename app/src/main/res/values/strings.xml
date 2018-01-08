@@ -1,6 +1,8 @@
 <resources>
     <string name="content_authority">br.com.etm.checkseries</string>
 
+    <string name="formatted_progress_show">%d / %d</string>
+
     <string name="today">Hoje</string>
     <string name="tomorrow">Amanhã</string>
     <string name="at_days">Em /days dias.</string>

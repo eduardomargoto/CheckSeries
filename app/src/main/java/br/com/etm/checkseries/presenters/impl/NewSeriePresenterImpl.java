@@ -4,9 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
+
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
@@ -88,24 +90,30 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(apiShow -> {
-                    apiShow.setApiIdentifiers(mediaObject.getApiIdentifiers());
-                    apiShow.setType(mediaObject.getType());
-                    apiShow.setYear(mediaObject.getYear());
-                    apiShow.setAdded(mediaObject.isAdded());
-                    apiShow.setFanArtImages(mediaObject.getFanArtImages());
+                    apiShow.setMediaObject(mediaObject);
 
                     Uri uri = context.getContentResolver()
                             .insert(Contract.Show.URI, apiShow.getContentValues());
+                    if (uri != null) {view.onSerieAdded(position);}
 
-                    if (uri != null) {
-                        view.onSerieAdded(position);
-                    }
-
+                    insertNextEpisode(context, apiShow);
                 }, throwable -> {
                     Log.e("Presenter", "insert - getShow", throwable);
                 });
+    }
 
+    private void insertNextEpisode(Context context, ApiShow apiShow) {
+        interactor.getEpisode(String.valueOf(apiShow.getTraktId()), 1, 1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiEpisode -> {
 
+                    apiEpisode.setShowTraktId(apiShow.getTraktId());
+                    context.getContentResolver()
+                            .insert(Contract.Episode.URI, apiEpisode.getContentValues());
+                }, throwable -> {
+                    Log.e("Presenter", "insert - getEpisode", throwable);
+                });
 
     }
 

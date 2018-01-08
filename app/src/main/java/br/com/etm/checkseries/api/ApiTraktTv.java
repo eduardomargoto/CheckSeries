@@ -52,10 +52,11 @@ public interface ApiTraktTv {
     @GET("/shows/{id}?extended=full")
     Observable<ApiShow> getShow(@Path("id") String showId);
 
-    @GET("/shows/{id}/seasons/{season}/episodes/{episode}")
-    ApiEpisode getEpisode(@Path("id") String showId,
-                          @Path("season") String seasonNumber,
-                          @Path("episode") String episodeNumber);
+    @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
+    @GET("/shows/{id}/seasons/{season}/episodes/{episode}?extended=full")
+    Observable<ApiEpisode> getEpisode(@Path("id") String showId,
+                          @Path("season") int seasonNumber,
+                          @Path("episode") int episodeNumber);
 
     @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
     @GET("/people/{id}?extended=full")

@@ -32,18 +32,17 @@ public class SeriePresenterImpl implements SeriePresenter {
     public void retrieveShows() {
         Cursor cursor = App.getContext().getContentResolver()
                 .query(Contract.Show.URI,
-                        Contract.Show.SHOWS_COLUMNS
-                        , null
+                        Contract.Show.SHOW_EPISODE_COLUMNS
+                        , Contract.Show.TABLE_NAME + "." + Contract.Show._ID + " = " + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_SHOW_ID
                         , null
                         , null);
 
         List<ApiShow> apiShows = new ArrayList<>();
         if (cursor != null) {
-            cursor.moveToFirst();
-            do  {
+            while(cursor.moveToNext()) {
                 ApiShow apiShow = new ApiShow(cursor);
                 apiShows.add(apiShow);
-            } while(cursor.moveToNext());
+            }
         }
 
         view.configureView(apiShows);

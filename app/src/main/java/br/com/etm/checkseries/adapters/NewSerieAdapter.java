@@ -42,6 +42,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_newserie, parent, false);
+
         return new MyViewHolder(view, this);
     }
 
