@@ -84,14 +84,29 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
 
     @Override
     public void insert(Context context, int position, ApiMediaObject mediaObject) {
-        Log.i("NewSeriePresenter", mediaObject.toString());
+        interactor.getShow(String.valueOf(mediaObject.getApiIdentifiers().getTrakt()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiShow -> {
+                    apiShow.setApiIdentifiers(mediaObject.getApiIdentifiers());
+                    apiShow.setType(mediaObject.getType());
+                    apiShow.setYear(mediaObject.getYear());
+                    apiShow.setAdded(mediaObject.isAdded());
+                    apiShow.setFanArtImages(mediaObject.getFanArtImages());
 
-        Uri uri = context.getContentResolver()
-                .insert(Contract.Show.URI, mediaObject.getContentValues());
+                    Uri uri = context.getContentResolver()
+                            .insert(Contract.Show.URI, apiShow.getContentValues());
 
-        if (uri != null) {
-            view.onSerieAdded(position);
-        }
+                    if (uri != null) {
+                        view.onSerieAdded(position);
+                    }
+
+                }, throwable -> {
+                    Log.e("Presenter", "insert - getShow", throwable);
+                });
+
+
+
     }
 
 

@@ -184,7 +184,7 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                        .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
 //                        .placeholder(R.drawable.loading_animation_black)
 //                        .error(R.drawable.image_area_48dp)
-//                        .into(mvholder.iv_serie);
+//                        .into(mvholder.ivSerie);
 
                 UtilsImages.darkenImagen(mvholder.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
             } else {
@@ -204,7 +204,7 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                        .centerInside()
 //                        .placeholder(R.drawable.loading_animation_black)
 //                        .error(R.drawable.image_area_48dp)
-//                        .into(mvholder.iv_serie);
+//                        .into(mvholder.ivSerie);
             }
 
 //            Picasso.with(context).load(UtilsImages.getFilesDirectory(context, serie.getFanArtFilename()))

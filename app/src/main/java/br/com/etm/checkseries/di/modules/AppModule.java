@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.di;
+package br.com.etm.checkseries.di.modules;
 
 import javax.inject.Singleton;
 

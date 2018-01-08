@@ -50,7 +50,7 @@ public interface ApiTraktTv {
     ApiShow deleteCheckIn(@Header("Authorization") String accessToken);
 
     @GET("/shows/{id}?extended=full")
-    ApiShow getShow(@Path("id") String showId);
+    Observable<ApiShow> getShow(@Path("id") String showId);
 
     @GET("/shows/{id}/seasons/{season}/episodes/{episode}")
     ApiEpisode getEpisode(@Path("id") String showId,

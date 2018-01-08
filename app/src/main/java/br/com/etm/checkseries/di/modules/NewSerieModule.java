@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.di;
+package br.com.etm.checkseries.di.modules;
 
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;

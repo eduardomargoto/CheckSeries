@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 import br.com.etm.checkseries.api.ApiFanArt;
 import br.com.etm.checkseries.api.ApiTraktTv;
-import br.com.etm.checkseries.di.AppComponent;
-import br.com.etm.checkseries.di.AppModule;
-import br.com.etm.checkseries.di.DaggerAppComponent;
+import br.com.etm.checkseries.di.components.AppComponent;
+import br.com.etm.checkseries.di.components.DaggerAppComponent;
+import br.com.etm.checkseries.di.modules.AppModule;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends MultiDexApplication {
 
+    public static Context context;
     private static AppComponent appComponent;
     private static Retrofit.Builder builder = new Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -26,7 +27,12 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         initComponent();
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static ApiTraktTv getApi() {

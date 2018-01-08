@@ -107,4 +107,52 @@ public class ApiFanArtObject {
     public List<ApiFanArtImages> getShowBackgroundImages() {
         return showBackgroundImages;
     }
+
+    public void setCharactersArtImages(List<ApiFanArtImages> charactersArtImages) {
+        this.charactersArtImages = charactersArtImages;
+    }
+
+    public void setSeasonFanArtImages(List<ApiFanArtImages> seasonFanArtImages) {
+        this.seasonFanArtImages = seasonFanArtImages;
+    }
+
+    public void setTvThumbImages(List<ApiFanArtImages> tvThumbImages) {
+        this.tvThumbImages = tvThumbImages;
+    }
+
+    public void setClearArtImages(List<ApiFanArtImages> clearArtImages) {
+        this.clearArtImages = clearArtImages;
+    }
+
+    public void setClearLogoImages(List<ApiFanArtImages> clearLogoImages) {
+        this.clearLogoImages = clearLogoImages;
+    }
+
+    public void setHdTvLogoImages(List<ApiFanArtImages> hdTvLogoImages) {
+        this.hdTvLogoImages = hdTvLogoImages;
+    }
+
+    public void setHdClearArtImages(List<ApiFanArtImages> hdClearArtImages) {
+        this.hdClearArtImages = hdClearArtImages;
+    }
+
+    public void setSeasonThumbImages(List<ApiFanArtImages> seasonThumbImages) {
+        this.seasonThumbImages = seasonThumbImages;
+    }
+
+    public void setSeasonBannerImages(List<ApiFanArtImages> seasonBannerImages) {
+        this.seasonBannerImages = seasonBannerImages;
+    }
+
+    public void setTvPosterImages(List<ApiFanArtImages> tvPosterImages) {
+        this.tvPosterImages = tvPosterImages;
+    }
+
+    public void setTvBannerImages(List<ApiFanArtImages> tvBannerImages) {
+        this.tvBannerImages = tvBannerImages;
+    }
+
+    public void setShowBackgroundImages(List<ApiFanArtImages> showBackgroundImages) {
+        this.showBackgroundImages = showBackgroundImages;
+    }
 }

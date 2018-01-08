@@ -1,5 +1,6 @@
-package br.com.etm.checkseries.di;
+package br.com.etm.checkseries.di.components;
 
+import br.com.etm.checkseries.di.modules.NewSerieModule;
 import br.com.etm.checkseries.fragments.NewSerieFragment;
 import br.com.etm.checkseries.scopes.FragmentScope;
 import dagger.Component;

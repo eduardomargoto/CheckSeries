@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ApiFanArtImages {
+
     @SerializedName("id")
     private String id;
 
@@ -18,6 +19,10 @@ public class ApiFanArtImages {
 
     @SerializedName("season")
     private String season;
+
+    public ApiFanArtImages(String url) {
+        this.url = url;
+    }
 
     public String getId() {
         return id;

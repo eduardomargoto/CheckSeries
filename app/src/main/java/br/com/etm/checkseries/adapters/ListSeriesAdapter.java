@@ -126,7 +126,7 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
 //                                .centerCrop()
 //                                .placeholder(R.drawable.loading_animation_white)
 //                                .error(R.drawable.image_area_36dp)
-//                                .into(hold.iv_serie);
+//                                .into(hold.ivSerie);
 
                         UtilsImages.darkenImagen(hold.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
                         Bitmap bitmap = null;
@@ -151,7 +151,7 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
 //                        .centerCrop()
 //                        .placeholder(R.drawable.loading_animation_white)
 //                        .error(R.drawable.image_area_36dp)
-//                        .into(holder.iv_serie);
+//                        .into(holder.ivSerie);
                 UtilsImages.darkenImagen(holder.iv_serie); // escurecer as imagens para evitar problemas ao visualizar os icones
             }
 
@@ -172,7 +172,7 @@ public class ListSeriesAdapter extends RecyclerView.Adapter<ListSeriesAdapter.My
 //                    .resize(width, height)
 //                    .centerInside()
 //                    .placeholder(R.drawable.loading_animation_white)
-//                    .into(mvh.iv_serie);
+//                    .into(mvh.ivSerie);
 
         }
 

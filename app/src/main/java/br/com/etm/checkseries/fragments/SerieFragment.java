@@ -18,12 +18,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
+import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.NewSerieActivity;
+import br.com.etm.checkseries.di.components.DaggerSerieComponent;
+import br.com.etm.checkseries.di.modules.SerieModule;
+import br.com.etm.checkseries.presenters.SeriePresenter;
+import br.com.etm.checkseries.views.SerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,7 +40,7 @@ import butterknife.Unbinder;
 /**
  * Created by EDUARDO_MARGOTO on 20/10/2015.
  */
-public class SerieFragment extends Fragment {
+public class SerieFragment extends Fragment implements SerieView {
 
     private static final String TAG = SerieFragment.class.getSimpleName();
     private static final String PARAM_SERIES = "series_param";
@@ -51,44 +59,28 @@ public class SerieFragment extends Fragment {
     private Unbinder unbinder;
     private ArrayList<Serie> seriesList = null;
 
+    @Inject
+    SeriePresenter presenter;
+
     public static SerieFragment newInstance() {
-        SerieFragment fragment = new SerieFragment();
-        return fragment;
+        return new SerieFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        DaggerSerieComponent.builder()
+                .serieModule(new SerieModule(this))
+                .build()
+                .inject(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.fragment_serie, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        if (seriesList != null && !seriesList.isEmpty()) {
-            tvMessage.setVisibility(View.VISIBLE);
-        }
-
-//        int positionAds = 0;
-//        if (!MainActivity.mAds.isEmpty()) {
-//            if (seriesList.size() >= 4) {
-//                for (int i = 3; i < seriesList.size(); i++) {
-//                    if ((i % 3) == 0) {
-//                        Serie s = new Serie();
-//                        s.setName(MainActivity.mAds.get(positionAds).getTitle());
-//                        seriesList.add(i, s);
-//                        positionAds++;
-//                        if (positionAds == MainActivity.mAds.size())
-//                            positionAds = 0;
-//                    }
-//                }
-//            } else {
-//                Serie s = new Serie();
-//                s.setName(MainActivity.mAds.get(positionAds).getTitle());
-//                seriesList.add(s);
-//            }
-//        }
-
-
-        configureRecyclerView();
+        presenter.onCreate();
         return view;
     }
 
@@ -96,10 +88,9 @@ public class SerieFragment extends Fragment {
     public void onClickAddSerie() {
         Intent intent = new Intent(getActivity(), NewSerieActivity.class);
         startActivity(intent);
-        ///startActivityForResult(it, MainActivity.NEWSERIEACTIVITY_CODE);
     }
 
-    private void configureRecyclerView() {
+    private void configureRecyclerView(List<ApiShow> apiShows) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager lm = null;
@@ -111,10 +102,9 @@ public class SerieFragment extends Fragment {
 
         }
         recyclerView.setLayoutManager(lm);
-        SerieAdapter serieAdapter = new SerieAdapter(getActivity(), seriesList);
+        SerieAdapter serieAdapter = new SerieAdapter(apiShows);
         recyclerView.setAdapter(serieAdapter);
     }
-
 
     public ArrayList<Serie> getListSeriesShow() {
         EnvironmentConfig ec = EnvironmentConfig.getInstance();
@@ -163,14 +153,12 @@ public class SerieFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onViewCreated()");
         super.onViewCreated(view, savedInstanceState);
         registerForContextMenu(recyclerView);
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        Log.i(TAG, "onCreateContextMenu()");
         super.onCreateContextMenu(menu, v, menuInfo);
         // inflate menu
         int position = SerieAdapter.POSITION_SERIE_ACTIVE;
@@ -182,6 +170,15 @@ public class SerieFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void configureView(List<ApiShow> apiShows) {
+        if (seriesList != null && !seriesList.isEmpty()) {
+            tvMessage.setVisibility(View.VISIBLE);
+        }
+
+        configureRecyclerView(apiShows);
     }
 
     /* @Override
