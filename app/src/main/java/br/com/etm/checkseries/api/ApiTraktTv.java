@@ -9,6 +9,7 @@ import br.com.etm.checkseries.api.data.tracktv.ApiMovie;
 import br.com.etm.checkseries.api.data.tracktv.ApiPerson;
 import br.com.etm.checkseries.api.data.tracktv.ApiResponseToken;
 import br.com.etm.checkseries.api.data.tracktv.ApiSearchObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.api.data.tracktv.ApiToken;
 import io.reactivex.Observable;
@@ -53,10 +54,8 @@ public interface ApiTraktTv {
     Observable<ApiShow> getShow(@Path("id") String showId);
 
     @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
-    @GET("/shows/{id}/seasons/{season}/episodes/{episode}?extended=full")
-    Observable<ApiEpisode> getEpisode(@Path("id") String showId,
-                          @Path("season") int seasonNumber,
-                          @Path("episode") int episodeNumber);
+    @GET("/shows/{id}/seasons?extended=full,episodes")
+    Observable<List<ApiSeason>> getEpisodes(@Path("id") String showId);
 
     @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
     @GET("/people/{id}?extended=full")

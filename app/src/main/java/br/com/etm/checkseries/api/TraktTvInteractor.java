@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -21,5 +22,5 @@ public interface TraktTvInteractor {
 
     Observable<ApiShow> getShow(String showId);
 
-    Observable<ApiEpisode> getEpisode(String showId, int season, int episodeNumber);
+    Observable<List<ApiSeason>> getEpisodes(String showId);
 }

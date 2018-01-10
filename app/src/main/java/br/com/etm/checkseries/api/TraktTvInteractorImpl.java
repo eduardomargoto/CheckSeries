@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.api.mappers.SearchObjectMapper;
 import io.reactivex.Observable;
@@ -45,7 +46,7 @@ public class TraktTvInteractorImpl implements TraktTvInteractor {
     }
 
     @Override
-    public Observable<ApiEpisode> getEpisode(String showId, int season, int episodeNumber) {
-        return api.getEpisode(showId, season, episodeNumber);
+    public Observable<List<ApiSeason>> getEpisodes(String showId) {
+        return api.getEpisodes(showId);
     }
 }

@@ -30,12 +30,11 @@ import butterknife.ButterKnife;
  */
 public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String TAG = SerieAdapter.class.getSimpleName();
-
     public static int POSITION_SERIE_ACTIVE = -1;
     public static final int NATIVE_ADS = 0;
     public static final int ITEM_SERIE = 1;
 
+    private OnShowListener onShowListener;
     private List<ApiShow> apiShows;
 
     public SerieAdapter(List<ApiShow> apiShows) {
@@ -48,8 +47,6 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.i(TAG, "onCreateViewHolder() viewType: " + viewType);
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_serie_v2, parent, false);
 
@@ -59,7 +56,6 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.i(TAG, "onBindViewHolder(" + position + ")");
         if (holder instanceof MyViewHolder) {
             ApiShow apiShow = apiShows.get(position);
             MyViewHolder myViewHolder = (MyViewHolder) holder;
@@ -79,6 +75,16 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (apiShows.get(position).getTraktId() != null)
             return NATIVE_ADS;
         else return ITEM_SERIE;
+    }
+
+
+    public void setOnShowListener(OnShowListener onShowListener) {
+        this.onShowListener = onShowListener;
+    }
+
+    public interface OnShowListener{
+        void onFavouriteShow(ApiShow apiShow);
+        void onNextEpisode(ApiShow apiShow);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -113,21 +119,47 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+
         }
 
         private void bind(ApiShow apiShow) {
             tvTitle.setText(apiShow.getTitle());
             tvNetwork.setText(apiShow.getNetwork());
-            tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
-                    , apiShow.getNextEpisode().getNumber()
-                    , apiShow.getTotalEpisodes()));
-            tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitle());
-            tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));
-
+            if(apiShow.getNextEpisode() != null) {
+                tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
+                        , apiShow.getNextEpisode().getNumber()
+                        , apiShow.getTotalEpisodes()));
+                tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitle());
+                tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));
+            }
+            setIconFavourite(apiShow);
             Picasso.with(itemView.getContext())
                     .load(apiShow.getBackgroundUrl())
                     .error(R.drawable.ic_panorama_white)
                     .into(ivSerie);
+
+            ivFavourite.setOnClickListener(view -> {
+                apiShow.setFavourite(!apiShow.isFavourite());
+                setIconFavourite(apiShow);
+                if(onShowListener != null){
+                    onShowListener.onFavouriteShow(apiShow);
+                }
+            });
+
+            ibCheckEpisode.setOnClickListener(view -> {
+                if(onShowListener != null){
+                    onShowListener.onNextEpisode(apiShow);
+                }
+            });
+        }
+
+        private void setIconFavourite(ApiShow apiShow){
+            if(apiShow.isFavourite()){
+                ivFavourite.setImageResource(R.drawable.ic_favourite_white);
+            } else {
+                ivFavourite.setImageResource(R.drawable.ic_favourite_unchecked_white);
+            }
         }
     }
 

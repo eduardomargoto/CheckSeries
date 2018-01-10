@@ -2,13 +2,19 @@ package br.com.etm.checkseries.api.data.tracktv;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import br.com.etm.checkseries.data.Contract;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by eduardo on 07/12/17.
@@ -61,7 +67,7 @@ public class ApiShow {
     @SerializedName("aired_episodes")
     private Integer totalEpisodes;
 
-    private ApiEpisode nextEpisode;
+    private List<ApiSeason> seasons;
 
     public ApiShow(Cursor cursor) {
 
@@ -101,16 +107,18 @@ public class ApiShow {
                 .split(","));
         totalEpisodes = cursor.getInt(Contract.Show.POSITION_TOTAL_EPISODES);
 
-        nextEpisode = new ApiEpisode(cursor);
+//        nextEpisode = new ApiEpisode(cursor);
 
     }
 
-    public ApiEpisode getNextEpisode() {
-        return nextEpisode;
+    public List<ApiSeason> getSeasons() {
+        if (seasons == null)
+            seasons = new ArrayList<>();
+        return seasons;
     }
 
-    public void setNextEpisode(ApiEpisode nextEpisode) {
-        this.nextEpisode = nextEpisode;
+    public void setSeasons(List<ApiSeason> seasons) {
+        this.seasons = seasons;
     }
 
     public boolean isFavourite() {
@@ -321,7 +329,7 @@ public class ApiShow {
         this.totalEpisodes = totalEpisodes;
     }
 
-    public void setMediaObject(ApiMediaObject mediaObject){
+    public void setMediaObject(ApiMediaObject mediaObject) {
         title = mediaObject.getTitle();
         type = mediaObject.getType();
         traktId = mediaObject.getApiIdentifiers().getTrakt();
@@ -333,6 +341,27 @@ public class ApiShow {
         backgroundUrl = mediaObject.getFanArtImages().getShowBackgroundImages().get(0).getUrl();
         bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
         posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
+    }
+
+    private ApiEpisode nextEpisode = null;
+
+    private void syncNextEpisode() {
+        for(ApiSeason season : getSeasons()){
+            for(ApiEpisode episode : season.getEpisodes()){
+                if(!episode.isWatched()){
+                    nextEpisode = episode;
+                    break;
+                }
+            }
+            if(nextEpisode != null)
+                break;
+        }
+    }
+
+    public ApiEpisode getNextEpisode() {
+        if (nextEpisode == null)
+            syncNextEpisode();
+        return nextEpisode;
     }
 
     public ContentValues getContentValues() {

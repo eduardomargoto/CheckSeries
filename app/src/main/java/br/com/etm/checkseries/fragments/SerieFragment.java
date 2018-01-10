@@ -110,6 +110,18 @@ public class SerieFragment extends Fragment implements SerieView {
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(lm);
         SerieAdapter serieAdapter = new SerieAdapter(apiShows);
+
+        serieAdapter.setOnShowListener(new SerieAdapter.OnShowListener() {
+            @Override
+            public void onFavouriteShow(ApiShow apiShow) {
+                presenter.updateShow(apiShow);
+            }
+
+            @Override
+            public void onNextEpisode(ApiShow apiShow) {
+                presenter.nextEpisode(apiShow);
+            }
+        });
         recyclerView.setAdapter(serieAdapter);
     }
 

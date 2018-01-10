@@ -19,8 +19,8 @@ public class Contract {
     static final String PATH_SHOW_BY_ID = "show/*";
 
     static final String PATH_EPISODE = "episode";
-    static final String PATH_EPISODE_BY_ID = "episode/*";
-    static final String PATH_EPISODE_SINGLE = PATH_SHOW_BY_ID + "/seasons/*/episodes/*";
+
+    static final String PATH_SEASON = "season";
 
     private static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY);
 
@@ -124,9 +124,6 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_FAVOURITE
         };
 
-
-        public static final String[] SHOW_EPISODE_COLUMNS = ObjectArrays.concat(SHOWS_COLUMNS, Episode.COLUMNS, String.class);
-
         public static Uri makeUriWithId(String tracktId) {
             return URI.buildUpon().appendPath(tracktId).build();
         }
@@ -159,7 +156,8 @@ public class Contract {
         public static final String COLUMN_AVAILABLE_TRANSLATIONS = "available_translations";
         public static final String COLUMN_RUNTIME = "runtime";
         public static final String COLUMN_BACKGROUND_URL = "background_url";
-        public static final String COLUMN_SHOW_ID = "show_trakt_id";
+        public static final String COLUMN_WATCHED = "watched";
+        public static final String COLUMN_SEASON_ID = "season_trakt_id";
 
         public static final int POSITION_ID = 0;
         public static final int POSITION_TITLE = 1;
@@ -178,7 +176,7 @@ public class Contract {
         public static final int POSITION_RUNTIME = 14;
         public static final int POSITION_OVERVIEW = 15;
         public static final int POSITION_BACKGROUND_URL = 16;
-        public static final int POSITION_SHOW_ID = 17;
+        public static final int POSITION_SEASON_ID = 17;
 
         public static final String[] COLUMNS = new String[]{
                 TABLE_NAME + "." + _ID
@@ -198,11 +196,69 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_AVAILABLE_TRANSLATIONS
                 , TABLE_NAME + "." + COLUMN_RUNTIME
                 , TABLE_NAME + "." + COLUMN_BACKGROUND_URL
-                , TABLE_NAME + "." + COLUMN_SHOW_ID
+                , TABLE_NAME + "." + COLUMN_WATCHED
+                , TABLE_NAME + "." + COLUMN_SEASON_ID
         };
 
         public static Uri makeUriWithId(String tracktId) {
             return URI.buildUpon().appendPath(tracktId).build();
         }
+    }
+
+    public static final class Season implements BaseColumns {
+
+        public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_SEASON).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + AUTHORITY + "/" + PATH_SEASON;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + AUTHORITY + "/" + PATH_SEASON;
+
+        public static final String TABLE_NAME = "seasons";
+
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_TVDB_ID = "tvdb_id";
+        public static final String COLUMN_IMDB_ID = "imdb_id";
+        public static final String COLUMN_TMDB_ID = "tmdb_id";
+        public static final String COLUMN_OVERVIEW = "overview";
+        public static final String COLUMN_NUMBER = "number";
+        public static final String COLUMN_FIRST_AIRED = "first_aired";
+        public static final String COLUMN_RATING = "rating";
+        public static final String COLUMN_VOTES = "votes";
+        public static final String COLUMN_EPISODE_COUNT = "episode_count";
+        public static final String COLUMN_AIRED_EPISODE = "aired_episodes";
+        public static final String COLUMN_SHOW_ID = "show_trakt_id";
+
+        public static final int POSITION_ID = 0;
+        public static final int POSITION_TITLE = 1;
+        public static final int POSITION_TVDB_ID = 2;
+        public static final int POSITION_IMDB_ID = 3;
+        public static final int POSITION_TMDB_ID = 4;
+        public static final int POSITION_OVERVIEW = 5;
+        public static final int POSITION_NUMBER = 6;
+        public static final int POSITION_FIRST_AIRED = 7;
+        public static final int POSITION_RATING = 8;
+        public static final int POSITION_VOTES = 9;
+        public static final int POSITION_EPISODE_COUNT = 10;
+        public static final int POSITION_AIRED_EPISODES = 11;
+        public static final int POSITION_SHOW_ID = 12;
+        public static final int POSITION_WATCHED = 13;
+
+        public static final String[] COLUMNS = new String[]{
+                TABLE_NAME + "." + _ID
+                , TABLE_NAME + "." + COLUMN_TITLE
+                , TABLE_NAME + "." + COLUMN_TVDB_ID
+                , TABLE_NAME + "." + COLUMN_IMDB_ID
+                , TABLE_NAME + "." + COLUMN_TMDB_ID
+                , TABLE_NAME + "." + COLUMN_NUMBER
+                , TABLE_NAME + "." + COLUMN_OVERVIEW
+                , TABLE_NAME + "." + COLUMN_FIRST_AIRED
+                , TABLE_NAME + "." + COLUMN_RATING
+                , TABLE_NAME + "." + COLUMN_VOTES
+                , TABLE_NAME + "." + COLUMN_EPISODE_COUNT
+                , TABLE_NAME + "." + COLUMN_AIRED_EPISODE
+                , TABLE_NAME + "." + COLUMN_SHOW_ID
+        };
+
     }
 }

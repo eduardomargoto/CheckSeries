@@ -7,7 +7,9 @@ import android.util.Log;
 
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
+import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
@@ -103,14 +105,21 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     private void insertNextEpisode(Context context, ApiShow apiShow) {
-        interactor.getEpisode(String.valueOf(apiShow.getTraktId()), 1, 1)
+        interactor.getEpisodes(String.valueOf(apiShow.getTraktId()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(apiEpisode -> {
+                .subscribe(apiSeasons -> {
+                    apiShow.setSeasons(apiSeasons);
+                    for(ApiSeason apiSeason : apiSeasons){
+                        context.getContentResolver()
+                                .insert(Contract.Season.URI, apiSeason.getContentValues(apiShow));
+                        for(ApiEpisode apiEpisode : apiSeason.getEpisodes()) {
+                            apiEpisode.setSeasonTraktId(apiSeason.getIdentifiers().getTrakt());
+                            context.getContentResolver()
+                                    .insert(Contract.Episode.URI, apiEpisode.getContentValues());
+                        }
+                    }
 
-                    apiEpisode.setShowTraktId(apiShow.getTraktId());
-                    context.getContentResolver()
-                            .insert(Contract.Episode.URI, apiEpisode.getContentValues());
                 }, throwable -> {
                     Log.e("Presenter", "insert - getEpisode", throwable);
                 });

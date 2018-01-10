@@ -43,7 +43,8 @@ public class ApiEpisode extends ApiEpisodeObject {
     @SerializedName("available_translations")
     private List<String> availableTranslations;
 
-    private Integer showTraktId;
+    private boolean watched;
+    private Integer seasonTraktId;
     private String backgroundUrl;
 
     public ApiEpisode(Cursor cursor) {
@@ -73,16 +74,25 @@ public class ApiEpisode extends ApiEpisodeObject {
                 .replaceAll("\\]", "")
                 .split(","));
 
-        showTraktId = cursor.getInt(cursor.getColumnIndex(Contract.Episode.COLUMN_SHOW_ID));
+        seasonTraktId = cursor.getInt(cursor.getColumnIndex(Contract.Episode.COLUMN_SEASON_ID));
+
+        watched = cursor.getInt(cursor.getColumnIndex(Contract.Episode.COLUMN_WATCHED)) == 1;
     }
 
-
-    public Integer getShowTraktId() {
-        return showTraktId;
+    public boolean isWatched() {
+        return watched;
     }
 
-    public void setShowTraktId(Integer showTraktId) {
-        this.showTraktId = showTraktId;
+    public void setWatched(boolean watched) {
+        this.watched = watched;
+    }
+
+    public Integer getSeasonTraktId() {
+        return seasonTraktId;
+    }
+
+    public void setSeasonTraktId(Integer seasonTraktId) {
+        this.seasonTraktId = seasonTraktId;
     }
 
     public List<String> getAvailableTranslations() {
@@ -203,8 +213,8 @@ public class ApiEpisode extends ApiEpisodeObject {
         contentValues.put(Contract.Episode.COLUMN_VOTES, votes);
         contentValues.put(Contract.Episode.COLUMN_COMMENT_COUNT, commentCount);
         contentValues.put(Contract.Episode.COLUMN_AVAILABLE_TRANSLATIONS, availableTranslations.toString());
-
-        contentValues.put(Contract.Episode.COLUMN_SHOW_ID, showTraktId);
+        contentValues.put(Contract.Episode.COLUMN_WATCHED, watched);
+        contentValues.put(Contract.Episode.COLUMN_SEASON_ID, seasonTraktId);
 
         return contentValues;
     }
