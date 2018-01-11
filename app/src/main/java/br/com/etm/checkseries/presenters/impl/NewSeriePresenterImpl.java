@@ -107,7 +107,7 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
                         for(ApiEpisode apiEpisode : apiSeason.getEpisodes()) {
                             apiEpisode.setSeasonTraktId(apiSeason.getIdentifiers().getTrakt());
 
-                            dbInteractor.updateEpisode(apiEpisode);
+                            dbInteractor.insertEpisode(apiEpisode);
                         }
                     }
 
