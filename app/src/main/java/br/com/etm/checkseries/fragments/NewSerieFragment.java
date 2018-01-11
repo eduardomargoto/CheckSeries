@@ -131,7 +131,7 @@ public class NewSerieFragment extends Fragment implements NewSerieView {
         serieAdapter = new NewSerieAdapter(null);
         serieAdapter.setOnItemClickListener((adapterView, view, position, l) -> {
             ApiMediaObject mediaObject = (ApiMediaObject) view.getTag();
-            presenter.insert(getContext(), position, mediaObject);
+            presenter.insert(position, mediaObject);
         });
 
         serieAdapter.setOnLoadingImageListener((position, id, type) -> presenter.retrieveImages(position, id, type));

@@ -13,5 +13,5 @@ public interface SeriePresenter {
 
     void updateShow(ApiShow apiShow);
 
-    void nextEpisode(ApiShow apiShow);
+    void nextEpisode(ApiShow apiShow, int position);
 }

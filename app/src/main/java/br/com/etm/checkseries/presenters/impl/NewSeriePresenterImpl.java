@@ -12,6 +12,7 @@ import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
+import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,12 +28,14 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     private NewSerieView view;
     private TraktTvInteractor interactor;
     private FanArtInteractor fanArtInteractor;
+    private DbInteractor dbInteractor;
     private Disposable disposable;
 
-    public NewSeriePresenterImpl(NewSerieView view, TraktTvInteractor interactor, FanArtInteractor fanArtInteractor) {
+    public NewSeriePresenterImpl(NewSerieView view, TraktTvInteractor interactor, FanArtInteractor fanArtInteractor, DbInteractor dbInteractor) {
         this.view = view;
         this.interactor = interactor;
         this.fanArtInteractor = fanArtInteractor;
+        this.dbInteractor = dbInteractor;
     }
 
     @Override
@@ -49,18 +52,8 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
                 .doOnTerminate(view::dismissProgress)
                 .subscribe(apiMediaObjects -> {
                     for (ApiMediaObject mediaObject : apiMediaObjects) {
-                        Cursor cursor = context.getContentResolver().query(
-                                Contract.Show.makeUriWithId(String.valueOf(mediaObject.getApiIdentifiers().getTrakt()))
-                                , Contract.Show.SHOWS_COLUMNS, null
-                                , new String[]{String.valueOf(mediaObject.getApiIdentifiers().getTrakt())}
-                                , ""
-                        );
-                        if (cursor != null && cursor.moveToFirst()) {
-                            mediaObject.setAdded(true);
-                        }
-                        cursor.close();
+                        mediaObject.setAdded(dbInteractor.isShowAdded(mediaObject));
                     }
-
                     view.updateView(apiMediaObjects);
                 }, throwable -> {
                     Log.e("Presenter", "searchSerie", throwable);
@@ -87,36 +80,34 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     }
 
     @Override
-    public void insert(Context context, int position, ApiMediaObject mediaObject) {
+    public void insert(int position, ApiMediaObject mediaObject) {
         interactor.getShow(String.valueOf(mediaObject.getApiIdentifiers().getTrakt()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(() -> view.onSerieAdded(position))
                 .subscribe(apiShow -> {
                     apiShow.setMediaObject(mediaObject);
-
-                    Uri uri = context.getContentResolver()
-                            .insert(Contract.Show.URI, apiShow.getContentValues());
-                    if (uri != null) {view.onSerieAdded(position);}
-
-                    insertNextEpisode(context, apiShow);
+                    dbInteractor.insertShow(apiShow);
+                    insertNextEpisode(apiShow);
                 }, throwable -> {
                     Log.e("Presenter", "insert - getShow", throwable);
                 });
     }
 
-    private void insertNextEpisode(Context context, ApiShow apiShow) {
+    private void insertNextEpisode(ApiShow apiShow) {
         interactor.getEpisodes(String.valueOf(apiShow.getTraktId()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(apiSeasons -> {
                     apiShow.setSeasons(apiSeasons);
                     for(ApiSeason apiSeason : apiSeasons){
-                        context.getContentResolver()
-                                .insert(Contract.Season.URI, apiSeason.getContentValues(apiShow));
+                        apiSeason.setShowTraktId(apiShow.getTraktId());
+                        dbInteractor.insertSeason(apiSeason);
+
                         for(ApiEpisode apiEpisode : apiSeason.getEpisodes()) {
                             apiEpisode.setSeasonTraktId(apiSeason.getIdentifiers().getTrakt());
-                            context.getContentResolver()
-                                    .insert(Contract.Episode.URI, apiEpisode.getContentValues());
+
+                            dbInteractor.updateEpisode(apiEpisode);
                         }
                     }
 

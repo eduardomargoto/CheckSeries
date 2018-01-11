@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.data.Contract;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Created by eduardo on 10/01/18.
@@ -38,6 +40,26 @@ public class ApiSeason {
     @SerializedName("episodes")
     private List<ApiEpisode> episodes;
 
+    private Integer showTraktId;
+
+    public int getEpisodesWatched() {
+        int totalWatched = 0;
+        for(ApiEpisode episode: getEpisodes()){
+            if(episode.isWatched()){
+                totalWatched++;
+            }
+        }
+        return totalWatched;
+    }
+
+    public Integer getShowTraktId() {
+        return showTraktId;
+    }
+
+    public void setShowTraktId(Integer showTraktId) {
+        this.showTraktId = showTraktId;
+    }
+
     public ApiSeason(Cursor cursor) {
 
         setIdentifiers(new ApiIdentifiers());
@@ -46,7 +68,7 @@ public class ApiSeason {
         identifiers.setImdb(cursor.getString(Contract.Season.POSITION_IMDB_ID));
         identifiers.setTmdb(cursor.getInt(Contract.Season.POSITION_TMDB_ID));
         title = cursor.getString(Contract.Season.POSITION_TITLE);
-        number= cursor.getInt(Contract.Season.POSITION_NUMBER);
+        number = cursor.getInt(Contract.Season.POSITION_NUMBER);
         overview = cursor.getString(Contract.Season.POSITION_OVERVIEW);
         firstAired = cursor.getString(Contract.Season.POSITION_FIRST_AIRED);
         rating = cursor.getDouble(Contract.Season.POSITION_RATING);
@@ -130,7 +152,7 @@ public class ApiSeason {
     }
 
     public List<ApiEpisode> getEpisodes() {
-        if(episodes == null)
+        if (episodes == null)
             episodes = new ArrayList<>();
         return episodes;
     }
@@ -139,7 +161,7 @@ public class ApiSeason {
         this.episodes = episodes;
     }
 
-    public ContentValues getContentValues(ApiShow apiShow) {
+    public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(Contract.Season._ID, getIdentifiers().getTrakt());
@@ -156,7 +178,7 @@ public class ApiSeason {
         contentValues.put(Contract.Season.COLUMN_EPISODE_COUNT, votes);
         contentValues.put(Contract.Season.COLUMN_AIRED_EPISODE, votes);
 
-        contentValues.put(Contract.Season.COLUMN_SHOW_ID, apiShow.getTraktId());
+        contentValues.put(Contract.Season.COLUMN_SHOW_ID, showTraktId);
 
         return contentValues;
     }

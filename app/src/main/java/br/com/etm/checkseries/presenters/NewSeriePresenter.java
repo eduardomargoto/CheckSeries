@@ -17,5 +17,5 @@ public interface NewSeriePresenter {
     void retrieveImages(int position, String id, String type);
     void onDestroy();
 
-    void insert(Context context, int position, ApiMediaObject mediaObject);
+    void insert(int position, ApiMediaObject mediaObject);
 }

@@ -77,6 +77,10 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         else return ITEM_SERIE;
     }
 
+    public void notifyItemChanged(ApiShow apiShow, int position){
+        apiShows.set(position, apiShow);
+        notifyItemChanged(position);
+    }
 
     public void setOnShowListener(OnShowListener onShowListener) {
         this.onShowListener = onShowListener;
@@ -84,7 +88,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public interface OnShowListener{
         void onFavouriteShow(ApiShow apiShow);
-        void onNextEpisode(ApiShow apiShow);
+        void onNextEpisode(ApiShow apiShow, int position);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -139,6 +143,9 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .error(R.drawable.ic_panorama_white)
                     .into(ivSerie);
 
+            pbEpisodes.setProgress(apiShow.getEpisodesWatched());
+            pbEpisodes.setMax(apiShow.getTotalEpisodes());
+
             ivFavourite.setOnClickListener(view -> {
                 apiShow.setFavourite(!apiShow.isFavourite());
                 setIconFavourite(apiShow);
@@ -147,9 +154,13 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             });
 
+            if(apiShow.getNextEpisode() != null){
+                ibCheckEpisode.setVisibility(View.VISIBLE);
+            } else {ibCheckEpisode.setVisibility(View.GONE);}
+
             ibCheckEpisode.setOnClickListener(view -> {
                 if(onShowListener != null){
-                    onShowListener.onNextEpisode(apiShow);
+                    onShowListener.onNextEpisode(apiShow, getAdapterPosition());
                 }
             });
         }

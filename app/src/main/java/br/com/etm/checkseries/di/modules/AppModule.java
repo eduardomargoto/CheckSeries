@@ -8,6 +8,8 @@ import br.com.etm.checkseries.api.FanArtInteractorImpl;
 import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractorImpl;
 import br.com.etm.checkseries.api.mappers.SearchObjectMapper;
+import br.com.etm.checkseries.data.DbInteractor;
+import br.com.etm.checkseries.data.DbInteractorImpl;
 import dagger.Module;
 import dagger.Provides;
 
@@ -35,5 +37,10 @@ public class AppModule {
     @Provides
     FanArtInteractor providesFanArtInteractor(){
         return new FanArtInteractorImpl(App.getApiFanArt());
+    }
+
+    @Provides
+    DbInteractor providesDbInteractor(){
+        return new DbInteractorImpl();
     }
 }

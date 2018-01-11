@@ -21,6 +21,7 @@ public class DbProvider extends ContentProvider {
     private static final int SHOW_BY_ID = 101;
 
     private static final int EPISODE = 200;
+    private static final int NEXTEPISODE = 201;
 
     private static final int SEASON = 300;
 
@@ -33,6 +34,7 @@ public class DbProvider extends ContentProvider {
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW, SHOW);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SEASON, SEASON);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE, EPISODE);
+        matcher.addURI(Contract.AUTHORITY, Contract.PATH_NEXTEPISODE, NEXTEPISODE);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID, SHOW_BY_ID);
         return matcher;
     }
@@ -76,6 +78,17 @@ public class DbProvider extends ContentProvider {
             case EPISODE:
                 returnCursor = db.query(
                         Contract.Episode.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            case NEXTEPISODE:
+                returnCursor = db.query(
+                        Contract.Episode.TABLE_NAME + ", " + Contract.Season.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -221,6 +234,14 @@ public class DbProvider extends ContentProvider {
                 case SHOW:
                     rowsUpdated = db.update(
                             Contract.Show.TABLE_NAME,
+                            values,
+                            selection,
+                            selectionArgs
+                    );
+                    break;
+                case EPISODE:
+                    rowsUpdated = db.update(
+                            Contract.Episode.TABLE_NAME,
                             values,
                             selection,
                             selectionArgs

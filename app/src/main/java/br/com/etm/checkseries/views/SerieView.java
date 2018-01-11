@@ -11,4 +11,6 @@ import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 public interface SerieView {
 
     void configureView(List<ApiShow> apiShows);
+
+    void notifyDataChanged(ApiShow apiShow, int position);
 }

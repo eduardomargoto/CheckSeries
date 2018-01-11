@@ -63,6 +63,7 @@ public class SerieFragment extends Fragment implements SerieView {
 
     private Unbinder unbinder;
     private ArrayList<Serie> seriesList = null;
+    private SerieAdapter serieAdapter;
 
     @Inject
     SeriePresenter presenter;
@@ -109,7 +110,7 @@ public class SerieFragment extends Fragment implements SerieView {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(lm);
-        SerieAdapter serieAdapter = new SerieAdapter(apiShows);
+        serieAdapter = new SerieAdapter(apiShows);
 
         serieAdapter.setOnShowListener(new SerieAdapter.OnShowListener() {
             @Override
@@ -118,8 +119,8 @@ public class SerieFragment extends Fragment implements SerieView {
             }
 
             @Override
-            public void onNextEpisode(ApiShow apiShow) {
-                presenter.nextEpisode(apiShow);
+            public void onNextEpisode(ApiShow apiShow, int position) {
+                presenter.nextEpisode(apiShow, position);
             }
         });
         recyclerView.setAdapter(serieAdapter);
@@ -153,6 +154,13 @@ public class SerieFragment extends Fragment implements SerieView {
         }
 
         configureRecyclerView(apiShows);
+    }
+
+    @Override
+    public void notifyDataChanged(ApiShow apiShow, int position) {
+        if(position != -1) {
+            serieAdapter.notifyItemChanged(apiShow, position);
+        }
     }
 
 }

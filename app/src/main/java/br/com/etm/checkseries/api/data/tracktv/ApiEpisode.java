@@ -191,9 +191,9 @@ public class ApiEpisode extends ApiEpisodeObject {
         this.runtime = runtime;
     }
 
-
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(Contract.Episode._ID, getIdentifiers().getTrakt());
         contentValues.put(Contract.Episode.COLUMN_TITLE, getTitle());
         contentValues.put(Contract.Episode.COLUMN_TVDB_ID, getIdentifiers().getTvdb());
@@ -206,14 +206,14 @@ public class ApiEpisode extends ApiEpisodeObject {
 
         contentValues.put(Contract.Episode.COLUMN_OVERVIEW, overview);
         contentValues.put(Contract.Episode.COLUMN_FIRST_AIRED, dateFirstAired);
-        ;
+
         contentValues.put(Contract.Episode.COLUMN_RUNTIME, runtime);
         contentValues.put(Contract.Episode.COLUMN_UPDATED_AT, dateUpdated);
         contentValues.put(Contract.Episode.COLUMN_RATING, rating);
         contentValues.put(Contract.Episode.COLUMN_VOTES, votes);
         contentValues.put(Contract.Episode.COLUMN_COMMENT_COUNT, commentCount);
         contentValues.put(Contract.Episode.COLUMN_AVAILABLE_TRANSLATIONS, availableTranslations.toString());
-        contentValues.put(Contract.Episode.COLUMN_WATCHED, watched);
+        contentValues.put(Contract.Episode.COLUMN_WATCHED, watched ? 1 : 0);
         contentValues.put(Contract.Episode.COLUMN_SEASON_ID, seasonTraktId);
 
         return contentValues;

@@ -19,6 +19,7 @@ public class Contract {
     static final String PATH_SHOW_BY_ID = "show/*";
 
     static final String PATH_EPISODE = "episode";
+    static final String PATH_NEXTEPISODE = "nextepisode";
 
     static final String PATH_SEASON = "season";
 
@@ -132,6 +133,7 @@ public class Contract {
     public static final class Episode implements BaseColumns {
 
         public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_EPISODE).build();
+        public static final Uri NEXTEPISODE_URI = BASE_URI.buildUpon().appendPath(PATH_NEXTEPISODE).build();
 
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + AUTHORITY + "/" + PATH_EPISODE;
@@ -200,9 +202,12 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_SEASON_ID
         };
 
-        public static Uri makeUriWithId(String tracktId) {
-            return URI.buildUpon().appendPath(tracktId).build();
+        public static String[] COLUMNS_NEXTEPISODE = ObjectArrays.concat(COLUMNS, Season.COLUMNS, String.class);
+
+        public static Uri makeUriWithId(Integer tracktId) {
+            return URI.buildUpon().appendPath(String.valueOf(tracktId)).build();
         }
+
     }
 
     public static final class Season implements BaseColumns {

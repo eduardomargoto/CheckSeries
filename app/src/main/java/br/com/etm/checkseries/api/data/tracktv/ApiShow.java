@@ -69,6 +69,8 @@ public class ApiShow {
 
     private List<ApiSeason> seasons;
 
+    private ApiEpisode nextEpisode = null;
+
     public ApiShow(Cursor cursor) {
 
         traktId = cursor.getInt(Contract.Show.POSITION_ID);
@@ -112,9 +114,26 @@ public class ApiShow {
     }
 
     public List<ApiSeason> getSeasons() {
-        if (seasons == null)
+        if (seasons == null) {
             seasons = new ArrayList<>();
+        }
         return seasons;
+    }
+
+    public ApiEpisode getNextEpisode() {
+        return nextEpisode;
+    }
+
+    public void setNextEpisode(ApiEpisode nextEpisode) {
+        this.nextEpisode = nextEpisode;
+    }
+
+    public int getEpisodesWatched() {
+        int totalWatched = 0;
+        for(ApiSeason season : getSeasons()){
+            totalWatched = totalWatched + season.getEpisodesWatched();
+        }
+        return totalWatched;
     }
 
     public void setSeasons(List<ApiSeason> seasons) {
@@ -343,30 +362,10 @@ public class ApiShow {
         posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
     }
 
-    private ApiEpisode nextEpisode = null;
-
-    private void syncNextEpisode() {
-        for(ApiSeason season : getSeasons()){
-            for(ApiEpisode episode : season.getEpisodes()){
-                if(!episode.isWatched()){
-                    nextEpisode = episode;
-                    break;
-                }
-            }
-            if(nextEpisode != null)
-                break;
-        }
-    }
-
-    public ApiEpisode getNextEpisode() {
-        if (nextEpisode == null)
-            syncNextEpisode();
-        return nextEpisode;
-    }
-
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.Show._ID, traktId);
+
+        contentValues.put(Contract.Show._ID, getTraktId());
         contentValues.put(Contract.Show.COLUMN_NAME, title);
         contentValues.put(Contract.Show.COLUMN_TVDB_ID, tvdbId);
         contentValues.put(Contract.Show.COLUMN_IMDB_ID, imdbId);
@@ -395,9 +394,11 @@ public class ApiShow {
         contentValues.put(Contract.Show.COLUMN_GENRES, genres.toString());
         contentValues.put(Contract.Show.COLUMN_TOTAL_EPISODES, totalEpisodes);
 
-        contentValues.put(Contract.Show.COLUMN_FAVOURITE, favourite);
+        contentValues.put(Contract.Show.COLUMN_FAVOURITE, favourite ? 1 : 0);
 
         return contentValues;
     }
+
+
 }
 

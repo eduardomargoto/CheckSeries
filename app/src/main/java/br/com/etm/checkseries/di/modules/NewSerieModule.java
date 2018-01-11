@@ -2,6 +2,7 @@ package br.com.etm.checkseries.di.modules;
 
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
+import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.presenters.impl.NewSeriePresenterImpl;
 import br.com.etm.checkseries.views.NewSerieView;
@@ -27,7 +28,7 @@ public class NewSerieModule {
     }
 
     @Provides
-    public NewSeriePresenter providesPresenter(NewSerieView view, TraktTvInteractor interactor, FanArtInteractor fanArtInteractor){
-        return new NewSeriePresenterImpl(view, interactor, fanArtInteractor);
+    public NewSeriePresenter providesPresenter(NewSerieView view, TraktTvInteractor interactor, FanArtInteractor fanArtInteractor, DbInteractor dbInteractor){
+        return new NewSeriePresenterImpl(view, interactor, fanArtInteractor, dbInteractor);
     }
 }
