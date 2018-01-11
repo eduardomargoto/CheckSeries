@@ -1,6 +1,5 @@
 package br.com.etm.checkseries.di.modules;
 
-import javax.inject.Singleton;
 
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.api.FanArtInteractor;

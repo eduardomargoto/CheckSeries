@@ -9,6 +9,7 @@ import dagger.Component;
  */
 
 @Component(
+        dependencies = {AppComponent.class},
         modules = {SerieModule.class}
 )
 public interface SerieComponent {
