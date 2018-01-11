@@ -19,6 +19,8 @@ public class Contract {
     static final String PATH_SHOW_BY_ID = "show/*";
 
     static final String PATH_EPISODE = "episode";
+    static final String PATH_EPISODE_BY_ID = "episode/*";
+
     static final String PATH_NEXTEPISODE = "nextepisode";
 
     static final String PATH_SEASON = "season";

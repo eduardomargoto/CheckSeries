@@ -46,11 +46,11 @@ public class SeriePresenterImpl implements SeriePresenter {
 
             int updatesRow = dbInteractor.updateEpisode(episode);
             if (updatesRow >= 1) {
-                dbInteractor.getNextEpisode(apiShow);
+                apiShow.setNextEpisode(dbInteractor.getNextEpisode(apiShow));
                 view.notifyDataChanged(apiShow, position);
             } else {episode.setWatched(false);}
         } else {
-            dbInteractor.getNextEpisode(apiShow);
+            apiShow.setNextEpisode(dbInteractor.getNextEpisode(apiShow));
         }
     }
 }

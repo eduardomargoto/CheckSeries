@@ -75,7 +75,7 @@ public class DbInteractorImpl implements DbInteractor {
                     }
                     cursorSeason.close();
                 }
-                getNextEpisode(apiShow);
+                apiShow.setNextEpisode(getNextEpisode(apiShow));
                 apiShows.add(apiShow);
             }
             cursor.close();
@@ -86,27 +86,28 @@ public class DbInteractorImpl implements DbInteractor {
 
     @Override
     public ApiEpisode getNextEpisode(ApiShow apiShow) {
+        ApiEpisode apiEpisode = null;
         Cursor cursor = App.getContext().getContentResolver()
                 .query(Contract.Episode.NEXTEPISODE_URI
-                        , Contract.Episode.COLUMNS_NEXTEPISODE  // projection
+                        , Contract.Episode.COLUMNS  // projection
                         , Contract.Season.COLUMN_SHOW_ID + " = ? AND " + Contract.Episode.COLUMN_WATCHED + " = 0 AND "
                                 + Contract.Season.TABLE_NAME + "." + Contract.Season._ID + " = " + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_SEASON_ID // selection
                         , new String[]{String.valueOf(apiShow.getTraktId())}
                         , Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_SEASON +
                                 " ASC, " + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_NUMBER + " ASC");
         if (cursor != null && cursor.moveToFirst()) {
-            apiShow.setNextEpisode(new ApiEpisode(cursor));
+            apiEpisode = new ApiEpisode(cursor);
             cursor.close();
         }
-        return apiShow.getNextEpisode();
+        return apiEpisode;
     }
 
     @Override
     public int updateEpisode(ApiEpisode apiEpisode) {
         return App.getContext().getContentResolver()
-                .update(Contract.Episode.URI
+                .update(Contract.Episode.makeUriWithId(apiEpisode.getIdentifiers().getTrakt())
                         , apiEpisode.getContentValues()
-                        , Contract.Episode._ID + " = ?"
+                        , null
                         , new String[]{String.valueOf(apiEpisode.getIdentifiers().getTrakt())});
     }
 

@@ -22,6 +22,7 @@ public class DbProvider extends ContentProvider {
 
     private static final int EPISODE = 200;
     private static final int NEXTEPISODE = 201;
+    private static final int EPISODE_BY_ID = 202;
 
     private static final int SEASON = 300;
 
@@ -34,6 +35,7 @@ public class DbProvider extends ContentProvider {
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW, SHOW);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SEASON, SEASON);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE, EPISODE);
+        matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE_BY_ID, EPISODE_BY_ID);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_NEXTEPISODE, NEXTEPISODE);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID, SHOW_BY_ID);
         return matcher;
@@ -129,6 +131,12 @@ public class DbProvider extends ContentProvider {
                 return Contract.Show.CONTENT_TYPE;
             case SHOW_BY_ID:
                 return Contract.Show.CONTENT_ITEM_TYPE;
+            case EPISODE:
+                return Contract.Episode.CONTENT_TYPE;
+            case EPISODE_BY_ID:
+                return Contract.Episode.CONTENT_ITEM_TYPE;
+            case SEASON:
+                return Contract.Season.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -244,6 +252,14 @@ public class DbProvider extends ContentProvider {
                             Contract.Episode.TABLE_NAME,
                             values,
                             selection,
+                            selectionArgs
+                    );
+                    break;
+                case EPISODE_BY_ID:
+                    rowsUpdated = db.update(
+                            Contract.Episode.TABLE_NAME,
+                            values,
+                            Contract.Episode._ID + " = ? ",
                             selectionArgs
                     );
                     break;

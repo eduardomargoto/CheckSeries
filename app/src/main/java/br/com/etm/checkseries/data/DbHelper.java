@@ -97,7 +97,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 + Contract.Episode.COLUMN_AVAILABLE_TRANSLATIONS + " TEXT , "
                 + Contract.Episode.COLUMN_UPDATED_AT + " TEXT , "
                 + Contract.Episode.COLUMN_BACKGROUND_URL + " TEXT , "
-                + Contract.Episode.COLUMN_WATCHED + " BOOLEAN , "
+                + Contract.Episode.COLUMN_WATCHED + " INTEGER , "
                 + Contract.Episode.COLUMN_SEASON_ID + " INTEGER "
                 + ")";
     }
