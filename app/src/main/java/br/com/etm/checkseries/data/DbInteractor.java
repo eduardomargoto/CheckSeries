@@ -15,7 +15,7 @@ public interface DbInteractor {
 
     int updateShow(ApiShow apiShow);
 
-    List<ApiShow> retrieveShows();
+    List<ApiShow> retrieveShows(String where);
 
     ApiEpisode getNextEpisode(ApiShow apiShow);
 

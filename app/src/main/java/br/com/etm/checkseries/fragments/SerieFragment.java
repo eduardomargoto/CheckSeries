@@ -1,18 +1,25 @@
 package br.com.etm.checkseries.fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -47,10 +54,6 @@ import static android.app.Activity.RESULT_OK;
 public class SerieFragment extends Fragment implements SerieView {
 
     private static final String TAG = SerieFragment.class.getSimpleName();
-    private static final String PARAM_SERIES = "series_param";
-
-    public static boolean SHOW_SERIES_HIDDENS = false;
-
     private static int RELOAD_SERIES = 101;
 
     @BindView(R.id.rv_list_serie)
@@ -100,10 +103,8 @@ public class SerieFragment extends Fragment implements SerieView {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == RELOAD_SERIES) {
-                presenter.retrieveShows();
-            }
+        if (resultCode == RESULT_OK && requestCode == RELOAD_SERIES) {
+            presenter.retrieveShows();
         }
     }
 
@@ -135,12 +136,38 @@ public class SerieFragment extends Fragment implements SerieView {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_tbtop, menu);
+        MenuItem searchItem = menu.findItem(R.id.it_search);
+        SearchManager manager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setSearchableInfo(manager.getSearchableInfo(getActivity().getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String newText) {
+                Log.i(TAG, "onQueryTextSubmit(" + newText + ")");
+                presenter.filter(newText);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String newText) {
+                Log.i(TAG, "onQueryTextChange(" + newText + ")");
+                presenter.filter(newText);
+                return true;
+            }
+        });
+    }
+
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        // inflate menu
-        int position = SerieAdapter.POSITION_SERIE_ACTIVE;
-        Serie s = this.seriesList.get(position);
-        HelpFragment.createContextMenu(getActivity(), s, menu);
+//        int position = SerieAdapter.POSITION_SERIE_ACTIVE;
+//        Serie s = this.seriesList.get(position);
+//        HelpFragment.createContextMenu(getActivity(), s, menu);
     }
 
     @Override
@@ -160,9 +187,14 @@ public class SerieFragment extends Fragment implements SerieView {
 
     @Override
     public void notifyDataChanged(ApiShow apiShow, int position) {
-        if(position != -1) {
+        if (position != -1) {
             serieAdapter.notifyItemChanged(apiShow, position);
         }
+    }
+
+    @Override
+    public void updateRecyclerView(List<ApiShow> apiShows) {
+        serieAdapter.updateList(apiShows);
     }
 
 }

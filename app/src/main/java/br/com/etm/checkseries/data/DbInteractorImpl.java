@@ -30,12 +30,12 @@ public class DbInteractorImpl implements DbInteractor {
     }
 
     @Override
-    public List<ApiShow> retrieveShows() {
+    public List<ApiShow> retrieveShows(String where) {
 
         Cursor cursor = App.getContext().getContentResolver()
                 .query(Contract.Show.URI,
                         Contract.Show.SHOWS_COLUMNS
-                        , null
+                        , where
                         , null
                         , null);
 

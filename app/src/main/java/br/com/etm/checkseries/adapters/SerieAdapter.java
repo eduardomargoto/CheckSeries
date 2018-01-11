@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
  */
 public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static int POSITION_SERIE_ACTIVE = -1;
     public static final int NATIVE_ADS = 0;
     public static final int ITEM_SERIE = 1;
 
@@ -84,6 +83,11 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void setOnShowListener(OnShowListener onShowListener) {
         this.onShowListener = onShowListener;
+    }
+
+    public void updateList(List<ApiShow> apiShows) {
+        this.apiShows = apiShows;
+        notifyDataSetChanged();
     }
 
     public interface OnShowListener{

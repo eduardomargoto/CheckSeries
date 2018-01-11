@@ -13,4 +13,6 @@ public interface SerieView {
     void configureView(List<ApiShow> apiShows);
 
     void notifyDataChanged(ApiShow apiShow, int position);
+
+    void updateRecyclerView(List<ApiShow> apiShows);
 }
