@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
+import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.di.modules.AppModule;
 import dagger.Component;
 
@@ -22,4 +23,6 @@ public interface AppComponent {
     TraktTvInteractor traktTvInteractor();
 
     FanArtInteractor fanArtInteractor();
+
+    DbInteractor dbInteractor();
 }
