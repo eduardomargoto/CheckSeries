@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
@@ -76,6 +77,7 @@ public class SerieFragment extends Fragment implements SerieView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DaggerSerieComponent.builder()
+                .appComponent(App.getAppComponent())
                 .serieModule(new SerieModule(this))
                 .build()
                 .inject(this);
