@@ -13,6 +13,8 @@ import java.util.concurrent.Executor;
 
 import br.com.etm.checkseries.data.Contract;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -120,6 +122,25 @@ public class ApiShow {
         return seasons;
     }
 
+    //TODO: remove totalEpisodes api and database.
+    public Integer getTotalEpisodes() {
+        int totalEpisodes = 0;
+        for (ApiSeason season : seasons) {
+            totalEpisodes = totalEpisodes + season.getEpisodes().size();
+        }
+        return totalEpisodes;
+    }
+
+    public int getTotalEpisodesWatched() {
+        int totalEpisodesWatched = 0;
+        for (ApiSeason season : seasons) {
+            for (ApiEpisode episode : season.getEpisodes()) {
+                if (episode.isWatched()) totalEpisodesWatched++;
+            }
+        }
+        return totalEpisodesWatched;
+    }
+
     public ApiEpisode getNextEpisode() {
         return nextEpisode;
     }
@@ -130,7 +151,7 @@ public class ApiShow {
 
     public int getEpisodesWatched() {
         int totalWatched = 0;
-        for(ApiSeason season : getSeasons()){
+        for (ApiSeason season : getSeasons()) {
             totalWatched = totalWatched + season.getEpisodesWatched();
         }
         return totalWatched;
@@ -340,9 +361,6 @@ public class ApiShow {
         this.genres = genres;
     }
 
-    public Integer getTotalEpisodes() {
-        return totalEpisodes;
-    }
 
     public void setTotalEpisodes(Integer totalEpisodes) {
         this.totalEpisodes = totalEpisodes;
@@ -398,7 +416,6 @@ public class ApiShow {
 
         return contentValues;
     }
-
 
 }
 

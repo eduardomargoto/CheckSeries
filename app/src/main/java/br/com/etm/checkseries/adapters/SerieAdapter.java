@@ -134,21 +134,24 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private void bind(ApiShow apiShow) {
             tvTitle.setText(apiShow.getTitle());
             tvNetwork.setText(apiShow.getNetwork());
+
             if(apiShow.getNextEpisode() != null) {
                 tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
-                        , apiShow.getNextEpisode().getNumber()
+                        , apiShow.getTotalEpisodesWatched()
                         , apiShow.getTotalEpisodes()));
                 tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitle());
                 tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));
+
+                pbEpisodes.setProgress(apiShow.getEpisodesWatched());
+                pbEpisodes.setMax(apiShow.getTotalEpisodes());
+                pbEpisodes.setVisibility(View.VISIBLE);
             }
+
             setIconFavourite(apiShow);
             Picasso.with(itemView.getContext())
                     .load(apiShow.getBackgroundUrl())
                     .error(R.drawable.ic_panorama_white)
                     .into(ivSerie);
-
-            pbEpisodes.setProgress(apiShow.getEpisodesWatched());
-            pbEpisodes.setMax(apiShow.getTotalEpisodes());
 
             ivFavourite.setOnClickListener(view -> {
                 apiShow.setFavourite(!apiShow.isFavourite());
