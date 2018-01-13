@@ -7,6 +7,7 @@ import android.provider.BaseColumns;
 import com.google.common.collect.ObjectArrays;
 
 import br.com.etm.checkseries.BuildConfig;
+import br.com.etm.checkseries.data.preferences.Preferences;
 
 /**
  * Created by eduardo on 07/01/18.
@@ -67,7 +68,8 @@ public class Contract {
         public static final String COLUMN_GENRES = "genres";
         public static final String COLUMN_TOTAL_EPISODES = "aired_episodes";
         public static final String COLUMN_FAVOURITE = "favourite";
-
+        public static final String COLUMN_HIDDEN = "hidden";
+        public static final String COLUMN_UNFINISHED = "not_finished";
 
         public static final int POSITION_ID = 0;
         public static final int POSITION_TITLE = 1;
@@ -96,6 +98,8 @@ public class Contract {
         public static final int POSITION_GENRES = 24;
         public static final int POSITION_TOTAL_EPISODES = 25;
         public static final int POSITION_FAVOURITE = 26;
+        public static final int POSITION_HIDDEN = 27;
+        public static final int POSITION_UNFINISHED = 28;
 
         public static final String[] SHOWS_COLUMNS = new String[]{
                 TABLE_NAME + "." + _ID
@@ -125,10 +129,44 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_GENRES
                 , TABLE_NAME + "." + COLUMN_TOTAL_EPISODES
                 , TABLE_NAME + "." + COLUMN_FAVOURITE
+                , TABLE_NAME + "." + COLUMN_HIDDEN
+                , TABLE_NAME + "." + COLUMN_UNFINISHED
         };
 
         public static Uri makeUriWithId(String tracktId) {
             return URI.buildUpon().appendPath(tracktId).build();
+        }
+
+        public static String makeWhereFilter(Preferences preferences) {
+            String where = "";
+            boolean favourite = preferences.isFilterFavourite();
+            boolean hidden = preferences.isFilterHidden();
+            boolean notFinished = preferences.isFilterUnfinished();
+
+            if (favourite) {
+                where = where + COLUMN_FAVOURITE + " = " + (favourite ? 1 : 0);
+            }
+
+            if (hidden) {
+                if (!where.isEmpty()) where = where + " AND ";
+                where = where + COLUMN_HIDDEN + " = " + (hidden ? 1 : 0);
+            }
+
+            if (notFinished) {
+                if (!where.isEmpty()) where = where + " AND ";
+                where = where + COLUMN_UNFINISHED + " = " + (notFinished ? 1 : 0);
+            }
+
+            return where;
+        }
+
+        public static String makeOrder(Preferences preferences) {
+            if (preferences.isOrderName()) {
+                return COLUMN_NAME + " ASC ";
+            } else if (preferences.isOrderNextEpisode()) {
+                return COLUMN_AIR_DATE + " DESC ";
+            }
+            return null;
         }
     }
 

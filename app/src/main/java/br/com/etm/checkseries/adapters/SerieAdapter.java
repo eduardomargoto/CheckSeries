@@ -76,7 +76,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         else return ITEM_SERIE;
     }
 
-    public void notifyItemChanged(ApiShow apiShow, int position){
+    public void notifyItemChanged(ApiShow apiShow, int position) {
         apiShows.set(position, apiShow);
         notifyItemChanged(position);
     }
@@ -90,8 +90,9 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public interface OnShowListener{
+    public interface OnShowListener {
         void onFavouriteShow(ApiShow apiShow);
+
         void onNextEpisode(ApiShow apiShow, int position);
     }
 
@@ -135,11 +136,11 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tvTitle.setText(apiShow.getTitle());
             tvNetwork.setText(apiShow.getNetwork());
 
-            if(apiShow.getNextEpisode() != null) {
+            if (apiShow.getNextEpisode() != null) {
                 tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
                         , apiShow.getTotalEpisodesWatched()
                         , apiShow.getTotalEpisodes()));
-                tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitle());
+                tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitleFormatted());
                 tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));
 
                 pbEpisodes.setProgress(apiShow.getEpisodesWatched());
@@ -156,24 +157,26 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ivFavourite.setOnClickListener(view -> {
                 apiShow.setFavourite(!apiShow.isFavourite());
                 setIconFavourite(apiShow);
-                if(onShowListener != null){
+                if (onShowListener != null) {
                     onShowListener.onFavouriteShow(apiShow);
                 }
             });
 
-            if(apiShow.getNextEpisode() != null){
+            if (apiShow.getNextEpisode() != null) {
                 ibCheckEpisode.setVisibility(View.VISIBLE);
-            } else {ibCheckEpisode.setVisibility(View.GONE);}
+            } else {
+                ibCheckEpisode.setVisibility(View.GONE);
+            }
 
             ibCheckEpisode.setOnClickListener(view -> {
-                if(onShowListener != null){
+                if (onShowListener != null) {
                     onShowListener.onNextEpisode(apiShow, getAdapterPosition());
                 }
             });
         }
 
-        private void setIconFavourite(ApiShow apiShow){
-            if(apiShow.isFavourite()){
+        private void setIconFavourite(ApiShow apiShow) {
+            if (apiShow.isFavourite()) {
                 ivFavourite.setImageResource(R.drawable.ic_favourite_white);
             } else {
                 ivFavourite.setImageResource(R.drawable.ic_favourite_unchecked_white);

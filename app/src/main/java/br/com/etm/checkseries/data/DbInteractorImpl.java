@@ -10,6 +10,7 @@ import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
 import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import io.reactivex.Observable;
 
 /**
  * Created by eduardo on 11/01/18.
@@ -30,14 +31,14 @@ public class DbInteractorImpl implements DbInteractor {
     }
 
     @Override
-    public List<ApiShow> retrieveShows(String where) {
+    public Observable<List<ApiShow>> retrieveShows(String where, String order) {
 
         Cursor cursor = App.getContext().getContentResolver()
                 .query(Contract.Show.URI,
                         Contract.Show.SHOWS_COLUMNS
                         , where
                         , null
-                        , null);
+                        , order);
 
         List<ApiShow> apiShows = new ArrayList<>();
         if (cursor != null) {
@@ -81,7 +82,8 @@ public class DbInteractorImpl implements DbInteractor {
             cursor.close();
         }
 
-        return apiShows;
+
+        return Observable.fromArray(apiShows);
     }
 
     @Override

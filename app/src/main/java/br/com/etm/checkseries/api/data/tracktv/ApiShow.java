@@ -2,21 +2,14 @@ package br.com.etm.checkseries.api.data.tracktv;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 import br.com.etm.checkseries.data.Contract;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by eduardo on 07/12/17.
@@ -32,7 +25,7 @@ public class ApiShow {
     private Integer tmdbId;
     private String type;
 
-    private boolean favourite;
+
 
     private String bannerUrl;
     private String posterUrl;
@@ -69,6 +62,10 @@ public class ApiShow {
     @SerializedName("aired_episodes")
     private Integer totalEpisodes;
 
+    private boolean favourite;
+    private boolean hidden;
+    private boolean notFinished;
+
     private List<ApiSeason> seasons;
 
     private ApiEpisode nextEpisode = null;
@@ -89,6 +86,8 @@ public class ApiShow {
         posterUrl = cursor.getString(Contract.Show.POSITION_POSTER_URL);
 
         favourite = cursor.getInt(Contract.Show.POSITION_FAVOURITE) == 1;
+        hidden = cursor.getInt(Contract.Show.POSITION_HIDDEN) == 1;
+        notFinished = cursor.getInt(Contract.Show.POSITION_UNFINISHED) == 1;
 
         overview = cursor.getString(Contract.Show.POSITION_OVERVIEW);
         dateFirstAired = cursor.getString(Contract.Show.POSITION_FIRST_AIRED);
@@ -168,6 +167,23 @@ public class ApiShow {
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
     }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public boolean isNotFinished() {
+        return notFinished;
+    }
+
+    public void setNotFinished(boolean notFinished) {
+        this.notFinished = notFinished;
+    }
+
 
     public String getTitle() {
         return title;
@@ -413,6 +429,8 @@ public class ApiShow {
         contentValues.put(Contract.Show.COLUMN_TOTAL_EPISODES, totalEpisodes);
 
         contentValues.put(Contract.Show.COLUMN_FAVOURITE, favourite ? 1 : 0);
+        contentValues.put(Contract.Show.COLUMN_HIDDEN, hidden ? 1 : 0);
+        contentValues.put(Contract.Show.COLUMN_UNFINISHED, notFinished ? 1 : 0);
 
         return contentValues;
     }

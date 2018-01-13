@@ -6,9 +6,11 @@ import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.data.DbInteractor;
+import br.com.etm.checkseries.data.preferences.Preferences;
 import br.com.etm.checkseries.presenters.SeriePresenter;
 import br.com.etm.checkseries.views.SerieView;
-import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by eduardo on 08/01/18.
@@ -19,10 +21,12 @@ public class SeriePresenterImpl implements SeriePresenter {
     private SerieView view;
 
     private DbInteractor dbInteractor;
+    private Preferences preferences;
 
-    public SeriePresenterImpl(SerieView view, DbInteractor dbInteractor) {
+    public SeriePresenterImpl(SerieView view, DbInteractor dbInteractor, Preferences preferences) {
         this.dbInteractor = dbInteractor;
         this.view = view;
+        this.preferences = preferences;
     }
 
     @Override
@@ -32,7 +36,12 @@ public class SeriePresenterImpl implements SeriePresenter {
 
     @Override
     public void retrieveShows() {
-        view.configureView(dbInteractor.retrieveShows(null));
+        dbInteractor.retrieveShows(Contract.Show.makeWhereFilter(preferences), Contract.Show.makeOrder(preferences))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiShows -> {
+                    view.configureView(apiShows);
+                });
     }
 
     @Override
@@ -61,6 +70,22 @@ public class SeriePresenterImpl implements SeriePresenter {
 
     @Override
     public void filter(String newText) {
-        view.updateRecyclerView(dbInteractor.retrieveShows(Contract.Show.COLUMN_NAME + "LIKE %" + newText + "%"));
+        dbInteractor.retrieveShows(Contract.Show.COLUMN_NAME + " LIKE '%" + newText + "%'", Contract.Show.makeOrder(preferences))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiShows -> {
+                    view.updateRecyclerView(apiShows);
+                });
     }
+
+    @Override
+    public void filter() {
+        dbInteractor.retrieveShows(Contract.Show.makeWhereFilter(preferences), Contract.Show.makeOrder(preferences))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(apiShows -> {
+                    view.updateRecyclerView(apiShows);
+                });
+    }
+
 }

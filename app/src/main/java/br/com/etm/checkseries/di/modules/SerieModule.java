@@ -1,6 +1,7 @@
 package br.com.etm.checkseries.di.modules;
 
 import br.com.etm.checkseries.data.DbInteractor;
+import br.com.etm.checkseries.data.preferences.Preferences;
 import br.com.etm.checkseries.presenters.SeriePresenter;
 import br.com.etm.checkseries.presenters.impl.SeriePresenterImpl;
 import br.com.etm.checkseries.views.SerieView;
@@ -26,7 +27,7 @@ public class SerieModule {
     }
 
     @Provides
-    public SeriePresenter providesPresenter(DbInteractor dbInteractor){
-        return new SeriePresenterImpl(view, dbInteractor);
+    public SeriePresenter providesPresenter(DbInteractor dbInteractor, Preferences preferences){
+        return new SeriePresenterImpl(view, dbInteractor, preferences);
     }
 }

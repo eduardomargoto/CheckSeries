@@ -1,6 +1,8 @@
 package br.com.etm.checkseries.di.modules;
 
 
+import android.content.Context;
+
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.FanArtInteractorImpl;
@@ -9,6 +11,8 @@ import br.com.etm.checkseries.api.TraktTvInteractorImpl;
 import br.com.etm.checkseries.api.mappers.SearchObjectMapper;
 import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.data.DbInteractorImpl;
+import br.com.etm.checkseries.data.preferences.Preferences;
+import br.com.etm.checkseries.data.preferences.SharedPreferencesImpl;
 import dagger.Module;
 import dagger.Provides;
 
@@ -42,4 +46,10 @@ public class AppModule {
     DbInteractor providesDbInteractor(){
         return new DbInteractorImpl();
     }
+
+    @Provides
+    Preferences providesPreferences(){
+        return new SharedPreferencesImpl();
+    }
+
 }

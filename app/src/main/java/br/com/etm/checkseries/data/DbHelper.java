@@ -56,6 +56,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 + Contract.Show.COLUMN_COMMENT_COUNT + " INTEGER , "
                 + Contract.Show.COLUMN_GENRES + " TEXT , "
                 + Contract.Show.COLUMN_FAVOURITE + " BOOLEAN , "
+                + Contract.Show.COLUMN_HIDDEN + " BOOLEAN , "
+                + Contract.Show.COLUMN_UNFINISHED + " BOOLEAN , "
                 + Contract.Show.COLUMN_TOTAL_EPISODES + " INTEGER "
                 + ")";
     }

@@ -16,4 +16,7 @@ public interface SeriePresenter {
     void nextEpisode(ApiShow apiShow, int position);
 
     void filter(String newText);
+
+    void filter();
+
 }

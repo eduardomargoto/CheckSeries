@@ -3,19 +3,18 @@ package br.com.etm.checkseries.fragments;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +32,8 @@ import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
-import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
+import br.com.etm.checkseries.data.Contract;
+import br.com.etm.checkseries.data.preferences.Preferences;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.NewSerieActivity;
 import br.com.etm.checkseries.di.components.DaggerSerieComponent;
@@ -68,9 +68,12 @@ public class SerieFragment extends Fragment implements SerieView {
     private Unbinder unbinder;
     private ArrayList<Serie> seriesList = null;
     private SerieAdapter serieAdapter;
+    private Toolbar toolbar;
 
     @Inject
     SeriePresenter presenter;
+    @Inject
+    Preferences preferences;
 
     public static SerieFragment newInstance() {
         return new SerieFragment();
@@ -90,7 +93,8 @@ public class SerieFragment extends Fragment implements SerieView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_serie, container, false);
         unbinder = ButterKnife.bind(this, view);
-
+        toolbar = getActivity().findViewById(R.id.tb_main);
+        setHasOptionsMenu(true);
         presenter.onCreate();
         return view;
     }
@@ -141,24 +145,86 @@ public class SerieFragment extends Fragment implements SerieView {
         inflater.inflate(R.menu.menu_tbtop, menu);
         MenuItem searchItem = menu.findItem(R.id.it_search);
         SearchManager manager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setSearchableInfo(manager.getSearchableInfo(getActivity().getComponentName()));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String newText) {
-                Log.i(TAG, "onQueryTextSubmit(" + newText + ")");
                 presenter.filter(newText);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(final String newText) {
-                Log.i(TAG, "onQueryTextChange(" + newText + ")");
                 presenter.filter(newText);
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.it_options:
+                inflaterPopupMenu(toolbar, R.menu.menu_options, Gravity.END);
+                break;
+            case R.id.it_filter:
+                PopupMenu popupMenu = inflaterPopupMenu(toolbar, R.menu.menu_filter, Gravity.END);
+                popupMenu.getMenu().getItem(0).setChecked(preferences.isFilterUnfinished());
+                popupMenu.getMenu().getItem(1).setChecked(preferences.isFilterFavourite());
+                popupMenu.getMenu().getItem(2).setChecked(preferences.isFilterHidden());
+                break;
+        }
+        return true;
+    }
+
+    private PopupMenu inflaterPopupMenu(View anchor, int idMenu, int gravity) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), anchor);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(idMenu, popupMenu.getMenu());
+        popupMenu.setGravity(gravity);
+        popupMenu.show();
+
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+            /* MENU */
+                case R.id.it_options_update:
+                    // presenter.updateShows();
+                    break;
+                case R.id.it_options_order:
+                    inflaterPopupMenu(toolbar, R.menu.menu_order, Gravity.END);
+                    break;
+
+            /*ORDER BY*/
+                case R.id.it_order_name:
+                case R.id.it_order_nextepisode:
+                    presenter.filter();
+                    break;
+
+            /*FILTROS*/
+                case R.id.it_filter_notfinalized:
+                    preferences.setFilterUnfinished(!preferences.isFilterUnfinished());
+                    presenter.filter();
+                    break;
+                case R.id.it_filter_stars:
+                    preferences.setFilterFavourite(!preferences.isFilterFavourite());
+                    presenter.filter();
+                    break;
+                case R.id.it_filter_hiddens:
+                    preferences.setFilterHidden(!preferences.isFilterHidden());
+                    presenter.filter();
+                    break;
+                case R.id.it_filter_removeall:
+                    preferences.clearFilter();
+                    presenter.filter();
+                    break;
+
+            }
+            return false;
+        });
+        return popupMenu;
     }
 
 

@@ -116,7 +116,7 @@
     <string name="app_options_update">Atualizar</string>
     <string name="app_options_order">Ordenar</string>
 
-    <string name="app_options_filter_notfinalized">Não Finalizados</string>
+    <string name="app_options_filter_notfinalized">Inacabados</string>
     <!--<string name="app_options_filter_comingsoon">Em breve</string>-->
     <string name="app_options_filter_hiddens">Ocultados</string>
     <string name="app_options_filter_removeall">Remover filtros</string>
@@ -159,8 +159,6 @@
     <!--PARSE CLOUD-->
     <!--<string name="parse_app_id">MY_APP_PARSE_ID</string>-->
     <!--<string name="parse_client_key">MY_APP_PARSE_CLIENT_KEY</string>-->
-
-
 
 </resources>
 

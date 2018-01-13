@@ -45,6 +45,11 @@ public class ApiEpisodeObject {
         return title;
     }
 
+
+    public String getTitleFormatted() {
+        return season + "x" + number + " - " +title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

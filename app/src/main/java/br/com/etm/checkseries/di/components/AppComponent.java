@@ -1,5 +1,7 @@
 package br.com.etm.checkseries.di.components;
 
+import br.com.etm.checkseries.data.preferences.Preferences;
+
 import javax.inject.Singleton;
 
 import br.com.etm.checkseries.App;
@@ -25,4 +27,6 @@ public interface AppComponent {
     FanArtInteractor fanArtInteractor();
 
     DbInteractor dbInteractor();
+
+    Preferences preferences();
 }
