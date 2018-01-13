@@ -23,7 +23,7 @@ public class DbInteractorImpl implements DbInteractor {
 
     @Override
     public int updateShow(ApiShow apiShow) {
-        return  App.getContext().getContentResolver()
+        return App.getContext().getContentResolver()
                 .update(Contract.Show.URI
                         , apiShow.getContentValues()
                         , Contract.Show._ID + " = ?"
@@ -145,6 +145,37 @@ public class DbInteractorImpl implements DbInteractor {
     public void insertEpisode(ApiEpisode apiEpisode) {
         App.getContext().getContentResolver()
                 .insert(Contract.Episode.URI, apiEpisode.getContentValues());
+    }
+
+    @Override
+    public int deleteShow(ApiShow apiShow) {
+        for (ApiSeason season : apiShow.getSeasons()) {
+            deleteSeason(season);
+        }
+        return App.getContext().getContentResolver()
+                .delete(Contract.Show.URI
+                        , Contract.Show._ID + " = ?"
+                        , new String[]{String.valueOf(apiShow.getTraktId())});
+    }
+
+    @Override
+    public int deleteSeason(ApiSeason apiSeason) {
+        for (ApiEpisode episode : apiSeason.getEpisodes()) {
+            deleteEpisode(episode);
+        }
+
+        return App.getContext().getContentResolver()
+                .delete(Contract.Season.URI
+                        , Contract.Season._ID + " = ?"
+                        , new String[]{String.valueOf(apiSeason.getIdentifiers().getTrakt())});
+    }
+
+    @Override
+    public int deleteEpisode(ApiEpisode apiEpisode) {
+        return App.getContext().getContentResolver()
+                .delete(Contract.Episode.URI
+                        , Contract.Episode._ID + " = ?"
+                        , new String[]{String.valueOf(apiEpisode.getIdentifiers().getTrakt())});
     }
 
 }

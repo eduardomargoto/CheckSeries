@@ -1,5 +1,6 @@
 package br.com.etm.checkseries.di.modules;
 
+import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.data.preferences.Preferences;
 import br.com.etm.checkseries.presenters.SeriePresenter;
@@ -22,12 +23,12 @@ public class SerieModule {
     }
 
     @Provides
-    public SerieView providesView(){
+    public SerieView providesView() {
         return this.view;
     }
 
     @Provides
-    public SeriePresenter providesPresenter(DbInteractor dbInteractor, Preferences preferences){
-        return new SeriePresenterImpl(view, dbInteractor, preferences);
+    public SeriePresenter providesPresenter(TraktTvInteractor traktTvInteractor, DbInteractor dbInteractor, Preferences preferences) {
+        return new SeriePresenterImpl(view, traktTvInteractor, dbInteractor, preferences);
     }
 }

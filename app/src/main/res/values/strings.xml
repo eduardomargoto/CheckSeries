@@ -124,7 +124,7 @@
     <string name="app_action_revfavorite_serie">removido dos favoritos</string>
     <string name="app_action_addfavorite_serie"> adicionado aos favoritos</string>
 
-    <string name="app_it_serie_watched">Episódio Assistido</string>
+    <string name="app_it_serie_watched">Check</string>
     <string name="app_it_serie_update">Atualizar</string>
     <string name="app_it_serie_hidden">Ocultar</string>
     <string name="app_it_change_name">Título Exibido</string>

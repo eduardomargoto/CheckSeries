@@ -305,5 +305,8 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_SHOW_ID
         };
 
+        public static Uri makeUriWithId(Integer tracktId) {
+            return URI.buildUpon().appendPath(String.valueOf(tracktId)).build();
+        }
     }
 }

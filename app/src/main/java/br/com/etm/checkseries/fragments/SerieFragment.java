@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,13 +34,14 @@ import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
-import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.data.preferences.Preferences;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.NewSerieActivity;
 import br.com.etm.checkseries.di.components.DaggerSerieComponent;
 import br.com.etm.checkseries.di.modules.SerieModule;
 import br.com.etm.checkseries.presenters.SeriePresenter;
+import br.com.etm.checkseries.utils.HelpFragment;
+import br.com.etm.checkseries.utils.Utils;
 import br.com.etm.checkseries.views.SerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,10 +136,19 @@ public class SerieFragment extends Fragment implements SerieView {
         recyclerView.setAdapter(serieAdapter);
     }
 
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         registerForContextMenu(recyclerView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        ApiShow apiShow = (ApiShow) serieAdapter.getMyViewHolder().itemView.getTag();
+        Utils.createContextMenu(getActivity(), apiShow, menu);
     }
 
     @Override
@@ -185,12 +197,11 @@ public class SerieFragment extends Fragment implements SerieView {
         inflater.inflate(idMenu, popupMenu.getMenu());
         popupMenu.setGravity(gravity);
         popupMenu.show();
-
-
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
             /* MENU */
                 case R.id.it_options_update:
+                    //TODO: updated all shows added and visibles (unhidden).
                     // presenter.updateShows();
                     break;
                 case R.id.it_options_order:
@@ -229,11 +240,32 @@ public class SerieFragment extends Fragment implements SerieView {
 
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-//        int position = SerieAdapter.POSITION_SERIE_ACTIVE;
-//        Serie s = this.seriesList.get(position);
-//        HelpFragment.createContextMenu(getActivity(), s, menu);
+    public boolean onContextItemSelected(MenuItem item) {
+        ApiShow apiShow = (ApiShow) serieAdapter.getMyViewHolder().itemView.getTag();
+        switch (item.getItemId()) {
+            case R.id.it_serie_update:
+                //TODO: sync with service trakt case logged.
+                presenter.syncShowWithService(apiShow);
+                break;
+            case R.id.it_serie_remove:
+                //TODO: remove in database and sync with service trakt case logged
+                serieAdapter.removeItem(apiShow);
+                presenter.removeShow(apiShow);
+                break;
+            case R.id.it_serie_hidden:
+                //TODO: hidden apiShow for not appear in main list
+                apiShow.setHidden(!apiShow.isHidden());
+                presenter.updateShow(apiShow);
+                serieAdapter.removeItem(apiShow);
+                break;
+            case R.id.it_change_name:
+                // TODO: change title name, verify possibility with service
+                break;
+            case R.id.it_manage_list:
+                // TODO: (2) managed list, (1) make map in database
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -247,7 +279,6 @@ public class SerieFragment extends Fragment implements SerieView {
         if (seriesList != null && !seriesList.isEmpty()) {
             tvMessage.setVisibility(View.VISIBLE);
         }
-
         configureRecyclerView(apiShows);
     }
 

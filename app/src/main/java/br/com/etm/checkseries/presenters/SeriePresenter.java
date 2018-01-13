@@ -19,4 +19,7 @@ public interface SeriePresenter {
 
     void filter();
 
+    void syncShowWithService(ApiShow apiShow);
+
+    void removeShow(ApiShow apiShow);
 }

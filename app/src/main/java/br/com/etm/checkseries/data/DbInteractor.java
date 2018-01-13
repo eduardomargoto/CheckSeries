@@ -31,4 +31,10 @@ public interface DbInteractor {
     void insertSeason(ApiSeason apiSeason);
 
     void insertEpisode(ApiEpisode apiEpisode);
+
+    int deleteShow(ApiShow apiShow);
+
+    int deleteSeason(ApiSeason apiSeason);
+
+    int deleteEpisode (ApiEpisode apiEpisode);
 }

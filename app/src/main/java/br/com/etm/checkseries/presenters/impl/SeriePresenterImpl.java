@@ -2,6 +2,9 @@ package br.com.etm.checkseries.presenters.impl;
 
 import android.util.Log;
 
+import com.appodeal.ads.ap;
+
+import br.com.etm.checkseries.api.TraktTvInteractor;
 import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
@@ -22,11 +25,13 @@ public class SeriePresenterImpl implements SeriePresenter {
 
     private DbInteractor dbInteractor;
     private Preferences preferences;
+    private TraktTvInteractor traktTvInteractor;
 
-    public SeriePresenterImpl(SerieView view, DbInteractor dbInteractor, Preferences preferences) {
+    public SeriePresenterImpl(SerieView view, TraktTvInteractor traktTvInteractor, DbInteractor dbInteractor, Preferences preferences) {
         this.dbInteractor = dbInteractor;
         this.view = view;
         this.preferences = preferences;
+        this.traktTvInteractor = traktTvInteractor;
     }
 
     @Override
@@ -86,6 +91,24 @@ public class SeriePresenterImpl implements SeriePresenter {
                 .subscribe(apiShows -> {
                     view.updateRecyclerView(apiShows);
                 });
+    }
+
+    @Override
+    public void syncShowWithService(ApiShow apiShow) {
+        traktTvInteractor.getShow(String.valueOf(apiShow.getTraktId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(newApiShow -> {
+                    dbInteractor.updateShow(newApiShow);
+                },throwable -> {
+                    Log.e("Presenter", "syncShowWithService", throwable);
+                });
+    }
+
+    @Override
+    public void removeShow(ApiShow apiShow) {
+        int rowsDeleted = dbInteractor.deleteShow(apiShow);
+        Log.i("Presenter", "RowsDeleted:" + rowsDeleted);
     }
 
 }

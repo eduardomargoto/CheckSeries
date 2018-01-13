@@ -2,6 +2,7 @@ package br.com.etm.checkseries.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private OnShowListener onShowListener;
     private List<ApiShow> apiShows;
+    private MyViewHolder myViewHolder;
 
     public SerieAdapter(List<ApiShow> apiShows) {
         if (apiShows != null) {
@@ -90,10 +92,19 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void removeItem(ApiShow apiShow) {
+        this.apiShows.remove(apiShow);
+        notifyDataSetChanged();
+    }
+
     public interface OnShowListener {
         void onFavouriteShow(ApiShow apiShow);
 
         void onNextEpisode(ApiShow apiShow, int position);
+    }
+
+    public MyViewHolder getMyViewHolder() {
+        return myViewHolder;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -125,14 +136,17 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.pb_episodes)
         ProgressBar pbEpisodes;
 
+        @BindView(R.id.iv_options)
+        ImageView ivOptions;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-
         }
 
         private void bind(ApiShow apiShow) {
+            itemView.setTag(apiShow);
+
             tvTitle.setText(apiShow.getTitle());
             tvNetwork.setText(apiShow.getNetwork());
 
@@ -153,6 +167,11 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(apiShow.getBackgroundUrl())
                     .error(R.drawable.ic_panorama_white)
                     .into(ivSerie);
+
+            ivOptions.setOnClickListener(view -> {
+                myViewHolder = this;
+                itemView.showContextMenu();
+            });
 
             ivFavourite.setOnClickListener(view -> {
                 apiShow.setFavourite(!apiShow.isFavourite());
@@ -182,6 +201,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 ivFavourite.setImageResource(R.drawable.ic_favourite_unchecked_white);
             }
         }
+
     }
 
     public class MyViewHolderNativeAds extends RecyclerView.ViewHolder {

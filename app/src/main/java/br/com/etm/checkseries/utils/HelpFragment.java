@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.fragments;
+package br.com.etm.checkseries.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
+import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.daos.DAO_ListSerie;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
@@ -29,13 +30,13 @@ import br.com.etm.checkseries.utils.UtilsImages;
  */
 public class HelpFragment {
 
-    public static void createContextMenu(Activity activity, Serie serie, ContextMenu menu) {
+    public static void createContextMenu(Activity activity, ApiShow apiShow, ContextMenu menu) {
         MenuInflater inflater = activity.getMenuInflater();
         inflater.inflate(R.menu.menu_options_serie, menu);
-        if (serie.isHidden())
+        if (apiShow.isHidden())
             menu.getItem(4).setTitle(R.string.app_it_serie_show);
 
-        menu.setHeaderTitle(serie.getName());
+        menu.setHeaderTitle(apiShow.getTitle());
     }
 
     public static void updateEpisodeMainActivity(final Episode episode, final int positionAdapter) {

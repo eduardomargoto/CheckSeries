@@ -435,5 +435,18 @@ public class ApiShow {
         return contentValues;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ApiShow apiShow = (ApiShow) o;
+
+        if (traktId != null ? !traktId.equals(apiShow.traktId) : apiShow.traktId != null)
+            return false;
+
+        return true;
+    }
+
 }
 

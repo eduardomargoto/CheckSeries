@@ -33,6 +33,7 @@ import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
 import br.com.etm.checkseries.deprecated.domains.ListOfUser;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.SeriesListActivity;
+import br.com.etm.checkseries.utils.HelpFragment;
 
 //import android.support.design.widget.FloatingActionButton;
 
