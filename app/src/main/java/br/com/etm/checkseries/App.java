@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by eduardo on 07/12/17.
- *
  */
 
 public class App extends MultiDexApplication {
@@ -46,7 +45,7 @@ public class App extends MultiDexApplication {
         return builder.build().create(ApiFanArt.class);
     }
 
-    public static void changeApiBaseUrl(String newApiBaseUrl) {
+    private static void changeApiBaseUrl(String newApiBaseUrl) {
         builder = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
