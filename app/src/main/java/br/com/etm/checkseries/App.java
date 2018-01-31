@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by eduardo on 07/12/17.
+ * Created by eduardo on 07/12/17.asdasdasd
  */
 
 public class App extends MultiDexApplication {
