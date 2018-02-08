@@ -98,10 +98,14 @@ public class ApiFanArtObject {
     }
 
     public List<ApiFanArtImages> getTvPosterImages() {
+        if(tvPosterImages == null)
+            tvPosterImages = new ArrayList<>();
         return tvPosterImages;
     }
 
     public List<ApiFanArtImages> getTvBannerImages() {
+        if(tvBannerImages == null)
+            tvBannerImages = new ArrayList<>();
         return tvBannerImages;
     }
 

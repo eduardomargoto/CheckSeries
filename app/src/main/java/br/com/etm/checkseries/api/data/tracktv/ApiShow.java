@@ -393,8 +393,10 @@ public class ApiShow {
         if (mediaObject.getFanArtImages() != null) {
             if (!mediaObject.getFanArtImages().getShowBackgroundImages().isEmpty())
                 backgroundUrl = mediaObject.getFanArtImages().getShowBackgroundImages().get(0).getUrl();
-            bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
-            posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
+            if (!mediaObject.getFanArtImages().getTvBannerImages().isEmpty())
+                bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
+            if (!mediaObject.getFanArtImages().getTvPosterImages().isEmpty())
+                posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
         }
     }
 

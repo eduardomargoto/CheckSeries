@@ -1,16 +1,13 @@
 package br.com.etm.checkseries.fragments;
 
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -24,14 +21,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
@@ -42,7 +35,6 @@ import br.com.etm.checkseries.activity.NewSerieActivity;
 import br.com.etm.checkseries.di.components.DaggerSerieComponent;
 import br.com.etm.checkseries.di.modules.SerieModule;
 import br.com.etm.checkseries.presenters.SeriePresenter;
-import br.com.etm.checkseries.utils.HelpFragment;
 import br.com.etm.checkseries.utils.Utils;
 import br.com.etm.checkseries.utils.UtilsEntitys;
 import br.com.etm.checkseries.views.SerieView;

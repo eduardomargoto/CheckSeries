@@ -2,8 +2,11 @@ package br.com.etm.checkseries.data;
 
 import android.database.Cursor;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
@@ -103,6 +106,33 @@ public class DbInteractorImpl implements DbInteractor {
         }
         return apiEpisode;
     }
+
+    @Override
+    public List<ApiEpisode> findEpisodesRelease() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Calendar today = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.set(Calendar.DAY_OF_MONTH, tomorrow.get(Calendar.DAY_OF_MONTH) + 30);
+        ArrayList<ApiEpisode> episodes = new ArrayList<>();
+
+        Cursor cursor = App.getContext().getContentResolver()
+                .query(Contract.Episode.URI
+                        , Contract.Episode.COLUMNS  // projection
+                        , " date(" + Contract.Episode.COLUMN_FIRST_AIRED + ") BETWEEN date('" + sdf.format(today.getTime()) + "') AND "
+                                + " date('" + sdf.format(tomorrow.getTime()) + "')"
+                        // selection
+                        , new String[]{}
+                        , "date(" + Contract.Episode.COLUMN_FIRST_AIRED + ") ASC");
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                episodes.add(new ApiEpisode(cursor));
+            }
+
+            cursor.close();
+        }
+        return episodes;
+    }
+
 
     @Override
     public int updateEpisode(ApiEpisode apiEpisode) {

@@ -106,7 +106,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.iv_serie)
         ImageView ivSerie;
 
-        @BindView(R.id.iv_favorite)
+        @BindView(R.id.iv_favourite)
         ImageView ivFavourite;
 
         @BindView(R.id.tv_title)

@@ -22,6 +22,8 @@ public interface DbInteractor {
 
     ApiEpisode getNextEpisode(ApiShow apiShow);
 
+    List<ApiEpisode> findEpisodesRelease();
+
     int updateEpisode(ApiEpisode apiEpisode);
 
     boolean isShowAdded(ApiMediaObject mediaObject);

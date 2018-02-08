@@ -60,7 +60,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         Log.i("LOG", "onBindViewHolder()");
 
         if (serieList.get(position).getBm_poster() != null)

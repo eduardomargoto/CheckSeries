@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -120,7 +121,7 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             tvNameSerie.setText(mediaObject.getTitle());
             tvAnoSerie.setText(String.valueOf(mediaObject.getYear()));
 
-            if(mediaObject.isAdded()) {
+            if (mediaObject.isAdded()) {
                 ivAddSerie.setImageDrawable(ContextCompat.
                         getDrawable(itemView.getContext(), R.drawable.ic_check_circle_white_24dp));
                 ivAddSerie.setEnabled(false);
@@ -136,7 +137,8 @@ public class NewSerieAdapter extends RecyclerView.Adapter<NewSerieAdapter.MyView
             }
 
             //TODO: create an algorithm to take the best image for the moment.
-            if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null) {
+            if (mediaObject.getFanArtImages() != null && mediaObject.getFanArtImages().getTvBannerImages() != null
+                    && !mediaObject.getFanArtImages().getTvBannerImages().isEmpty()) {
                 ivSerie.setAdjustViewBounds(true);
                 Picasso.with(itemView.getContext())
                         .load(mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl())

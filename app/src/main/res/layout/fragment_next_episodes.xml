@@ -17,6 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:textColor="@color/colorPrimaryText" />
+        android:text="@string/app_nextserie_empty"
+        android:textColor="@color/colorSecondText"
+        android:visibility="gone"/>
 
 </FrameLayout>
