@@ -45,6 +45,7 @@
     <!--<string name="app_dialog_denouncebutton">DENUNCIAR</string>-->
     <!--<string name="app_dialog_comment_denounce_confirmation">Deseja denunciar o comentário?</string>-->
     <string name="app_dialog_comment_remove_confirmation">Deseja remover o comentário?</string>
+    <string name="app_dialog_serie_remove_confirmation">Deseja remover %s ?</string>
     <string name="app_confiact_timeoffset">Deslocar horário de exibição em .hour. horas</string>
 
     <string name="app_enable">Habilitado</string>

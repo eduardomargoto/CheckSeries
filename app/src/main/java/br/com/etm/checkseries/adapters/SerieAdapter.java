@@ -1,8 +1,6 @@
 package br.com.etm.checkseries.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +11,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.api.data.tracktv.ApiShow;
@@ -173,30 +167,20 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ivFavourite.setOnClickListener(view -> {
                 apiShow.setFavourite(!apiShow.isFavourite());
                 setIconFavourite(apiShow);
-                if (onShowListener != null) {
-                    onShowListener.onFavouriteShow(apiShow);
-                }
+                if (onShowListener != null) { onShowListener.onFavouriteShow(apiShow);}
             });
 
-            if (apiShow.getNextEpisode() != null) {
-                ibCheckEpisode.setVisibility(View.VISIBLE);
-            } else {
-                ibCheckEpisode.setVisibility(View.GONE);
-            }
+            if (apiShow.getNextEpisode() != null) { ibCheckEpisode.setVisibility(View.VISIBLE);
+            } else { ibCheckEpisode.setVisibility(View.GONE); }
 
             ibCheckEpisode.setOnClickListener(view -> {
-                if (onShowListener != null) {
-                    onShowListener.onNextEpisode(apiShow, getAdapterPosition());
-                }
+                if (onShowListener != null) { onShowListener.onNextEpisode(apiShow, getAdapterPosition());}
             });
         }
 
         private void setIconFavourite(ApiShow apiShow) {
-            if (apiShow.isFavourite()) {
-                ivFavourite.setImageResource(R.drawable.ic_favourite_white);
-            } else {
-                ivFavourite.setImageResource(R.drawable.ic_favourite_unchecked_white);
-            }
+            if (apiShow.isFavourite()) { ivFavourite.setImageResource(R.drawable.ic_favourite_white);
+            } else { ivFavourite.setImageResource(R.drawable.ic_favourite_unchecked_white); }
         }
 
     }

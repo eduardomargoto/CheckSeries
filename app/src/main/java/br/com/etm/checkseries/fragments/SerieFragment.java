@@ -1,7 +1,9 @@
 package br.com.etm.checkseries.fragments;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +44,7 @@ import br.com.etm.checkseries.di.modules.SerieModule;
 import br.com.etm.checkseries.presenters.SeriePresenter;
 import br.com.etm.checkseries.utils.HelpFragment;
 import br.com.etm.checkseries.utils.Utils;
+import br.com.etm.checkseries.utils.UtilsEntitys;
 import br.com.etm.checkseries.views.SerieView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -242,8 +245,14 @@ public class SerieFragment extends Fragment implements SerieView {
                 break;
             case R.id.it_serie_remove:
                 //TODO: remove in database and sync with service trakt case logged
-                serieAdapter.removeItem(apiShow);
-                presenter.removeShow(apiShow);
+                UtilsEntitys.createAlertDialog(getContext(), "",
+                        getString(R.string.app_dialog_serie_remove_confirmation, apiShow.getTitle()),
+                        "Remover", (dialogInterface, i) -> {
+                            serieAdapter.removeItem(apiShow);
+                            presenter.removeShow(apiShow);
+                        }, "Cancelar", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        }).show();
                 break;
             case R.id.it_serie_hidden:
                 //TODO: hidden apiShow for not appear in main list
