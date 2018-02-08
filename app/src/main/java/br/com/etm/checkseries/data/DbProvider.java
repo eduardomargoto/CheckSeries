@@ -22,6 +22,7 @@ public class DbProvider extends ContentProvider {
 
     private static final int EPISODE = 200;
     private static final int NEXTEPISODE = 201;
+    private static final int EPISODE_WITH_SHOW = 203;
     private static final int EPISODE_BY_ID = 202;
 
     private static final int SEASON = 300;
@@ -38,6 +39,8 @@ public class DbProvider extends ContentProvider {
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE_BY_ID, EPISODE_BY_ID);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_NEXTEPISODE, NEXTEPISODE);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_SHOW_BY_ID, SHOW_BY_ID);
+        matcher.addURI(Contract.AUTHORITY, Contract.PATH_EPISODE_WITH_SHOW, EPISODE_WITH_SHOW);
+
         return matcher;
     }
 
@@ -80,6 +83,17 @@ public class DbProvider extends ContentProvider {
             case EPISODE:
                 returnCursor = db.query(
                         Contract.Episode.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            case EPISODE_WITH_SHOW:
+                returnCursor = db.query(
+                        Contract.Episode.TABLE_NAME + ", " + Contract.Season.TABLE_NAME + ", " + Contract.Show.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,

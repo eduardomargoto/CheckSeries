@@ -47,6 +47,9 @@ public class ApiEpisode extends ApiEpisodeObject {
     private Integer seasonTraktId;
     private String backgroundUrl;
 
+    private String showName;
+    private String showNetwork;
+
     public ApiEpisode(Cursor cursor) {
 
         setIdentifiers(new ApiIdentifiers());
@@ -77,6 +80,22 @@ public class ApiEpisode extends ApiEpisodeObject {
         seasonTraktId = cursor.getInt(cursor.getColumnIndex(Contract.Episode.COLUMN_SEASON_ID));
 
         watched = cursor.getInt(cursor.getColumnIndex(Contract.Episode.COLUMN_WATCHED)) == 1;
+    }
+
+    public String getShowNetwork() {
+        return showNetwork;
+    }
+
+    public void setShowNetwork(String showNetwork) {
+        this.showNetwork = showNetwork;
+    }
+
+    public String getShowName() {
+        return showName;
+    }
+
+    public void setShowName(String show_name) {
+        this.showName = show_name;
     }
 
     public boolean isWatched() {

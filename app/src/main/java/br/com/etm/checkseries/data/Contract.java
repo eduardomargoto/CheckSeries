@@ -9,10 +9,6 @@ import com.google.common.collect.ObjectArrays;
 import br.com.etm.checkseries.BuildConfig;
 import br.com.etm.checkseries.data.preferences.Preferences;
 
-/**
- * Created by eduardo on 07/01/18.
- */
-
 public class Contract {
 
     static final String AUTHORITY = BuildConfig.APPLICATION_ID;
@@ -20,6 +16,7 @@ public class Contract {
     static final String PATH_SHOW_BY_ID = "show/*";
 
     static final String PATH_EPISODE = "episode";
+    static final String PATH_EPISODE_WITH_SHOW = "episode_show";
     static final String PATH_EPISODE_BY_ID = "episode/*";
 
     static final String PATH_NEXTEPISODE = "nextepisode";
@@ -173,6 +170,7 @@ public class Contract {
     public static final class Episode implements BaseColumns {
 
         public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_EPISODE).build();
+        public static final Uri URI_WITH_SHOW = BASE_URI.buildUpon().appendPath(PATH_EPISODE_WITH_SHOW).build();
         public static final Uri NEXTEPISODE_URI = BASE_URI.buildUpon().appendPath(PATH_NEXTEPISODE).build();
 
         public static final String CONTENT_TYPE =
@@ -241,6 +239,8 @@ public class Contract {
                 , TABLE_NAME + "." + COLUMN_WATCHED
                 , TABLE_NAME + "." + COLUMN_SEASON_ID
         };
+
+
 
         public static String[] COLUMNS_NEXTEPISODE = ObjectArrays.concat(COLUMNS, Season.COLUMNS, String.class);
 

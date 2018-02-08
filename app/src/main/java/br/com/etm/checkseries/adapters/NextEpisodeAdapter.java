@@ -18,12 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,16 +40,11 @@ import br.com.etm.checkseries.utils.UtilsImages;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by EDUARDO_MARGOTO on 28/10/2015.
- */
-
 public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
     private AdapterView.OnItemClickListener onItemClickListener;
-    private AdapterView.OnItemClickListener onCheckItemClickListener;
     private int totalHeaders = 1;
     private List<ApiEpisode> episodeList;
     private LayoutInflater layoutInflater;
@@ -84,125 +83,58 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             view = layoutInflater.inflate(R.layout.header_item_nextepisodes, parent, false);
             return new MyViewHolderHeader(view);
         } else {
-            if (EnvironmentConfig.getInstance().isLayoutCompat())
-                view = layoutInflater.inflate(R.layout.item_serie_compat, parent, false);
-            else
-                view = layoutInflater.inflate(R.layout.item_serie_v2, parent, false);
+            view = layoutInflater.inflate(R.layout.item_next_episode, parent, false);
             return new MyViewHolder(view, this);
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.i("LOG", "NextEpisodeAdapter - onBindViewHolder(" + position + ")");
-
-        if (holder instanceof MyViewHolderHeader && !episodeList.isEmpty()) {
-            if (position == 0)
-                episode = episodeList.get(position);
-            else episode = episodeList.get((position + 1) - headers_itens.get(position + 1));
-            MyViewHolderHeader holderHeader = (MyViewHolderHeader) holder;
-            holderHeader.bind(episode);
-
+        if (holder instanceof MyViewHolderHeader) {
+            if (!episodeList.isEmpty()) {
+                if (position == 0)
+                    episode = episodeList.get(position);
+                else episode = episodeList.get((position + 1) - headers_itens.get(position + 1));
+                MyViewHolderHeader holderHeader = (MyViewHolderHeader) holder;
+                holderHeader.bind(episode);
+            }
         } else if (holder instanceof MyViewHolder && !episodeList.isEmpty()) {
 
             int header = headers_itens.get(position);
-            int newposition = position - header;
+            int newPosition = position - header;
 
-            MyViewHolder mvholder = (MyViewHolder) holder;
-            episode = episodeList.get(newposition);
-//            Serie serie = null;
-//            try {
-//                serie = new DAO_Serie(context).find(String.valueOf(episode.getSerieId()));
-//            } catch (Exception e) {
-//                Toast.makeText(context, "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                e.printStackTrace();
-//            }
-
-            // mvholder.tvName.setText(serie.getName());
-
+            MyViewHolder myholder = (MyViewHolder) holder;
+            episode = episodeList.get(newPosition);
+            myholder.tvName.setText(episode.getShowName());
             if (episode != null) {
+                myholder.tvNextEpisode.setText(episode.getTitleFormatted());
+                myholder.tvNextEpisodeTime.setText(episode.getDateFirstAiredFormatted(context));
 
-                mvholder.tvNextEpisode.setText(episode.getTitleFormatted());
-                mvholder.tvNextEpisodeTime.setText(episode.getDateFirstAiredFormatted(context));
-            }
-        /* -- EXIBIÇÃO NETWORK E HORA QUE VAI AO AR -- */
-//            if (!EnvironmentConfig.getInstance().isLayoutCompat()) {
-//                String text = serie.getNetwork();
-//                if (!serie.getAirs_DayOfWeekFormatted().equals(""))
-//                    text = text + " / " + serie.getAirs_DayOfWeekFormatted();
-//                if (!serie.getAirs_Time().equals(""))
-//                    text = text + " " + serie.getAirs_Time();
-//                mvholder.tvNetwork.setText(text);
-//            }
-
-
-            if (!EnvironmentConfig.getInstance().isLayoutCompat()) {
-                mvholder.rlView.setMinimumHeight(UtilsImages.getHeightDensity(context));
-                //          File file = UtilsImages.getFilesDirectory(context, serie.getFanArtFilename());
-                // if (file == null) {
-                //      Bitmap bitmap = null;
-//                    try {
-//                        bitmap = Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-//                                .stableKey(serie.getFanArtFilenameCache())
-//                                .get();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-
-                //    UtilsImages.saveToInternalSorage(bitmap, serie.getFanArtFilename(), context);
-                //    bitmap.recycle();
-                //   }
-//                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getFanArt())
-//                        .stableKey(serie.getFanArtFilenameCache())
-//                        .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
-//                        .placeholder(R.drawable.loading_animation_black)
-//                        .error(R.drawable.image_area_48dp)
-//                        .into(mvholder.ivSerie);
-
-                UtilsImages.darkenImagen(mvholder.ivSerie); // escurecer as imagens para evitar problemas ao visualizar os icones
-            } else {
-                int width = 0, height = 0;
-                if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    width = UtilsImages.getWidthAllDensity(context) / 2;
-                    height = (UtilsImages.getHeightDensity(context) - 140) / 2;
-                } else {
-                    width = UtilsImages.getWidthAllDensity(context);
-                    height = (UtilsImages.getHeightDensity(context) - 140);
+                SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("E hh:mm", Locale.getDefault());
+                String dateFormatted = "";
+                try {
+                    Date date = parseDate.parse(episode.getDateFirstAired().replace("Z", "").replace("T", " "));
+                    dateFormatted = dateFormat.format(date);
+                } catch (ParseException e) {
                 }
-                mvholder.rlView.setMinimumHeight(height);
-//
-//                Picasso.with(context).load(APITheTVDB.PATH_BANNERS + serie.getPoster())
-//                        .stableKey(serie.getFanArtFilenameCache())
-//                        .resize(width, height)
-//                        .centerInside()
-//                        .placeholder(R.drawable.loading_animation_black)
-//                        .error(R.drawable.image_area_48dp)
-//                        .into(mvholder.ivSerie);
+                myholder.tvNetwork.setText(myholder.itemView.getContext().getString(R.string.formatted_comingsoon_episode,
+                        episode.getShowNetwork(),
+                        dateFormatted
+                ));
+                if (episode.getBackgroundUrl() != null) {
+                    Picasso.with(context).load(episode.getBackgroundUrl())
+                            .placeholder(R.drawable.loading_animation_white)
+                            .error(R.drawable.ic_panorama_white)
+                            .into(myholder.ivSerie);
+                    UtilsImages.darkenImagen(myholder.ivSerie);
+                }
             }
-
-//            Picasso.with(context).load(UtilsImages.getFilesDirectory(context, serie.getFanArtFilename()))
-//                    .stableKey(serie.getFanArtFilenameCache())
-//                    .resize(UtilsImages.getWidthAllDensity(context), UtilsImages.getHeightDensity(context))
-//                    .centerCrop()
-//                    .placeholder(R.drawable.loading_animation_white)
-//                    .into(mvholder.ivSerie);
-//            UtilsImages.darkenImagen(mvholder.ivSerie); // escurecer as imagens para evitar problemas ao visualizar os icones
         }
     }
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-    }
-
-    public void setOnCheckItemClickListener(AdapterView.OnItemClickListener onCheckItemClickListener) {
-        this.onCheckItemClickListener = onCheckItemClickListener;
-    }
-
-    private void onCheckItemHolderClick(MyViewHolder itemHolder) {
-        if (onCheckItemClickListener != null) {
-            onCheckItemClickListener.onItemClick(null, itemHolder.itemView,
-                    itemHolder.getAdapterPosition(), itemHolder.getItemId());
-        }
     }
 
     private void onItemHolderClick(MyViewHolder itemHolder) {
@@ -212,16 +144,14 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-
     @Override
     public int getItemCount() {
-        if (episodeList == null)
-            episodeList = new ArrayList<>();
+        if (episodeList == null) episodeList = new ArrayList<>();
         return episodeList.size() + totalHeaders;
     }
 
     public int getNumHeader(int position) {
-        int header = -1;
+        int header;
         try {
             header = headers_itens.get(position);
             if (header == 0)
@@ -234,7 +164,6 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public boolean isHeader(int position) {
-
         int header = getNumHeader(position);
         if (position == 0)
             return true;
@@ -294,8 +223,6 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ic_check_episode)
-        ImageButton icCheckEpisode;
         @BindView(R.id.tv_title)
         TextView tvName;
         @BindView(R.id.tv_nextepisode_serie)
@@ -304,21 +231,14 @@ public class NextEpisodeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView tvNetwork;
         @BindView(R.id.tv_nextepisodetime_serie)
         TextView tvNextEpisodeTime;
-
         @BindView(R.id.iv_serie)
         ImageView ivSerie;
-        @BindView(R.id.rl_view)
-        RelativeLayout rlView;
-
 
         public MyViewHolder(View itemView, NextEpisodeAdapter adapter) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(view -> {
                 adapter.onItemHolderClick(this);
-            });
-            icCheckEpisode.setOnClickListener(view -> {
-                adapter.onCheckItemHolderClick(this);
             });
         }
 

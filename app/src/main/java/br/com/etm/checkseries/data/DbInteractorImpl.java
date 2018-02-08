@@ -2,6 +2,8 @@ package br.com.etm.checkseries.data;
 
 import android.database.Cursor;
 
+import com.google.common.collect.ObjectArrays;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,7 +66,7 @@ public class DbInteractorImpl implements DbInteractor {
                                         Contract.Episode.COLUMNS
                                         , Contract.Episode.COLUMN_SEASON_ID + " = ?"
                                         , new String[]{String.valueOf(apiSeason.getIdentifiers().getTrakt())}
-                                        , Contract.Episode.COLUMN_NUMBER);
+                                        , Contract.Episode.COLUMN_NUMBER + " ASC");
 
                         if (cursorEpisode != null) {
                             while (cursorEpisode.moveToNext()) {
@@ -73,7 +75,6 @@ public class DbInteractorImpl implements DbInteractor {
                             }
                             cursorEpisode.close();
                         }
-
 
                         apiShow.getSeasons().add(apiSeason);
                     }
@@ -93,7 +94,8 @@ public class DbInteractorImpl implements DbInteractor {
     public ApiEpisode getNextEpisode(ApiShow apiShow) {
         ApiEpisode apiEpisode = null;
         Cursor cursor = App.getContext().getContentResolver()
-                .query(Contract.Episode.NEXTEPISODE_URI
+                .query(Contract.Episode.
+                                NEXTEPISODE_URI
                         , Contract.Episode.COLUMNS  // projection
                         , Contract.Season.COLUMN_SHOW_ID + " = ? AND " + Contract.Episode.COLUMN_WATCHED + " = 0 AND "
                                 + Contract.Season.TABLE_NAME + "." + Contract.Season._ID + " = " + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_SEASON_ID // selection
@@ -116,16 +118,21 @@ public class DbInteractorImpl implements DbInteractor {
         ArrayList<ApiEpisode> episodes = new ArrayList<>();
 
         Cursor cursor = App.getContext().getContentResolver()
-                .query(Contract.Episode.URI
-                        , Contract.Episode.COLUMNS  // projection
-                        , " date(" + Contract.Episode.COLUMN_FIRST_AIRED + ") BETWEEN date('" + sdf.format(today.getTime()) + "') AND "
+                .query(Contract.Episode.URI_WITH_SHOW
+                        , ObjectArrays.concat(Contract.Episode.COLUMNS,
+                                new String[]{Contract.Show.TABLE_NAME + "." + Contract.Show.COLUMN_NAME, Contract.Show.TABLE_NAME + "." + Contract.Show.COLUMN_NETWORK}, String.class) // projection
+                        , Contract.Episode.COLUMN_SEASON_ID + " = " + Contract.Season.TABLE_NAME + "." + Contract.Season._ID + " AND "
+                                + Contract.Season.TABLE_NAME + "." + Contract.Season.COLUMN_SHOW_ID + " = " + Contract.Show.TABLE_NAME + "." + Contract.Show._ID + " AND "
+                                + " date(" + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_FIRST_AIRED + ") BETWEEN date('" + sdf.format(today.getTime()) + "') AND "
                                 + " date('" + sdf.format(tomorrow.getTime()) + "')"
-                        // selection
                         , new String[]{}
-                        , "date(" + Contract.Episode.COLUMN_FIRST_AIRED + ") ASC");
+                        , "date(" + Contract.Episode.TABLE_NAME + "." + Contract.Episode.COLUMN_FIRST_AIRED + ") ASC");
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                episodes.add(new ApiEpisode(cursor));
+                ApiEpisode apiEpisode = new ApiEpisode(cursor);
+                apiEpisode.setShowName(cursor.getString(cursor.getColumnIndex(Contract.Show.TABLE_NAME + "." + Contract.Show.COLUMN_NAME)));
+                apiEpisode.setShowNetwork(cursor.getString(cursor.getColumnIndex(Contract.Show.TABLE_NAME + "." + Contract.Show.COLUMN_NETWORK)));
+                episodes.add(apiEpisode);
             }
 
             cursor.close();

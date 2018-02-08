@@ -5,11 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,11 +19,8 @@ import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NextEpisodeAdapter;
 import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
 import br.com.etm.checkseries.di.components.DaggerNextEpisodeComponent;
-import br.com.etm.checkseries.di.components.DaggerSerieComponent;
 import br.com.etm.checkseries.di.modules.NextEpisodeModule;
-import br.com.etm.checkseries.di.modules.SerieModule;
 import br.com.etm.checkseries.presenters.NextEpisodePresenter;
-import br.com.etm.checkseries.presenters.impl.NextEpisodePresenterImpl;
 import br.com.etm.checkseries.views.NextEpisodeView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,14 +74,6 @@ public class NextEpisodeFragment extends Fragment implements NextEpisodeView {
 //                Intent it = new Intent(context, SerieActivity.class);
 //                it.putExtra("serie", serieList.get(getAdapterPosition()));
 //                context.startActivity(it);
-        });
-
-        serieAdapter.setOnCheckItemClickListener((adapterView, view, i, l) -> {
-//                Serie serie = serieList.get(getAdapterPosition());
-//                Episode episode = serie.getNextEpisode();
-//                episode.setWatched(true);
-//                new DAO_Episode(v.getContext()).edit(episode);
-//                notifyItemChanged(getAdapterPosition());
         });
         recyclerView.setAdapter(serieAdapter);
     }
