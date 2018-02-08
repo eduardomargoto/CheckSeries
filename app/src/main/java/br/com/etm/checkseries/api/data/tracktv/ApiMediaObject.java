@@ -1,12 +1,7 @@
 package br.com.etm.checkseries.api.data.tracktv;
 
-import android.content.ContentValues;
-
 import com.google.gson.annotations.SerializedName;
-
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
-import br.com.etm.checkseries.data.Contract;
-
 
 /**
  * Created by eduardo on 07/12/17.

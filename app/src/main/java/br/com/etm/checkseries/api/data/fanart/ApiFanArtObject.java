@@ -2,6 +2,7 @@ package br.com.etm.checkseries.api.data.fanart;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -105,6 +106,8 @@ public class ApiFanArtObject {
     }
 
     public List<ApiFanArtImages> getShowBackgroundImages() {
+        if (showBackgroundImages == null)
+            return showBackgroundImages = new ArrayList<>();
         return showBackgroundImages;
     }
 

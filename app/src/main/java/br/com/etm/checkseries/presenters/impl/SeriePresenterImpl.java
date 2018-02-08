@@ -57,16 +57,15 @@ public class SeriePresenterImpl implements SeriePresenter {
 
     @Override
     public void nextEpisode(ApiShow apiShow, int position) {
-        ApiEpisode episode = apiShow.getNextEpisode();
-        if (episode != null && position != -1) {
-            episode.setWatched(true);
+        if (apiShow.getNextEpisode() != null && position != -1) {
+            apiShow.setWatchedNextEpisode(true);
 
-            int updatesRow = dbInteractor.updateEpisode(episode);
+            int updatesRow = dbInteractor.updateEpisode(apiShow.getNextEpisode());
             if (updatesRow >= 1) {
                 apiShow.setNextEpisode(dbInteractor.getNextEpisode(apiShow));
                 view.notifyDataChanged(apiShow, position);
             } else {
-                episode.setWatched(false);
+                apiShow.getNextEpisode().setWatched(false);
             }
         } else {
             apiShow.setNextEpisode(dbInteractor.getNextEpisode(apiShow));

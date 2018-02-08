@@ -191,6 +191,19 @@ public class ApiEpisode extends ApiEpisodeObject {
         this.runtime = runtime;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ApiEpisode apiEpisode = (ApiEpisode) o;
+
+        if (getIdentifiers().getTrakt() != null ? !getIdentifiers().getTrakt().equals(apiEpisode.getIdentifiers().getTrakt()) : apiEpisode.getIdentifiers().getTrakt() != null)
+            return false;
+
+        return true;
+    }
+
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
 

@@ -26,13 +26,10 @@ import br.com.etm.checkseries.api.data.tracktv.ApiShow;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by EDUARDO_MARGOTO on 20/10/2015.
- */
 public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int NATIVE_ADS = 0;
-    public static final int ITEM_SERIE = 1;
+    private static final int NATIVE_ADS = 0;
+    private static final int ITEM_SERIE = 1;
 
     private OnShowListener onShowListener;
     private List<ApiShow> apiShows;
@@ -152,7 +149,7 @@ public class SerieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             if (apiShow.getNextEpisode() != null) {
                 tvTotalEpisodes.setText(App.getContext().getString(R.string.formatted_progress_show
-                        , apiShow.getTotalEpisodesWatched()
+                        , apiShow.getEpisodesWatched()
                         , apiShow.getTotalEpisodes()));
                 tvNextEpisodeTitle.setText(apiShow.getNextEpisode().getTitleFormatted());
                 tvTimeNextEpisode.setText(apiShow.getNextEpisode().getDateFirstAiredFormatted(tvTimeNextEpisode.getContext()));

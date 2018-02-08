@@ -26,7 +26,6 @@ public class ApiShow {
     private String type;
 
 
-
     private String bannerUrl;
     private String posterUrl;
     private String backgroundUrl;
@@ -391,9 +390,12 @@ public class ApiShow {
         tmdbId = mediaObject.getApiIdentifiers().getTmdb();
 
         //TODO: get the best images, looking likes and season.
-        backgroundUrl = mediaObject.getFanArtImages().getShowBackgroundImages().get(0).getUrl();
-        bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
-        posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
+        if (mediaObject.getFanArtImages() != null) {
+            if (!mediaObject.getFanArtImages().getShowBackgroundImages().isEmpty())
+                backgroundUrl = mediaObject.getFanArtImages().getShowBackgroundImages().get(0).getUrl();
+            bannerUrl = mediaObject.getFanArtImages().getTvBannerImages().get(0).getUrl();
+            posterUrl = mediaObject.getFanArtImages().getTvPosterImages().get(0).getUrl();
+        }
     }
 
     public ContentValues getContentValues() {
@@ -448,5 +450,14 @@ public class ApiShow {
         return true;
     }
 
+    public void setWatchedNextEpisode(boolean watchedNextEpisode) {
+        nextEpisode.setWatched(watchedNextEpisode);
+        for (ApiSeason apiSeason : seasons) {
+            int index = apiSeason.getEpisodes().indexOf(nextEpisode);
+            if (index != -1) {
+                apiSeason.getEpisodes().get(index).setWatched(watchedNextEpisode);
+            }
+        }
+    }
 }
 

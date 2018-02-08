@@ -50,13 +50,8 @@ import butterknife.Unbinder;
 
 import static android.app.Activity.RESULT_OK;
 
-
-/**
- * Created by EDUARDO_MARGOTO on 20/10/2015.
- */
 public class SerieFragment extends Fragment implements SerieView {
 
-    private static final String TAG = SerieFragment.class.getSimpleName();
     private static int RELOAD_SERIES = 101;
 
     @BindView(R.id.rv_list_serie)
@@ -117,9 +112,7 @@ public class SerieFragment extends Fragment implements SerieView {
 
     private void configureRecyclerView(List<ApiShow> apiShows) {
         recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        LinearLayoutManager lm = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(lm);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         serieAdapter = new SerieAdapter(apiShows);
 
         serieAdapter.setOnShowListener(new SerieAdapter.OnShowListener() {
@@ -214,7 +207,7 @@ public class SerieFragment extends Fragment implements SerieView {
                     presenter.filter();
                     break;
 
-            /*FILTROS*/
+            /*FILTERS*/
                 case R.id.it_filter_notfinalized:
                     preferences.setFilterUnfinished(!preferences.isFilterUnfinished());
                     presenter.filter();
