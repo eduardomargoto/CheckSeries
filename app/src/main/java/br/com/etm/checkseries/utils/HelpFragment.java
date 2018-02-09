@@ -2,7 +2,6 @@ package br.com.etm.checkseries.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 import br.com.etm.checkseries.deprecated.daos.DAO_Episode;
 import br.com.etm.checkseries.deprecated.daos.DAO_ListSerie;
 import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
@@ -23,7 +22,6 @@ import br.com.etm.checkseries.deprecated.domains.Episode;
 import br.com.etm.checkseries.deprecated.domains.ListOfUser_Serie;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.deprecated.utils.APITheTVDB;
-import br.com.etm.checkseries.utils.UtilsImages;
 
 /**
  * Created by EDUARDO_MARGOTO on 30/10/2015.

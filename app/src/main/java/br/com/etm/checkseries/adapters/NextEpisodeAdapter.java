@@ -1,8 +1,6 @@
 package br.com.etm.checkseries.adapters;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -10,19 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.text.DateFormat;
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
-import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
-import br.com.etm.checkseries.deprecated.domains.EnvironmentConfig;
-import br.com.etm.checkseries.deprecated.domains.Serie;
+import br.com.etm.checkseries.api.data.trakTv.ApiEpisode;
 import br.com.etm.checkseries.utils.UtilsImages;
 import butterknife.BindView;
 import butterknife.ButterKnife;

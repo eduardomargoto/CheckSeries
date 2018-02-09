@@ -2,6 +2,7 @@ package br.com.etm.checkseries.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.FileChannel;
+
 import br.com.etm.checkseries.R;
 
 
@@ -30,6 +32,7 @@ import br.com.etm.checkseries.R;
 public class UtilsEntitys {
 
     public static AlertDialog.Builder myDialog = null;
+    private static ProgressDialog mProgressDialog;
 
     public static void updateWidgets(Context context) {
 //        Intent intent = new Intent(context.getApplicationContext(), WidgetProviderComingSoon.class);
@@ -85,19 +88,19 @@ public class UtilsEntitys {
             File data = Environment.getDataDirectory();
 
 //            if (sd.canWrite()) {
-                String currentDBPath = "//data//" + packagename + "//databases//" + dbname;
-                String backupDBPath = pathBackup;
+            String currentDBPath = "//data//" + packagename + "//databases//" + dbname;
+            String backupDBPath = pathBackup;
 
-                File currentDB = new File(data, currentDBPath);
-                File backupDB = new File(sd, backupDBPath);
+            File currentDB = new File(data, currentDBPath);
+            File backupDB = new File(sd, backupDBPath);
 
-                FileChannel src = new FileInputStream(currentDB).getChannel();
-                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-                Toast.makeText(context.getApplicationContext(), "Backup com sucesso!",
-                        Toast.LENGTH_SHORT).show();
+            FileChannel src = new FileInputStream(currentDB).getChannel();
+            FileChannel dst = new FileOutputStream(backupDB).getChannel();
+            dst.transferFrom(src, 0, src.size());
+            src.close();
+            dst.close();
+            Toast.makeText(context.getApplicationContext(), "Backup com sucesso!",
+                    Toast.LENGTH_SHORT).show();
 //            } else {
 //                Toast.makeText(context.getApplicationContext(), "Sem permissão para escrever no disco!",
 //                        Toast.LENGTH_SHORT).show();
@@ -235,14 +238,25 @@ public class UtilsEntitys {
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(textPositiveButton, positiveButton)
-                .setNegativeButton(textNegativeButton, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(textNegativeButton, (dialog, which) -> dialog.dismiss());
 
     }
 
+    public static void showProgress(Context context) {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            dismissProgress();
+        mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(context.getString(R.string.app_loading));
+        mProgressDialog.show();
+    }
+
+    public static void dismissProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
+    }
 
 }
 

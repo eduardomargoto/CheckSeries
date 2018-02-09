@@ -4,10 +4,10 @@ package br.com.etm.checkseries.data;
 
 import java.util.List;
 
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiEpisode;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiSeason;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 import io.reactivex.Observable;
 
 /**

@@ -1,17 +1,14 @@
 package br.com.etm.checkseries.presenters.impl;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.util.Log;
 
 import br.com.etm.checkseries.api.FanArtInteractor;
 import br.com.etm.checkseries.api.TraktTvInteractor;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
-import br.com.etm.checkseries.data.Contract;
+import br.com.etm.checkseries.api.data.trakTv.ApiEpisode;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiSeason;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;
 import br.com.etm.checkseries.views.NewSerieView;
@@ -97,7 +94,7 @@ public class NewSeriePresenterImpl implements NewSeriePresenter {
     private void insertNextEpisode(ApiShow apiShow) {
         interactor.getEpisodes(String.valueOf(apiShow.getTraktId()))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.computation())
                 .subscribe(apiSeasons -> {
                     apiShow.setSeasons(apiSeasons);
                     for(ApiSeason apiSeason : apiSeasons){

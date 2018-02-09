@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.api.data.tracktv;
+package br.com.etm.checkseries.api.data.trakTv;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,20 +6,12 @@ import com.google.gson.annotations.SerializedName;
  * Created by eduardo on 07/12/17.
  */
 
-public class ApiPersonObject {
+public class ApiSeasonObject {
 
-    @SerializedName("name")
-    private String name;
     @SerializedName("ids")
     private ApiIdentifiers identifiers;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @SerializedName("number")
+    private Integer number;
 
     public ApiIdentifiers getIdentifiers() {
         return identifiers;
@@ -27,5 +19,13 @@ public class ApiPersonObject {
 
     public void setIdentifiers(ApiIdentifiers identifiers) {
         this.identifiers = identifiers;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }

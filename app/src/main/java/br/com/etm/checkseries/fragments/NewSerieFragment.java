@@ -21,7 +21,7 @@ import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NewSerieAdapter;
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
 import br.com.etm.checkseries.di.components.DaggerNewSerieComponent;
 import br.com.etm.checkseries.di.modules.NewSerieModule;
 import br.com.etm.checkseries.presenters.NewSeriePresenter;

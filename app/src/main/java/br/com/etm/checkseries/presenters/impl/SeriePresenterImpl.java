@@ -2,11 +2,12 @@ package br.com.etm.checkseries.presenters.impl;
 
 import android.util.Log;
 
-import com.appodeal.ads.ap;
+import java.util.Arrays;
 
+import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.api.TraktTvInteractor;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiAliases;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 import br.com.etm.checkseries.data.Contract;
 import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.data.preferences.Preferences;
@@ -14,10 +15,6 @@ import br.com.etm.checkseries.presenters.SeriePresenter;
 import br.com.etm.checkseries.views.SerieView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-
-/**
- * Created by eduardo on 08/01/18.
- */
 
 public class SeriePresenterImpl implements SeriePresenter {
 
@@ -99,7 +96,7 @@ public class SeriePresenterImpl implements SeriePresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(newApiShow -> {
                     dbInteractor.updateShow(newApiShow);
-                },throwable -> {
+                }, throwable -> {
                     Log.e("Presenter", "syncShowWithService", throwable);
                 });
     }
@@ -108,6 +105,26 @@ public class SeriePresenterImpl implements SeriePresenter {
     public void removeShow(ApiShow apiShow) {
         int rowsDeleted = dbInteractor.deleteShow(apiShow);
         Log.i("Presenter", "RowsDeleted:" + rowsDeleted);
+    }
+
+    @Override
+    public void retrieveAliases(ApiShow apiShow) {
+        traktTvInteractor.getAliasesShow(String.valueOf(apiShow.getTraktId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> view.showProgress())
+                .doOnTerminate(view::dismissProgress)
+                .subscribe(apiAliases -> {
+                    String[] aliases = new String[apiAliases.size()];
+                    for (int i = 0; i < apiAliases.size(); i++) {
+                        aliases[i] = apiAliases.get(i).getTitle();
+                    }
+                    int checkItem = Arrays.asList(aliases).indexOf(apiShow.getTitle());
+                    view.configureDialogAliases(aliases, checkItem, apiShow);
+                }, throwable -> {
+                    Log.e("Presenter", "syncShowWithService", throwable);
+                });
+
     }
 
 }

@@ -18,8 +18,7 @@ import java.util.List;
 
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
-import br.com.etm.checkseries.data.DbProvider;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
 import br.com.etm.checkseries.utils.LoadingImageListener;
 import br.com.etm.checkseries.utils.UtilsImages;
 import butterknife.BindView;

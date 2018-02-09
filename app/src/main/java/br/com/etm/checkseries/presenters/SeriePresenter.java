@@ -1,6 +1,6 @@
 package br.com.etm.checkseries.presenters;
 
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 
 /**
  * Created by eduardo on 08/01/18.
@@ -22,4 +22,6 @@ public interface SeriePresenter {
     void syncShowWithService(ApiShow apiShow);
 
     void removeShow(ApiShow apiShow);
+
+    void retrieveAliases(ApiShow apiShow);
 }

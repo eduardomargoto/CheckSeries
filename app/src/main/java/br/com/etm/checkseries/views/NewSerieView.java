@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
 
 /**
  * Created by eduardo on 07/12/17.

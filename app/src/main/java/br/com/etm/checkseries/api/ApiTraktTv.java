@@ -3,15 +3,15 @@ package br.com.etm.checkseries.api;
 import java.util.List;
 
 import br.com.etm.checkseries.BuildConfig;
-import br.com.etm.checkseries.api.data.tracktv.ApiCheckInObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
-import br.com.etm.checkseries.api.data.tracktv.ApiMovie;
-import br.com.etm.checkseries.api.data.tracktv.ApiPerson;
-import br.com.etm.checkseries.api.data.tracktv.ApiResponseToken;
-import br.com.etm.checkseries.api.data.tracktv.ApiSearchObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiSeason;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
-import br.com.etm.checkseries.api.data.tracktv.ApiToken;
+import br.com.etm.checkseries.api.data.trakTv.ApiAliases;
+import br.com.etm.checkseries.api.data.trakTv.ApiCheckInObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiMovie;
+import br.com.etm.checkseries.api.data.trakTv.ApiPerson;
+import br.com.etm.checkseries.api.data.trakTv.ApiResponseToken;
+import br.com.etm.checkseries.api.data.trakTv.ApiSearchObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiSeason;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiToken;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -70,4 +70,9 @@ public interface ApiTraktTv {
     @GET("/search/{type}?extended=full,images")
     Observable<List<ApiSearchObject>> search(@Path("type") String types,
                                              @Query("query") String searchText);
+
+
+    @Headers({"Content-Type:application/json", "trakt-api-version:2", "trakt-api-key: " + BuildConfig.CLIENT_ID})
+    @GET("/shows/{id}/aliases")
+    Observable<List<ApiAliases>> getAliasesShow(@Path("id") String traktId);
 }

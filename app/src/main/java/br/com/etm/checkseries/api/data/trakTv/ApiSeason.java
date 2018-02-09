@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.api.data.tracktv;
+package br.com.etm.checkseries.api.data.trakTv;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.etm.checkseries.data.Contract;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 /**
  * Created by eduardo on 10/01/18.

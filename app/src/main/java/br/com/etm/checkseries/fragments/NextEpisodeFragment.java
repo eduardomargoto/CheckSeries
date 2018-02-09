@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.NextEpisodeAdapter;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
+import br.com.etm.checkseries.api.data.trakTv.ApiEpisode;
 import br.com.etm.checkseries.di.components.DaggerNextEpisodeComponent;
 import br.com.etm.checkseries.di.modules.NextEpisodeModule;
 import br.com.etm.checkseries.presenters.NextEpisodePresenter;

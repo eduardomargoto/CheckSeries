@@ -3,7 +3,7 @@ package br.com.etm.checkseries.presenters;
 
 import android.content.Context;
 
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
 
 /**
  * Created by eduardo on 07/12/17.

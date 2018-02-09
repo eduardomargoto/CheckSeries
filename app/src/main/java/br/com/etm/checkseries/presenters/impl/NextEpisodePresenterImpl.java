@@ -1,7 +1,7 @@
 package br.com.etm.checkseries.presenters.impl;
 
 import java.util.List;
-import br.com.etm.checkseries.api.data.tracktv.ApiEpisode;
+import br.com.etm.checkseries.api.data.trakTv.ApiEpisode;
 import br.com.etm.checkseries.data.DbInteractor;
 import br.com.etm.checkseries.presenters.NextEpisodePresenter;
 import br.com.etm.checkseries.views.NextEpisodeView;

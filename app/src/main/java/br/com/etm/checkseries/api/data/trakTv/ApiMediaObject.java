@@ -1,4 +1,4 @@
-package br.com.etm.checkseries.api.data.tracktv;
+package br.com.etm.checkseries.api.data.trakTv;
 
 import com.google.gson.annotations.SerializedName;
 import br.com.etm.checkseries.api.data.fanart.ApiFanArtObject;

@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.etm.checkseries.api.data.tracktv.ApiMediaObject;
-import br.com.etm.checkseries.api.data.tracktv.ApiSearchObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiMediaObject;
+import br.com.etm.checkseries.api.data.trakTv.ApiSearchObject;
 
 /**
  * Created by eduardo on 06/01/18.

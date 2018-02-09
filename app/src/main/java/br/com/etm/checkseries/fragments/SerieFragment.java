@@ -2,12 +2,14 @@ package br.com.etm.checkseries.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -22,14 +24,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import br.com.etm.checkseries.App;
 import br.com.etm.checkseries.R;
 import br.com.etm.checkseries.adapters.SerieAdapter;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiAliases;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 import br.com.etm.checkseries.data.preferences.Preferences;
+import br.com.etm.checkseries.deprecated.daos.DAO_Serie;
 import br.com.etm.checkseries.deprecated.domains.Serie;
 import br.com.etm.checkseries.activity.NewSerieActivity;
 import br.com.etm.checkseries.di.components.DaggerSerieComponent;
@@ -253,6 +259,7 @@ public class SerieFragment extends Fragment implements SerieView {
                 serieAdapter.removeItem(apiShow);
                 break;
             case R.id.it_change_name:
+                presenter.retrieveAliases(apiShow);
                 // TODO: change title name, verify possibility with service
                 break;
             case R.id.it_manage_list:
@@ -286,6 +293,33 @@ public class SerieFragment extends Fragment implements SerieView {
     @Override
     public void updateRecyclerView(List<ApiShow> apiShows) {
         serieAdapter.updateList(apiShows);
+    }
+
+    @Override
+    public void showProgress() {
+        UtilsEntitys.showProgress(getActivity());
+    }
+
+    @Override
+    public void dismissProgress() {
+        UtilsEntitys.dismissProgress();
+    }
+
+    @Override
+    public void configureDialogAliases(String[] aliases, int checkItem, ApiShow apiShow) {
+        if(aliases.length != 0) {
+            AlertDialog.Builder dialogChangeTitleSerie = new AlertDialog.Builder(getActivity());
+            dialogChangeTitleSerie.setTitle(getString(R.string.app_text_titles));
+            dialogChangeTitleSerie.setSingleChoiceItems(aliases, checkItem, (dialog, which) -> {
+                apiShow.setTitle(aliases[which]);
+            }).setOnDismissListener(dialog -> {
+                presenter.updateShow(apiShow);
+                serieAdapter.notifyItemChanged(apiShow);
+            }).create();
+            dialogChangeTitleSerie.show();
+        } else {
+            Toast.makeText(getContext(), "Não há outros títulos para serem exibidos.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

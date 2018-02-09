@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:padding="10dp"
-        android:textColor="@color/colorDivider"
+        android:textColor="@color/colorLightPrimary"
         android:textSize="14sp" />
 
 </LinearLayout>

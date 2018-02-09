@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import br.com.etm.checkseries.R;
-import br.com.etm.checkseries.api.data.tracktv.ApiShow;
+import br.com.etm.checkseries.api.data.trakTv.ApiShow;
 
 /**
  * Created by eduardo on 06/01/18.
